@@ -402,7 +402,6 @@ const AppStateContextProvider = ({ children }) => {
       user_hashed_phone_number: userHashedPhoneNumber,
       firstname: user?.user?.firstname || "",
     });
-    // facebook add to cart event...
     const eventId = crypto.randomUUID(); // Generate a unique event ID
     const eventData = {
       eventName: "AddToCart",
@@ -414,14 +413,28 @@ const AppStateContextProvider = ({ children }) => {
       country: "IND",
       userAgent: navigator.userAgent,
       sourceUrl: window.location.href,
-      products: [
-        {
-          sku: dataSet?.product_id?.toString(), // correct productid as SKU
-          quantity: 1, // dynamically use item quantity
-          item_price: parseFloat(dataSet?.unit_price?.replace(/,/g, "")) || 0,
-        },
-      ],
-      value: dataSet?.unit_price?.replace(/,/g, ""),
+      products: Array.isArray(dataSet?.items)
+      ? dataSet.items.map((item) => ({
+          sku: item?.product_id?.toString(),
+          quantity: 1, // ya agar item me quantity ka field ho to use le lo
+          item_price: parseFloat(item?.unit_price?.replace(/,/g, "")) || 0,
+        }))
+      : [
+          {
+            sku: dataSet?.product_id?.toString(),
+            quantity: 1,
+            item_price: parseFloat(dataSet?.unit_price?.replace(/,/g, "")) || 0,
+          },
+        ],
+        value: Array.isArray(dataSet?.items)
+        ? dataSet.items
+            .reduce(
+              (sum, item) =>
+                sum + (parseFloat(item?.unit_price?.replace(/,/g, "")) || 0),
+              0
+            )
+            .toString()
+        : (parseFloat(dataSet?.unit_price?.replace(/,/g, "")) || 0).toString(),
       currency: "INR",
     };
 

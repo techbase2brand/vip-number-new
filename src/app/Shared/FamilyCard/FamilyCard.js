@@ -219,6 +219,7 @@ const FamilyCard = ({ count, apiData }) => {
             ? product.productid
             : product.product_id,
           number: parseInt(product.number),
+          unit_price: product.unit_price,
           item_loc: "cart",
           tag: "new",
         }));
@@ -273,6 +274,7 @@ const FamilyCard = ({ count, apiData }) => {
             ? product.productid
             : product.product_id,
           number: parseInt(product.number),
+          unit_price: product.unit_price,
           item_loc: "cart",
           tag: "new",
         }));
@@ -324,6 +326,7 @@ const FamilyCard = ({ count, apiData }) => {
       const items = selectedProducts.map((product) => ({
         product_id: product.productid ? product.productid : product.product_id,
         number: parseInt(product.number),
+        unit_price: product.unit_price,
         item_loc: "cart",
         tag: "new",
       }));
