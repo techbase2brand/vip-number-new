@@ -1,0 +1,35 @@
+name: Deploy Next.js to CloudPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: SSH into CloudPanel & run deploy.sh
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          script: /home/fancymobilenumber-vip/deploy.sh
+          port: 22
+          sync: false
+          use_insecure_cipher: false
+          timeout: 30s
+          command_timeout: 10m
+          proxy_port: 22
+          proxy_timeout: 30s
+          proxy_use_insecure_cipher: false
+          script_stop: false
+          debug: false
+
+ 
