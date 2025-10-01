@@ -8,40 +8,15 @@ function hashData(data) {
 export async function POST(req) {
   try {
     const { eventName, eventId, emails, phones, firstName, lastName, country, userAgent, sourceUrl, products, value, currency } = await req.json();
-    
-    // Check if required environment variables are present
-    if (!process.env.FB_ACCESS_TOKEN) {
-      console.warn('FB_ACCESS_TOKEN environment variable is missing - Facebook events will be skipped');
-      return new Response(JSON.stringify({ 
-        message: 'Facebook tracking not configured - event logged but not sent to Facebook',
-        eventData: { eventName, eventId }
-      }), { status: 200 });
-    }
-    
-    if (!process.env.NEXT_PUBLIC_FB_PIXEL_ID) {
-      console.warn('NEXT_PUBLIC_FB_PIXEL_ID environment variable is missing - Facebook events will be skipped');
-      return new Response(JSON.stringify({ 
-        message: 'Facebook tracking not configured - event logged but not sent to Facebook',
-        eventData: { eventName, eventId }
-      }), { status: 200 });
-    }
-    
-    // Validate required fields
-    if (!eventName || !eventId) {
-      console.error('Missing required fields: eventName or eventId');
-      return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 });
-    }
-
     // Safely parse total value
     const valueParsed = value ? parseFloat(value.replace(/,/g, '')) : 0;
-    
     // Map product details safely
-    const contents = products && Array.isArray(products) ? products.map((product) => ({
+    const contents = products.map((product) => ({
       id: (product.sku || product.productid || "").toString(),
       title: product.productname || "",
       quantity: product.quantity || 1,
       item_price: product.item_price || parseFloat((product.unit_price || "0").replace(/,/g, "")),
-    })) : [];
+    }));
 
     const fbPayload = {
       data: [
@@ -69,31 +44,17 @@ export async function POST(req) {
           event_id: eventId,
         },
       ],
-      access_token: process.env.FB_ACCESS_TOKEN,
+      access_token: process.env.FB_ACCESS_TOKEN,  // Use your Facebook Access Token here
     };
 
     const pixel_id = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
-    console.log('Sending Facebook event:', { eventName, eventId, pixel_id });
-    
     const fbResponse = await axios.post(`https://graph.facebook.com/v18.0/${pixel_id}/events`, fbPayload);
-    
-    console.log('Facebook API response:', fbResponse.data);
-    return new Response(JSON.stringify(fbResponse.data), { 
-      status: fbResponse.status,
-      headers: { "Content-Type": "application/json" }
-    });
+      // This should now log the response data
+
+    return new Response(JSON.stringify(fbResponse.data), { status: fbResponse.status });
   } catch (error) {
     console.error('Error in Facebook API Request:', error.message);
     console.error('Error details:', error.response ? error.response.data : 'No response data');
-    console.error('Full error:', error);
-    
-    return new Response(JSON.stringify({ 
-      error: 'Internal Server Error',
-      details: error.message,
-      response: error.response ? error.response.data : null
-    }), { 
-      status: 500,
-      headers: { "Content-Type": "application/json" }
-    });
+    return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
   }
 }
