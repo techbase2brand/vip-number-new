@@ -7,12 +7,9 @@ export async function GET(request, { params }) {
     const { searchParams } = new URL(request.url);
     const queryString = searchParams.toString();
 
-    const apiUrl =
-      process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL +
-      "/" +
-      slug +
-      "?" +
-      queryString;
+    const apiUrl = `${process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL}/${slug}${
+      queryString ? "?" + queryString : ""
+    }`;
 
     const incomingAuthHeader = request.headers.get("authorization");
 
@@ -57,7 +54,7 @@ export async function POST(request, { params }) {
 
     const body = await request.json();
     const incomingAuthHeader = request.headers.get("authorization");
-    const apiUrl = process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL + "/" + slug;
+    const apiUrl = `${process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL}/${slug}`;
 
     const fetchOptions = {
       method: "POST",
@@ -100,7 +97,7 @@ export async function PUT(request, { params }) {
 
     const body = await request.json();
     const incomingAuthHeader = request.headers.get("authorization");
-    const apiUrl = process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL + "/" + slug;
+    const apiUrl = `${process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL}/${slug}`;
 
     const fetchOptions = {
       method: "PUT",
@@ -141,7 +138,7 @@ export async function DELETE(request, { params }) {
     const resolvedParams = await params;
     const slug = resolvedParams.slug.join("/");
     const incomingAuthHeader = request.headers.get("authorization");
-    const apiUrl = process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL + "/" + slug;
+    const apiUrl = `${process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL}/${slug}`;
 
     const fetchOptions = {
       method: "DELETE",

@@ -33,7 +33,8 @@ const Profile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useRouter();
-  const { logout, user, setUserProfile,setProfileUpdate } = useContext(AppStateContext);
+  const { logout, user, setUserProfile, setProfileUpdate } =
+    useContext(AppStateContext);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showConfirmationModalss, setShowConfirmationModalss] = useState(false);
   const [profileActive, setProfileActive] = useState("tab1");
@@ -882,42 +883,65 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="">
-                      <div className="relative profile-label-rs">
-                        <select
-                          id="city"
-                          value={city}
-                          onChange={(event) => setCity(event.target.value)}
-                          className="peer w-full p-3 text-gray-800 rounded-md border border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                          style={{
-                            WebkitAppearance: "none",
-                            MozAppearance: "none",
-                            appearance: "none",
-                            textAlign: "left",
-                            paddingLeft: "12px",
-                            width: "100%",
-                            maxWidth: "100%",
-                            height: "48px",
-                            fontSize: "16px",
-                          }}
-                        >
-                          <option value="">Select City</option>
-                          {cities?.map((cityName) => (
-                            <option key={cityName} value={cityName}>
-                              {cityName}
-                            </option>
-                          ))}
-                        </select>
-                        <label
-                          htmlFor="city"
-                          className={`absolute left-3 transition-all transform origin-left text-primary ${
-                            city
-                              ? "-top-2 text-sm text-primary scale-90 bg-white"
-                              : "top-[14px] text-primary bg-white"
-                          } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1`}
-                        >
-                          Select City
-                        </label>
-                      </div>
+                      {cities.length > 0 ? (
+                        <div className="relative profile-label-rs">
+                          <select
+                            id="city"
+                            value={city}
+                            onChange={(event) => setCity(event.target.value)}
+                            className="peer w-full p-3 text-gray-800 rounded-md border border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                            style={{
+                              WebkitAppearance: "none",
+                              MozAppearance: "none",
+                              appearance: "none",
+                              textAlign: "left",
+                              paddingLeft: "12px",
+                              width: "100%",
+                              maxWidth: "100%",
+                              height: "48px",
+                              fontSize: "16px",
+                            }}
+                          >
+                            <option value="">Select City</option>
+                            {cities?.map((cityName) => (
+                              <option key={cityName} value={cityName}>
+                                {cityName}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="city"
+                            className={`absolute left-3 transition-all transform origin-left text-primary ${
+                              city
+                                ? "-top-2 text-sm text-primary scale-90 bg-white"
+                                : "top-[14px] text-primary bg-white"
+                            } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1`}
+                          >
+                            Select City
+                          </label>
+                        </div>
+                      ) : (
+                        <div className="relative profile-label-rs">
+                          <input
+                            id="city"
+                            type="text"
+                            placeholder="Enter Your City"
+                            value={city}
+                            onChange={(event) => setCity(event.target.value)}
+                            className="peer w-full p-3 text-gray-800  rounded-md border border-primary focus:outline-none focus:ring-1 focus:ring-primary "
+                          />
+                          <label
+                            htmlFor="city"
+                            className={`absolute left-3 transition-all transform origin-left text-primary ${
+                              zipCode
+                                ? "-top-2 text-sm text-primary scale-90 bg-white"
+                                : "top-[14px] text-primary bg-white"
+                            } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1`}
+                          >
+                            City
+                          </label>
+                        </div>
+                      )}
                     </div>
                     <div className="">
                       <div className="relative profile-label-rs">
@@ -947,7 +971,7 @@ const Profile = () => {
                         onClick={handleSaveAddress}
                         aria-label="Save"
                       >
-                       {!addressData ? (
+                        {!addressData ? (
                           "Save"
                         ) : (
                           <span className="dot-loader ml-2 flex">
