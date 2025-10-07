@@ -133,6 +133,7 @@
   justify-content: center;
 }
 .banner-slider-os .slick-dots {
+  display: flex !important;
   text-align: justify;
   bottom: 40px !important;
   position: relative !important;

@@ -7,7 +7,17 @@ import SortedFilter from "../../Shared/FilterTabs/SortedFilter";
 import Image from "next/image";
 import { AppliedTags } from "@/app/Shared/Search/Search";
 import { useGetQueryParams } from "@/app/utils";
-const SearchByPrice = ({ results, nextPage, searchNextUrl,loadmore }) => {
+const SearchByPrice = ({ 
+  results, 
+  nextPage, 
+  searchNextUrl, 
+  loadmore, 
+  isDealPage, 
+  dealSortOrder, 
+  dealComingSoon, 
+  onDealSortChange, 
+  onDealComingSoonChange 
+}) => {
   const { queryParams } = useGetQueryParams();
   const panelImg = process.env.NEXT_PUBLIC_IMAGES;
   return (
@@ -21,7 +31,13 @@ const SearchByPrice = ({ results, nextPage, searchNextUrl,loadmore }) => {
                 MainHeading="Search By Price Number"
                 rightImage={`${panelImg}/assets/img/vip-images/crown-icon1_imduk0.webp`}
               />
-              <SortedFilter />
+              <SortedFilter 
+                isDealPage={isDealPage}
+                dealSortOrder={dealSortOrder}
+                dealComingSoon={dealComingSoon}
+                onDealSortChange={onDealSortChange}
+                onDealComingSoonChange={onDealComingSoonChange}
+              />
             </div>
 
             {results && results.length > 0 ? (

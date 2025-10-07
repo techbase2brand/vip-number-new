@@ -4,7 +4,14 @@ import { useGetQueryParams } from "../../utils";
 import { usePathname, useRouter } from "next/navigation";
 import { AppStateContext } from "../../contexts/AppStateContext/AppStateContext";
 
-const SortedFilter = ({ id }) => {
+const SortedFilter = ({ 
+  id, 
+  isDealPage, 
+  dealSortOrder, 
+  dealComingSoon, 
+  onDealSortChange, 
+  onDealComingSoonChange 
+}) => {
   const { queryParams } = useGetQueryParams();
   const {
     setCatFilter,
@@ -20,23 +27,41 @@ const SortedFilter = ({ id }) => {
     sort === "asc" ? "low-to-high" : sort === "desc" ? "high-to-low" : "";
 
   const [sortingOrder, setSortingOrder] = useState(
-    getSortValue(queryParams?.sort)
+    getSortValue(isDealPage ? dealSortOrder : queryParams?.sort)
   );
-  const [comingSoon, setComingSoon] = useState("");
+  const [comingSoon, setComingSoon] = useState(
+    isDealPage ? dealComingSoon : ""
+  );
 
   useEffect(() => {
-    setSortingOrder(getSortValue(queryParams?.sort));
-  }, [queryParams?.sort]);
-
-  useEffect(() => {
-    if (queryParams?.comingsoon) {
-      setComingSoon(queryParams.comingsoon);
+    if (isDealPage) {
+      setSortingOrder(getSortValue(dealSortOrder));
     } else {
-      setComingSoon("yes");
+      setSortingOrder(getSortValue(queryParams?.sort));
     }
-  }, [queryParams]); // Runs when queryParams changes
+  }, [isDealPage, dealSortOrder, queryParams?.sort]);
+
+  useEffect(() => {
+    if (isDealPage) {
+      setComingSoon(dealComingSoon);
+    } else {
+      if (queryParams?.comingsoon) {
+        setComingSoon(queryParams.comingsoon);
+      } else {
+        setComingSoon("yes");
+      }
+    }
+  }, [isDealPage, dealComingSoon, queryParams?.comingsoon]);
 
   const applyFilters = (order) => {
+    // Deal page specific handling
+    if (isDealPage && onDealSortChange) {
+      const sortValue = order === "low-to-high" ? "asc" : order === "high-to-low" ? "desc" : "";
+      onDealSortChange(sortValue);
+      return;
+    }
+
+    // Original functionality for other pages (unchanged)
     if (!order && pathname !== "/search-results") {
       setSelectedPriceOptions("");
       setSortingOrder("");
@@ -181,11 +206,16 @@ const SortedFilter = ({ id }) => {
               id="ripple-on"
               type="checkbox"
               checked={comingSoon === "yes"}
-              onChange={(e) =>
-                handleSelectChange({
-                  target: { value: e.target.checked ? "yes" : "no" },
-                })
-              }
+              onChange={(e) => {
+                const newValue = e.target.checked ? "yes" : "no";
+                if (isDealPage && onDealComingSoonChange) {
+                  onDealComingSoonChange(newValue);
+                } else {
+                  handleSelectChange({
+                    target: { value: newValue },
+                  });
+                }
+              }}
               className="peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-300 shadow hover:shadow-md transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-slate-400 before:opacity-0 before:transition-opacity checked:border-primary checked:bg-primary checked:before:bg-slate-400 hover:before:opacity-10"
               disabled={dataLoading} 
             />

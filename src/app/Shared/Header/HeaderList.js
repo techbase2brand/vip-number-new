@@ -6,6 +6,7 @@ import FilterTabs from "../FilterTabs/FilterTabs";
 import FilterTabsCat from "../FilterTabs/FilterTabsCat";
 import { CiSearch } from "react-icons/ci";
 import { RiDiscountPercentFill } from "react-icons/ri";
+import { FaMoneyBillWave } from "react-icons/fa";
 import { MyRegisterSignInContext } from "@/app/contexts/MyRegisterSignInContext/MyRegisterSignInContext";
 
 const HeaderList = ({
@@ -242,6 +243,11 @@ const HeaderList = ({
               </section>
             )}
           </OutsideClickHandler>
+        </li>
+        <li>
+        <Link className="text-lg font-medium" href="/deals">
+            Deals 💰
+          </Link>
         </li>
       </ul>
       <div className="filter-tab-display">
