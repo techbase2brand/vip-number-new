@@ -5,6 +5,7 @@ import BannerSlider from "react-slick";
 import Image from "next/image";
 // import usePageLoadDelay from "@/app/usePageLoadDelay";
 import { AppStateContext } from "@/app/contexts/AppStateContext/AppStateContext";
+import Link from "next/link";
 const Banner = () => {
   const { skeleton,setDataLoading } = useContext(AppStateContext);
   const [isMobile, setIsMobile] = useState(false);
@@ -22,47 +23,67 @@ const Banner = () => {
 
   const mobileBanner = [
     {
+      image: `/assets/vipsalebannerphone.png`,
+      alt: "vip sale",
+      link:"/deals"
+    },
+    {
       image: `${panelImg}/assets/img/vip-images/mobilebanner1.png`,
       alt: "International Business Award with Shilpa Shetty - VIP Number & VIP Mobile Numbers",
+      link:"/"
     },
     {
       image: `${panelImg}/assets/img/vip-images/mobilebanner2.png`,
       alt: "International Business Award with Malaika Arora - VIP Number & VIP Mobile Numbers",
+      link:"/family-pack"
     },
     {
       image: `${panelImg}/assets/img/vip-images/mobilebanner3.png`,
       alt: "International Business Award with Sonu Sood - VIP Number & VIP Mobile Numbers",
+       link:"/business"
     },
     {
       image: `${panelImg}/assets/img/vip-images/mobilebanner4.png`,
       alt: "Choice is yours - VIP Number & VIP Mobile Numbers",
+       link:"/"
     },
     {
       image: `${panelImg}/assets/img/vip-images/businesstoday.png`,
        alt: "Business Today - VIP Number & VIP Mobile Numbers",
+        link:"/"
     },
   ];
 
   const bannerImageArray = [
     {
+      image: `/assets/vipsalebanner.png`,
+      alt: "vip sale",
+      link:"/deals"
+    },
+    {
       image: `${panelImg}/assets/img/vip-images/banner1.webp`,
       alt: "International Business Award with Shilpa Shetty - VIP Number & VIP Mobile Numbers",
+      link:"/"
     },
     {
       image: `${panelImg}/assets/img/vip-images/bannermalika.webp`,
       alt: "International Business Award with Malaika Arora - VIP Number & VIP Mobile Numbers",
+      link:"/family-pack"
     },
     {
       image: `${panelImg}/assets/img/vip-images/bannersonusood.webp`,
       alt: "International Business Award with Sonu Sood - VIP Number & VIP Mobile Numbers",
+      link:"/business"
     },
     {
       image: `${panelImg}/assets/img/vip-images/banner4desktop.webp`,
       alt: "Choice is yours - VIP Number & VIP Mobile Numbers",
+      link:"/"
     },
     {
       image: `${panelImg}/assets/img/vip-images/business.webp`,
        alt: "Business Today - VIP Number & VIP Mobile Numbers",
+       link:"/"
     },
   ];
 
@@ -148,6 +169,7 @@ const Banner = () => {
                 {imagesToDisplay.map((items, index) => {
                   return (
                     <div className="" key={index}>
+                      <Link href={items.link}>
                       <Image
                         src={items?.image}
                         alt={items?.alt}
@@ -157,6 +179,7 @@ const Banner = () => {
                         // priority={index === 0 ? true : false}
                         className="cursor-pointer rounded-tl-[20px] rounded-tr-[20px] rounded-bl-none rounded-br-none object-[54%_15%]  sm:object-[73%_8%]  md:h-auto xl:h-[500px] lg:h-[300px] 2xl:h-[550px]"
                       />
+                      </Link>
                     </div>
                   );
                 })}

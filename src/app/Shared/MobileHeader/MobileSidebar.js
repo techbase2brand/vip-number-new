@@ -5,6 +5,7 @@ import numer1numerology from "../../../../public/assets/numer1numerology.svg";
 import { PiHandshake } from "react-icons/pi";
 import React, { useState } from "react";
 import { GoHome } from "react-icons/go";
+import { FaMoneyBillWave } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import { MdOutlineFamilyRestroom, MdOutlineSell } from "react-icons/md";
 import OutsideClickHandler from "react-outside-click-handler";
@@ -169,6 +170,16 @@ const MobileSidebar = ({
                     >
                       <GoHome fontSize={30} color="var(--primary)" />
                       Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className=" font-medium text-[16px] leading-[20px] text-[#333333] flex items-center gap-4 no-underline w-full relative"
+                      href="/deals"
+                      onClick={mobileToggleInactive}
+                    >
+                      <FaMoneyBillWave fontSize={30} color="var(--primary)" />
+                      Deals 💰
                     </Link>
                   </li>
                   <li>
