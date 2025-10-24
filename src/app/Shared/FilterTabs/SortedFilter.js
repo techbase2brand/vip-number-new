@@ -155,7 +155,7 @@ const SortedFilter = ({
 const handleNumerologyChange = (e) => {
   const selectedValue = e.target.value;
   setNumerologyFilter(selectedValue);
-
+  
   const filterObj = {
     callCount: (parseInt(queryParams?.callCount) || 0) + 1,
   };
@@ -171,8 +171,10 @@ const handleNumerologyChange = (e) => {
       ...newParams,
       ...filterObj,
     }).toString();
-    Router.push(`${pathname}?${queryString}`);
-    setCatFilter(true);
+    window.history.pushState(null, "", `${pathname}?${queryString}`);
+    setTimeout(() => {
+      setCatFilter(true);
+    }, 200);
     return;
   }
 
@@ -186,8 +188,10 @@ const handleNumerologyChange = (e) => {
   // Merge new query with cleaned params
   const route = { ...newParams, ...filterObj };
   const queryString = new URLSearchParams(route).toString();
-  Router.push(`${pathname}?${queryString}`);
-  setCatFilter(true);
+  window.history.pushState(null, "", `${pathname}?${queryString}`);
+  setTimeout(() => {
+    setCatFilter(true);
+  }, 200);
 };
 
 
@@ -291,7 +295,6 @@ const handleNumerologyChange = (e) => {
           <span className="text-sm text-gray-700">Coming Soon</span>
         </label>
       </div>
-      {queryParams?.type === "advanced" && (
         <div className="relative  mb-3" onClick={handleClick}>
           <select
             value={numerologyFilter}
@@ -307,7 +310,6 @@ const handleNumerologyChange = (e) => {
             ▼
           </span>
         </div>
-      )}
     </div>
   );
 };

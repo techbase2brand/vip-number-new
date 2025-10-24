@@ -365,6 +365,14 @@ const TabNavigationSlider = ({ arrayOfArrays, catFilter }) => {
       } else {
         queryParams.append("comingsoon", "yes");
       }
+      
+      // Add numerology filters from current URL
+      const currentUrlParams = new URLSearchParams(window.location.search);
+      const current30Hide = currentUrlParams.get("30hide");
+      const current90Hide = currentUrlParams.get("90hide");
+      if (current30Hide) queryParams.append("30hide", current30Hide);
+      if (current90Hide) queryParams.append("90hide", current90Hide);
+      
       queryParams.append("page", categoryCurrentPage);
       queryParams.append("paginate", 60);
       queryParams.append("star_status", true);

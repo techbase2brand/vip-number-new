@@ -124,6 +124,10 @@ const SearchResults = () => {
           ...(queryParams?.sort && { sort: queryParams.sort }),
           ...(queryParams?.min_price && { min_price: queryParams.min_price }),
           ...(queryParams?.max_price && { max_price: queryParams.max_price }),
+          
+          // Add numerology filters
+          ...(queryParams?.["30hide"] && { "30hide": queryParams["30hide"] }),
+          ...(queryParams?.["90hide"] && { "90hide": queryParams["90hide"] }),
         });
 
         const response = await axios.get(
