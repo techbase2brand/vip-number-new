@@ -287,7 +287,7 @@ const NumerologyPopup = () => {
             "Error fetching country details:",
             error.response ? error.response.data : error.message
           );
-          toast.error("please check your pin code");
+          // toast.error("please check your pin code");
         }
       }
     };
@@ -654,29 +654,55 @@ const NumerologyPopup = () => {
               )}
             </div>
             {user?.token && (
-              <div className="px-2">
-                <div className="relative">
-                  <select
-                    className="peer w-full bg-transparent text-gray-900 border-2 border-primary rounded-md p-4 transition duration-300 ease-in-out focus:outline-none focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
-                    onChange={handleAreaChange}
-                    value={data.area}
-                    disabled={loading}
-                    id="area"
-                  >
-                    <option value="">Select Area</option>
-                    {area.map((item) => (
-                      <option key={item?.area} value={item?.area}>
-                        {item?.area}
-                      </option>
-                    ))}
-                  </select>
-                  <label
-                    htmlFor="area"
-                    className="absolute left-[7px] top-[-8px] text-primary bg-white text-xs  scale-90"
-                  >
-                    Select Area
-                  </label>
-                </div>
+              <div className="px-4">
+                {area.length > 0 ? (
+                  <div className="relative">
+                    <select
+                      className="peer w-full bg-transparent text-gray-900 border-2 border-primary rounded-md p-4 transition duration-300 ease-in-out focus:outline-none focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
+                      onChange={handleAreaChange}
+                      value={data.area}
+                      disabled={loading}
+                      id="area"
+                    >
+                      <option value="">Select Area</option>
+                      {area.map((item) => (
+                        <option key={item?.area} value={item?.area}>
+                          {item?.area}
+                        </option>
+                      ))}
+                    </select>
+                    <label
+                      htmlFor="area"
+                      className="absolute left-[7px] top-[-8px] text-primary bg-white text-xs  scale-90"
+                    >
+                      Select Area
+                    </label>
+                  </div>
+                ) : (
+                  <div className="w-full">
+                    <div className="relative ">
+                      <input
+                        id="area"
+                        type="text"
+                        name="area"
+                        value={data?.area}
+                        placeholder="City"
+                        onChange={handleChange}
+                        className="peer w-full bg-transparent text-black border-2 border-primary rounded-md px-3 lg:py-4 py-3  transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
+                      />
+                      <label
+                        htmlFor="area" // Match the label's htmlFor to input id
+                        className={`absolute cursor-text bg-white px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
+                          data?.area
+                            ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                            : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                        }`}
+                      >
+                        City
+                      </label>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             <div className="submit-numerology">

@@ -449,7 +449,7 @@ const ScannerComponents = () => {
           "Error fetching country details:",
           error.response ? error.response.data : error.message
         );
-        toast.error("please check your pin code");
+        // toast.error("please check your pin code");
       }
     };
     if (data.pin_code.length === 6) {
@@ -677,32 +677,56 @@ const ScannerComponents = () => {
                     </select>
                   </div> */}
                   <div className="w-full">
-                    <div className="relative">
-                      <label
-                        className="absolute cursor-text bg-[#f9f5ff] px-1 left-2.5 -top-2 text-xs text-primary scale-90 transition-all transform origin-left capitalize"
-                        htmlFor="city"
-                      >
-                        City
-                      </label>
-                      <select
-                        id="city"
-                        className={`peer w-full bg-transparent placeholder:text-primary text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm focus:shadow text-[16px] leading-4 ${
-                          loading ? "cursor-not-allowed opacity-70" : ""
-                        }`}
-                        onChange={handleAreaChange}
-                        value={data?.area}
-                        disabled={loading}
-                      >
-                        <option value="" className="text-gray-500">
-                          Select
-                        </option>
-                        {area.map((item) => (
-                          <option key={item.area} value={item.area}>
-                            {item.area}
+                    {area.length > 0 ? (
+                      <div className="relative">
+                        <label
+                          className="absolute cursor-text bg-[#f9f5ff] px-1 left-2.5 -top-2 text-xs text-primary scale-90 transition-all transform origin-left capitalize"
+                          htmlFor="city"
+                        >
+                          City
+                        </label>
+                        <select
+                          id="city"
+                          className={`peer w-full bg-transparent placeholder:text-primary text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm focus:shadow text-[16px] leading-4 ${
+                            loading ? "cursor-not-allowed opacity-70" : ""
+                          }`}
+                          onChange={handleAreaChange}
+                          value={data?.area}
+                          disabled={loading}
+                        >
+                          <option value="" className="text-gray-500">
+                            Select
                           </option>
-                        ))}
-                      </select>
-                    </div>
+                          {area.map((item) => (
+                            <option key={item.area} value={item.area}>
+                              {item.area}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ) : (
+                        <div className="relative">
+                          <input
+                            type="text"
+                            id="city"
+                            name="area"
+                            value={data?.area}
+                            onChange={handleChange}
+                            placeholder="City"
+                            className="peer w-full bg-transparent placeholder:text-primary text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm focus:shadow text-[16px] leading-4"
+                          />
+                          <label
+                            htmlFor="city"
+                            className={`absolute cursor-text bg-[#f9f5ff] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
+                              data?.area
+                                ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                                : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                            }`}
+                          >
+                            City
+                          </label>
+                        </div>
+                    )}
                   </div>
                 </div>
               )}

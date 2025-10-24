@@ -4,13 +4,13 @@ import { useGetQueryParams } from "../../utils";
 import { usePathname, useRouter } from "next/navigation";
 import { AppStateContext } from "../../contexts/AppStateContext/AppStateContext";
 
-const SortedFilter = ({ 
-  id, 
-  isDealPage, 
-  dealSortOrder, 
-  dealComingSoon, 
-  onDealSortChange, 
-  onDealComingSoonChange 
+const SortedFilter = ({
+  id,
+  isDealPage,
+  dealSortOrder,
+  dealComingSoon,
+  onDealSortChange,
+  onDealComingSoonChange,
 }) => {
   const { queryParams } = useGetQueryParams();
   const {
@@ -18,9 +18,13 @@ const SortedFilter = ({
     setSelectedPriceOptions,
     setTabCategory,
     setLoaderData,
-    setComing,dataLoading
+    setComing,
+    dataLoading,
   } = useContext(AppStateContext);
   const pathname = usePathname();
+  const [numerologyFilter, setNumerologyFilter] = useState(
+    queryParams?.["30hide"] ? "30hide" : ""
+  );
 
   const Router = useRouter();
   const getSortValue = (sort) =>
@@ -56,7 +60,8 @@ const SortedFilter = ({
   const applyFilters = (order) => {
     // Deal page specific handling
     if (isDealPage && onDealSortChange) {
-      const sortValue = order === "low-to-high" ? "asc" : order === "high-to-low" ? "desc" : "";
+      const sortValue =
+        order === "low-to-high" ? "asc" : order === "high-to-low" ? "desc" : "";
       onDealSortChange(sortValue);
       return;
     }
@@ -136,12 +141,59 @@ const SortedFilter = ({
     Router.push(`${pathname}?${queryString}`);
   };
 
+  useEffect(() => {
+  if (queryParams?.["30hide"]) {
+    setNumerologyFilter("30hide");
+  } else if (queryParams?.["90hide"]) {
+    setNumerologyFilter("90hide");
+  } else {
+    setNumerologyFilter("");
+  }
+}, [queryParams?.["30hide"], queryParams?.["90hide"]]);
+
+
+const handleNumerologyChange = (e) => {
+  const selectedValue = e.target.value;
+  setNumerologyFilter(selectedValue);
+
+  const filterObj = {
+    callCount: (parseInt(queryParams?.callCount) || 0) + 1,
+  };
+
+  // Remove existing numerology filters from queryParams
+  const newParams = { ...queryParams };
+  delete newParams["30hide"];
+  delete newParams["90hide"];
+
+  // If "View All Numerology" (blank) selected → no param
+  if (!selectedValue) {
+    const queryString = new URLSearchParams({
+      ...newParams,
+      ...filterObj,
+    }).toString();
+    Router.push(`${pathname}?${queryString}`);
+    setCatFilter(true);
+    return;
+  }
+
+  // Add only one active filter
+  if (selectedValue === "30hide") {
+    filterObj["30hide"] = 1;
+  } else if (selectedValue === "90hide") {
+    filterObj["90hide"] = 1;
+  }
+
+  // Merge new query with cleaned params
+  const route = { ...newParams, ...filterObj };
+  const queryString = new URLSearchParams(route).toString();
+  Router.push(`${pathname}?${queryString}`);
+  setCatFilter(true);
+};
+
+
   return (
-    <div className="flex gap-3 items-center ">
-      <div
-        className="relative  mb-3"
-        onClick={handleClick}
-      >
+    <div className="flex flex-wrap gap-x-2 md:gap-x-3 items-center justify-center">
+      <div className="relative  mb-3" onClick={handleClick}>
         <select
           value={sortingOrder}
           onChange={(e) => {
@@ -150,7 +202,7 @@ const SortedFilter = ({
             applyFilters(order);
           }}
           className="w-[170px] md:w-[200px] px-3 py-2 text-sm text-gray-700 border-2 border-primary  rounded-full bg-white appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-400 "
-          disabled={dataLoading} 
+          disabled={dataLoading}
         >
           <option value="">Sort by price</option>
           <option value="high-to-low">High to Low</option>
@@ -177,7 +229,7 @@ const SortedFilter = ({
           ▼
         </span>
       </div> */}
-      <div className="flex items-center gap-3 mb-3 w-full md:justify-self-auto justify-center">
+      <div className="flex items-center gap-3 mb-3  md:justify-self-auto justify-center w-max">
         {/* <label
           className="flex items-center space-x-2 cursor-pointer"
           onClick={handleClick}
@@ -217,7 +269,7 @@ const SortedFilter = ({
                 }
               }}
               className="peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-300 shadow hover:shadow-md transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-slate-400 before:opacity-0 before:transition-opacity checked:border-primary checked:bg-primary checked:before:bg-slate-400 hover:before:opacity-10"
-              disabled={dataLoading} 
+              disabled={dataLoading}
             />
             <span className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
               <svg
@@ -239,6 +291,23 @@ const SortedFilter = ({
           <span className="text-sm text-gray-700">Coming Soon</span>
         </label>
       </div>
+      {queryParams?.type === "advanced" && (
+        <div className="relative  mb-3" onClick={handleClick}>
+          <select
+            value={numerologyFilter}
+            onChange={handleNumerologyChange}
+            className="w-[180px] md:w-[200px] px-3 py-2 text-sm text-gray-700 border-2 border-primary  rounded-full bg-white appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-400 "
+            disabled={dataLoading}
+          >
+            <option value="">View All Numerology</option>
+            <option value="30hide">30% Numerology Hide</option>
+            <option value="90hide">90% Numerology Hide</option>
+          </select>
+          <span className="absolute top-1/2 right-3 transform -translate-y-1/2 text-sm text-primary pointer-events-none">
+            ▼
+          </span>
+        </div>
+      )}
     </div>
   );
 };
