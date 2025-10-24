@@ -1180,7 +1180,7 @@ const OrderPlacementTabs = () => {
                 order_id: newOrderId,
                 ...leadPayload,
                 success: orderdeclined,
-                lead_action: "Payment Received",
+                lead_action: "Payment Received - RZ",
               },
               {
                 headers: {

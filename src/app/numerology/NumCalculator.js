@@ -634,7 +634,8 @@ const NumCalculator = () => {
           "Error fetching country details:",
           error.response ? error.response.data : error.message
         );
-        toast.error("please check your pin code");
+        // toast.error("please check your pin code");
+        setLoading(false);
       }
     };
     if (data.pin_code.length === 6) {
@@ -865,34 +866,57 @@ const NumCalculator = () => {
                       <span className="text-red-600 text-sm block mt-1">{`${data.state_name} ${data.district}`}</span>
                     </div>
                     <div className="w-full">
-                      <div className="relative">
-                        <select
-                          id="area"
-                          onChange={handleAreaChange}
-                          value={data?.area}
-                          disabled={loading}
-                          className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4 appearance-none"
-                        >
-                          <option value="" disabled>
-                            Select Area
-                          </option>
-                          {area.map((item) => (
-                            <option key={item.area} value={item.area}>
-                              {item.area}
+                      {area.length > 0 ? (
+                        <div className="relative">
+                          <select
+                            id="area"
+                            onChange={handleAreaChange}
+                            value={data?.area}
+                            disabled={loading}
+                            className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4 appearance-none"
+                          >
+                            <option value="" disabled>
+                              Select Area
                             </option>
-                          ))}
-                        </select>
-                        <label
-                          htmlFor="area"
-                          className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                            data.area
-                              ? "-top-2 left-2.5 text-xs text-primary scale-90"
-                              : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                          }`}
-                        >
-                          Select Area
-                        </label>
-                      </div>
+                            {area.map((item) => (
+                              <option key={item.area} value={item.area}>
+                                {item.area}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="area"
+                            className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
+                              data.area
+                                ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                                : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                            }`}
+                          >
+                            Select Area
+                          </label>
+                        </div>
+                      ) : (
+                        <div className="relative">
+                          <input
+                            id="area"
+                            type="text"
+                            value={data?.area}
+                            name="area"
+                            onChange={handleChange}
+                            className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
+                          />
+                          <label
+                            htmlFor="area"
+                            className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
+                              data.area
+                                ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                                : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                            }`}
+                          >
+                            City
+                          </label>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </>

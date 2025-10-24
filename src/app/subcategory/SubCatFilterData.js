@@ -36,6 +36,8 @@ const SubCatFilterData = () => {
   const end_with = searchParams.get("end_with");
   const contains = searchParams.get("contains");
   const not_contain = searchParams.get("not_contain");
+  const hide30 = searchParams.get("30hide");
+  const hide90 = searchParams.get("90hide");
 
   const fetchDataOnLoad = async () => {
     if (!category || !id || !page || !paginate) return;
@@ -102,6 +104,16 @@ const SubCatFilterData = () => {
       } else if (comingsoon) {
         queryParams.set("comingsoon", comingsoon);
       }
+      
+      // Add numerology filters from URL parameters
+      if (hide30) {
+        queryParams.append("30hide", hide30);
+      }
+      if (hide90) {
+        queryParams.append("90hide", hide90);
+      }
+      
+      
       queryParams.set("star_status", true);
       const apiUrl = `/api/web/categories/search?${queryParams.toString()}`;
       const dynamicApiUrl = `/api/leaf/getSubCategoriesDetails.php?id=${id}`;

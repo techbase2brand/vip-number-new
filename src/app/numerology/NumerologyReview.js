@@ -10,7 +10,9 @@ const NumerologyReview = () => {
   const pathname = usePathname()
   const [counterOn, setCounterOn] = useState(false);
   const ref = useRef(null);
-
+  const startYear = 2007;
+  const currentYear = new Date().getFullYear();
+  const yearsOfExp = currentYear - startYear;
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -63,7 +65,7 @@ const NumerologyReview = () => {
             />
             <div>
               <p className="text-purple-900 font-extrabold text-lg">
-                {counterOn && <CountUp start={0} end={18}></CountUp>} +
+                {counterOn && <CountUp start={0} end={yearsOfExp}></CountUp>} +
               </p>
               <p className="text-gray-800 text-sm ">Year's Experience</p>
             </div>

@@ -7,7 +7,7 @@ const jsonLd = {
   url: "https://vipnumbershop.com/",
   telephone: "06009160092",
   description:
-    "Choose your lucky VIP mobile number from India’s trusted provider. 18 years of service and 2 Lakhs+ happy customers. Get your VIP number today at VIP Number Shop.",
+    `Choose your lucky VIP mobile number from India’s trusted provider. ${new Date().getFullYear()-2007} years of service and 2 Lakhs+ happy customers. Get your VIP number today at VIP Number Shop.`,
   address: {
     "@type": "PostalAddress",
     streetAddress: "SCO #62, ITI College Rd",
@@ -40,7 +40,7 @@ const jsonLd2 = {
   name: "VIP Number Shop | Buy VIP Mobile Numbers | Buy VIP Number",
   url: "https://www.vipnumbershop.com/",
   description:
-    "Choose your lucky VIP mobile number from India’s trusted provider. 18 years of service and 2 Lakhs+ happy customers. Get your VIP number today at VIP Number Shop.",
+    `Choose your lucky VIP mobile number from India’s trusted provider. ${new Date().getFullYear()-2007} years of service and 2 Lakhs+ happy customers. Get your VIP number today at VIP Number Shop.`,
   image:
     "https://www.vipnumbershop.com/_next/static/media/VIP-logo-1.1b6160e3.svg",
 };
@@ -77,7 +77,7 @@ const jsonLd4 = {
   name: "VIP Number Shop | Buy VIP Mobile Numbers | Buy VIP Number",
   image: "https://www.vipnumbershop.com/path/to/product-image.svg",
   description:
-    "Choose your lucky VIP mobile number from India’s trusted provider. 18 years of service and 2 Lakhs+ happy customers. Get your VIP number today at VIP Number Shop.",
+    `Choose your lucky VIP mobile number from India’s trusted provider. ${new Date().getFullYear()-2007} years of service and 2 Lakhs+ happy customers. Get your VIP number today at VIP Number Shop.`,
   brand: {
     "@type": "Brand",
     name: "VIP Number Shop",
