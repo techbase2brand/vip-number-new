@@ -444,7 +444,7 @@ const WalletPage = ({
                   </span>
                 </label>
               </div>
-              {amountTowithDraw <= 18000 && !isFastPayment && (
+              {amountTowithDraw <= 10000 && !isFastPayment && (
                 <div>
                   <div className="text-lg font-semibold text-gray-800">
                     Please Input the account detail to withdraw amount.

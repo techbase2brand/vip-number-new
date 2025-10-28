@@ -141,10 +141,10 @@ const CardCollection = ({
                                 }}
                                 aria-label="Moved to Cart"
                               >
-                                {items.alreadyInCart ? (
+                                {items?.alreadyInCart ? (
                                   <MdOutlineDriveFileMoveRtl fontSize={16} />
                                 ) : (
-                                  <FaPlusCircle fontSize={16}/>
+                                  <FaPlusCircle fontSize={16} />
                                 )}
                               </button>
                             )}
@@ -242,7 +242,7 @@ const CardCollection = ({
                       >
                         <div className="flex justify-between">
                           <h2 className="lg:text-[20px] text-lg  text-center font-extrabold cursor-pointer">
-                            {items.productname}
+                            {items?.productname}
                           </h2>
                           <div className="flex items-center gap-3 justify-between">
                             {(cardCollectionTitle === "WishList" ||
@@ -285,7 +285,7 @@ const CardCollection = ({
                                   }}
                                   aria-label="Moved to Cart"
                                 >
-                                  {items.alreadyInCart ? (
+                                  {items?.alreadyInCart ? (
                                     <MdOutlineDriveFileMoveRtl />
                                   ) : (
                                     <FaPlusCircle />

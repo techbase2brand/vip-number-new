@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { getOrderId, getProfile, phonePayOrder } from "../../Services/Services";
-import {useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useCallback } from "react";
 import { useGetQueryParams } from "../../utils";
@@ -138,9 +138,11 @@ const OrderPlacementTabs = () => {
   const [deliveryIsOpen, setDeliveryIsOpen] = useState(false);
   const [paySelected, setPaySelected] = useState("UPI");
   const [gatewayName, setGatewayName] = useState("PhonePe");
-  
+
   const [finalAmount, setFinalAmount] = useState();
   const [leadUpdate, setLeadUpdate] = useState(false);
+  const [hiddenDelivery, setHiddenDelivery] = useState(true);
+  const [deliveryUpdate, setDeliveryUpdate] = useState(false);
   const handleCheckboxChange = (pay) => {
     setIsChecked(!isChecked);
     setDeliveryCharges(isChecked ? 0 : pay); // Set delivery charges to 999 if checked, else 0
@@ -402,6 +404,7 @@ const OrderPlacementTabs = () => {
 
   //delete  product
   const handleDeleteItem = (productid) => {
+    setDeliveryUpdate(true);
     removeFromCart(productid);
     setCartItems(cartItems.filter((item) => item.id !== productid));
   };
@@ -676,7 +679,11 @@ const OrderPlacementTabs = () => {
     discount_type: "Amount",
     total_discount: totalDiscount,
     // lead_page: productRtpDate ? "coming soon" : "",
-    lead_page: isChecked ? "Home Delivery" : comingsoon ? "coming soon" : "Paynow",
+    lead_page: isChecked
+      ? "Home Delivery"
+      : comingsoon
+      ? "coming soon"
+      : "Paynow",
     lead_action:
       newTotal - Math.min(newTotal, wBalance) === 0 ? "Payment Received" : "",
     // wallet_money_used: walletInput > 0 ? walletInput : "",
@@ -715,7 +722,11 @@ const OrderPlacementTabs = () => {
     discount_value: discountValue,
     discount_type: "Amount",
     total_discount: totalDiscount,
-    lead_page: isChecked ? "Home Delivery" : comingsoon ? "coming soon" : "Paynow",
+    lead_page: isChecked
+      ? "Home Delivery"
+      : comingsoon
+      ? "coming soon"
+      : "Paynow",
     lead_action: "",
     wallet_money_used: Math.min(newTotal, wBalance),
     contactid: contactid,
@@ -988,18 +999,15 @@ const OrderPlacementTabs = () => {
               // Router.push("/payment-declined");
               window.PhonePeCheckout.closePage();
             } else if (response === "CONCLUDED") {
-              fetch(
-                `/api/web/payment/verifypaymentstatus`,
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    merchantOrderId: merchantOrderId,
-                  }),
-                }
-              )
+              fetch(`/api/web/payment/verifypaymentstatus`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  merchantOrderId: merchantOrderId,
+                }),
+              })
                 .then((res) => res.json())
                 .then((data) => {
                   if (data.state === "PENDING" || data.state === "FAILED") {
@@ -1687,28 +1695,34 @@ const OrderPlacementTabs = () => {
 
   useEffect(() => {
     const zip = userProfile?.address?.zip_code;
-    if (zip) {
-      handleSearchClick(zip);
+    if (zip && filteredCartItems.length > 0) {
+      handleSearchClick(zip, filteredCartItems);
     }
-  }, [userProfile?.address?.zip_code]);
+  }, [userProfile?.address?.zip_code, deliveryUpdate]);
 
-  const handleSearchClick = async (location) => {
+  const handleSearchClick = async (location, filteredCartNumbers) => {
     try {
-      const response = await fetch(
-        `/api/web/address/search`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ search: location, delivery: "yes" }),
-        }
-      );
+      const unitPrices = filteredCartNumbers.map((item) => ({
+        unitprice: parseFloat(item.unit_price),
+      }));
+      const response = await fetch(`/api/web/address/search`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          search: location,
+          delivery: "yes",
+          unitprices: unitPrices,
+        }),
+      });
       const data = await response.json();
       setResponseData(data.result);
+      setDeliveryUpdate(false);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setDeliveryUpdate(false);
     }
   };
 
@@ -1727,6 +1741,47 @@ const OrderPlacementTabs = () => {
       setFinalAmount(formData?.original_amount - wBalance);
     }
   }, [wBalance, isChecked]);
+  useEffect(() => {
+    if (responseData) {
+      const amountBelow = responseData[0]?.cf_2972
+        ? parseFloat(responseData[0]?.cf_2972)
+        : 0;
+      const amountAbove = responseData[0]?.cf_2974
+        ? parseFloat(responseData[0]?.cf_2974)
+        : 0;
+
+      let isDeliveryVisible = true; // Assume delivery is visible
+
+      // Condition 1: If both amountBelow and amountAbove are empty (no restrictions)
+      if (amountBelow === 0 && amountAbove === 0) {
+        isDeliveryVisible = true;
+      }
+      // Condition 2: If amountBelow is set and amountAbove is empty (only check if unit_price < amountBelow)
+      else if (amountBelow > 0 && amountAbove === 0) {
+        isDeliveryVisible = filteredCartItems.every((item) => {
+          const unitPrice = parseFloat(item.unit_price);
+          return unitPrice < amountBelow;
+        });
+      }
+      // Condition 3: If amountAbove is set and amountBelow is empty (only check if unit_price > amountAbove)
+      else if (amountAbove > 0 && amountBelow === 0) {
+        isDeliveryVisible = filteredCartItems.every((item) => {
+          const unitPrice = parseFloat(item.unit_price);
+          return unitPrice > amountAbove;
+        });
+      }
+      // Condition 4: If both amountBelow and amountAbove are set (check if unit_price is between amountBelow and amountAbove)
+      else if (amountBelow > 0 && amountAbove > 0) {
+        isDeliveryVisible = filteredCartItems.every((item) => {
+          const unitPrice = parseFloat(item.unit_price);
+          return unitPrice <= amountBelow && unitPrice >= amountAbove;
+        });
+      }
+
+      // Set the visibility of delivery
+      setHiddenDelivery(!isDeliveryVisible); // If conditions are not met, hide delivery
+    }
+  }, [responseData, filteredCartItems]);
   return (
     <>
       {skeleton ? (
@@ -2177,7 +2232,7 @@ const OrderPlacementTabs = () => {
                         !couponCode &&
                         total > 0 && (
                           <>
-                            {HideDelivery && (
+                            {HideDelivery && !hiddenDelivery && (
                               <HomeDelivery
                                 isChecked={isChecked}
                                 handleCheckboxChange={handleCheckboxChange}
