@@ -101,7 +101,7 @@ const DigitalForm = () => {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          `${apiUrl}/web/digital/visiting/card/${mobileNumber}`,
+          `/api/web/digital/visiting/card/${mobileNumber}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -420,7 +420,7 @@ const DigitalForm = () => {
 
       // Make API call to upload image
       const response = await axios.post(
-        `${apiUrl}/web/digital/card/imageUpload`,
+        `/api/web/digital/card/imageUpload`,
         uploadFormData,
         {
           headers: {
@@ -473,7 +473,7 @@ const DigitalForm = () => {
       const today = new Date();
       const formattedDate = today.toISOString().split("T")[0];
       const response = await axios.post(
-        `${apiUrl}/web/digital/visiting/card/${formData.id}`,
+        `/api/web/digital/visiting/card/${formData.id}`,
         {
           ...formData,
           bank_status: formData.bank_status ? 1 : 0,

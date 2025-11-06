@@ -967,7 +967,7 @@ export const NetedCategory = ({
                         className="xl:h-[241px] md:h-[236px] h-[190px] rounded-[17px] object-cover w-full border-2 border-white "
                       >
                         {/* <Image
-                        src={`${panelImg}/assets/img/vip-images/download_g3g7vd.png`}
+                        src={`${panelImg}/assets/img/vip-images/download_g3g7vd.webp`}
                         alt="sub Category"
                         height={400}
                         width={1000}

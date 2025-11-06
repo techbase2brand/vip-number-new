@@ -19,9 +19,9 @@ const AwardWinner = () => {
           <span><Image className="h-9 w-9" src={award} alt=""></Image></span>
           </div>
           <div className="Award-winner-row-os">
-            <AwardWinnerCard image={`${panelImg}/assets/img/vip-images/mobilebanner1.png`} />
-            <AwardWinnerCard image={`${panelImg}/assets/img/vip-images/mobilebanner3.png`} />
-            <AwardWinnerCard image={`${panelImg}/assets/img/vip-images/mobilebanner2.png`} />
+            <AwardWinnerCard image={`${panelImg}/assets/img/vip-images/mobilebanner1.webp`} />
+            <AwardWinnerCard image={`${panelImg}/assets/img/vip-images/mobilebanner3.webp`} />
+            <AwardWinnerCard image={`${panelImg}/assets/img/vip-images/mobilebanner2.webp`} />
           </div>
         </div>
       </div>

@@ -2033,7 +2033,11 @@ const OrderPlacementTabs = () => {
                                 </div>
                               </div>
                             </div>
-                            {coupons.length > 0 && user && (
+                          </div>
+                        </div>
+                        {coupons.length > 0 && user && (
+                          <div className="w-full md:p-2 p-2  border-[1px] border-[#58447f99] rounded-[10px] my-1">
+                            <div className="flex flex-col">
                               <>
                                 <div className="flex justify-between items-center">
                                   <h3 className="lg:text-[18px] text-[14px] font-medium  md:text-[26px] md:leading-[20px] md:font-bold sm:text-[17px] sm:leading-[30px] sm:font-bold text-left text-darktext undefined">
@@ -2056,9 +2060,9 @@ const OrderPlacementTabs = () => {
                                   </p>
                                 )}
                               </>
-                            )}
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                       <div className="w-full md:p-2 p-2  border-[1px] border-[#58447f99] rounded-[10px] my-1">
                         {coupons.length > 0 && user && showCoupon && (

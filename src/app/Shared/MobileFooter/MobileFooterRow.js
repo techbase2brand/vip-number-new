@@ -376,7 +376,7 @@ const MobileFooterRow = ({
               <div className="menu-Bar-rs mb-[7px]">
                 <span>
                   <Image
-                    src={`${panelImg}/assets/img/vip-images/deliveryPro_nxcujx.png`}
+                    src={`${panelImg}/assets/img/vip-images/deliveryPro_nxcujx.webp`}
                     alt="image"
                     width={84}
                     height={86}
@@ -495,7 +495,7 @@ const MobileFooterRow = ({
               <div className="menu-Bar-rs mb-[7px]">
                 <span>
                   <Image
-                    src={`${panelImg}/assets/img/vip-images/download_arbzig.png`}
+                    src={`${panelImg}/assets/img/vip-images/download_arbzig.webp`}
                     alt="faq image"
                     width={84}
                     height={86}
@@ -581,7 +581,7 @@ const MobileFooterRow = ({
               <div className="menu-Bar-rs">
                 <span>
                   <Image
-                    src={`${panelImg}/assets/img/vip-images/download_n1hp4f.png`}
+                    src={`${panelImg}/assets/img/vip-images/download_n1hp4f.webp`}
                     alt="QR-Stand for your Business"
                     width={84}
                     height={86}
@@ -597,7 +597,7 @@ const MobileFooterRow = ({
               <div className="menu-Bar-rs mb-[7px]">
                 <span>
                   <Image
-                    src={`${panelImg}/assets/img/vip-images/download_ahmtnt.png`}
+                    src={`${panelImg}/assets/img/vip-images/download_ahmtnt.webp`}
                     alt="Numerology Numbers"
                     width={84}
                     height={86}
@@ -650,7 +650,7 @@ const MobileFooterRow = ({
               <div className="menu-Bar-rs mb-[7px]">
                 <span>
                   <Image
-                    src={`${panelImg}/assets/img/vip-images/download_xegfcv.png`}
+                    src={`${panelImg}/assets/img/vip-images/download_xegfcv.webp`}
                     alt="Mobile Numerology Report"
                     width={84}
                     height={86}

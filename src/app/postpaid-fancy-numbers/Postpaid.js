@@ -33,7 +33,7 @@ const Postpaid = () => {
                 buttonTitle="Book Your Number"
             />
             <PreImageWithText
-                image={`${panelImg}/assets/img/vip-images/download_gdoys4.png`}
+                image={`${panelImg}/assets/img/vip-images/download_gdoys4.webp`}
                 heading="Secure Your Exclusive Postpaid Fancy Number with Your Preferred Operator"
                 subHeading="Welcome to the ultimate platform for VIP Prepaid Numbers! At VIP Number Shop, we bring you the most trusted and genuine VIP prepaid numbers, including Airtel, Jio, and BSNL. You can grow your communication experience with our memorable and distinctive combinations at the best prices. Order now and enjoy free delivery!"
                 subHeading1=""

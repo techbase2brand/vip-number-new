@@ -49,7 +49,7 @@ const OurCustomers = () => {
         <div className="OurCustomers-slider-row-os">
             <VipSlider {...CustomerSliderSettings}>
               <OurCustomerCard
-                image={`${panelImg}/assets/img/vip-images/download_et2ynn.png`}
+                image={`${panelImg}/assets/img/vip-images/download_et2ynn.webp`}
                 text="Sharing the QR code was easy and rewarding for me. I earned whenever someone purchased a number through my referral link. Great way to earn extra income!"
                 name="Sneha Patel"
                 // Date="September 12, 2023"

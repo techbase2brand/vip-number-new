@@ -121,7 +121,7 @@ const CityJammu = () => {
         text1="With the VIP Number Shop’s numerology calculator, customers in Jammu can discover a VIP mobile number that aligns perfectly with their personality and aspirations. Based on an individual’s birth date, the numerology tool recommends numbers that resonate with the person’s energy and goals, creating a positive impact on both personal and professional fronts."
         text2=""
         link="/"
-        image={`${panelImg}/assets/img/vip-images/download_z8oexj.png`}
+        image={`${panelImg}/assets/img/vip-images/download_z8oexj.webp`}
         imageAlt="Phone Screen with VIP Numbers Jammu"
       />
       <CityDifferentFromOthers

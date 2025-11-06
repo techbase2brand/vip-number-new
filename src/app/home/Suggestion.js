@@ -102,7 +102,7 @@ const Suggestion = () => {
               /> */}
 
               <Image
-                src={`${panelImg}/assets/img/vip-images/Handshake1-ezgif.com-crop_zhwnmw.png`}
+                src={`${panelImg}/assets/img/vip-images/Handshake1-ezgif.com-crop_zhwnmw.webp`}
                 alt="acroll arrow"
                 width={300}
                 height={100}

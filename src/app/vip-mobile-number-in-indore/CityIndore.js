@@ -120,7 +120,7 @@ const CityIndore = () => {
         text1="At VIP Number Shop, we proudly hold a top-ranking position for providing an exclusive collection of VIP mobile number in Indore. Explore a handpicked collection of fancy numbers that redefine communication and reflect your prestige. Trust our expertise to find the perfect number tailored to your needs."
         text2=""
         link="/"
-        image={`${panelImg}/assets/img/vip-images/download_znje8x.png`}
+        image={`${panelImg}/assets/img/vip-images/download_znje8x.webp`}
         imageAlt="Phone Screen with VIP Numbers Indore"
       />
       <CityDifferentFromOthers

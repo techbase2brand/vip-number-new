@@ -31,7 +31,7 @@ const InfluncerReadyToJoin = () => {
               <div className="relative w-full md:w-[250px] lg:w-[300px]">
                 {/* <div className="absolute inset-0 bg-black rounded-[40px]"></div> */}
                 <Image
-                  src={`${apiUrl}/assets/img/vip-images/sdsd 1.png`} // Replace with your actual image path
+                  src={`${apiUrl}/assets/img/vip-images/sdsd 1.webp`} // Replace with your actual image path
                   alt="Person with stylish outfit"
                   width={300}
                   height={500}

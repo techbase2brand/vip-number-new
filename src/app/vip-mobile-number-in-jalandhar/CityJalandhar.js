@@ -120,7 +120,7 @@ const CityJalandhar = () => {
         text1="With VIP Number Shop's numerology calculator, you can find a VIP mobile number that perfectly aligns with your energy and aspirations. The calculator helps you select a number based on your birth date and numerology, ensuring it resonates with your personality and brings positive vibes."
         text2=""
         link="/"
-        image={`${panelImg}/assets/img/vip-images/download_h8u8zl.png`}
+        image={`${panelImg}/assets/img/vip-images/download_h8u8zl.webp`}
         imageAlt="Phone Screen with VIP Numbers Jalandhar"
       />
       <CityDifferentFromOthers

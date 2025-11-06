@@ -502,7 +502,7 @@ const WalletPage = ({
                     </div>
                     <div className="withdrawal-account-details-input-row-os">
                       <div className="withdrawal-account-details-input-col-os withdrawal-account-details-input-col-1-os">
-                        <label>Acc. Name</label>
+                        <label>Name(As per Bank Account)</label>
                         <div className="withdrawal-account-details-input-col-os-1">
                           <input
                             type="text"
