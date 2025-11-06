@@ -55,7 +55,7 @@ const VipPrepaidNumber = () => {
         Our VIP Prepaid Number Collection Include
       </h2>
       <AboutImageWithText
-        image={`${panelImg}/assets/img/vip-images/download_cgi6d7.png`}
+        image={`${panelImg}/assets/img/vip-images/download_cgi6d7.webp`}
         heading="Airtel Prepaid Fancy Numbers"
         subHeading="Discover unique Airtel prepaid choice numbers at VIP Number Shop, offering a diverse range of combinations. Choose a number that resonates with your style. Unlock exclusive offers and enjoy a 100% refund guarantee in case of any issues. Enhance your Airtel experience with a distinct and memorable prepaid fancy number."
         subHeading1=""
@@ -64,7 +64,7 @@ const VipPrepaidNumber = () => {
       />
 
       <AboutImageWithText
-        image={`${panelImg}/assets/img/vip-images/download_yqpw7v.png`}
+        image={`${panelImg}/assets/img/vip-images/download_yqpw7v.webp`}
         heading="BSNL Prepaid Fancy Numbers"
         subHeading="Explore premium BSNL prepaid fancy numbers at VIP Number Shop. Secure a BSNL choice number with attractive discounts. Benefit from future purchasing discounts and exclusive access to limited edition numbers. Make a statement with a BSNL prepaid fancy number that reflects your individuality and stands out from the crowd."
         subHeading1=""
@@ -73,7 +73,7 @@ const VipPrepaidNumber = () => {
         style={columnDirection}
       />
       <AboutImageWithText
-        image={`${panelImg}/assets/img/vip-images/download_p9id7t.png`}
+        image={`${panelImg}/assets/img/vip-images/download_p9id7t.webp`}
         heading="Jio Prepaid VIP Numbers"
         subHeading="Unleash exclusivity with Jio prepaid choice numbers from VIP Number Shop. Stand out effortlessly with memorable combinations. Enjoy not only discounts on future purchases but also exclusive access to limited edition numbers. Choose a Jio prepaid fancy number that adds a personal touch to your communication and sets you apart."
         subHeading1=""
@@ -82,7 +82,7 @@ const VipPrepaidNumber = () => {
       />
 
       <AboutImageWithText
-        image={`${panelImg}/assets/img/vip-images/download_tnaylw.png`}
+        image={`${panelImg}/assets/img/vip-images/download_tnaylw.webp`}
         heading="Idea Prepaid VIP Numbers"
         subHeading="Explore distinctive Idea VIP numbers at VIP Number Shop. Find combinations that resonate with your style and make a lasting impression. Unlock exclusive offers and enjoy the benefits of a personalized Idea fancy number. Elevate your communication experience with a memorable and unique Idea VIP number."
         subHeading1=""
@@ -91,7 +91,7 @@ const VipPrepaidNumber = () => {
         style={columnDirection}
       />
       <AboutImageWithText
-        image={`${panelImg}/assets/img/vip-images/download_fzrjib.png`}
+        image={`${panelImg}/assets/img/vip-images/download_fzrjib.webp`}
         heading="VI (Vodafone Idea) Prepaid VIP Numbers"
         subHeading="Discover premium VI (Vodafone Idea) prepaid fancy numbers at VIP Number Shop. Secure your preferred VI choice number with attractive discounts. Benefit from future purchasing discounts and exclusive access to limited edition numbers. Make a statement with a VI VIP prepaid number that adds a touch of uniqueness to your communication."
         subHeading1=""
@@ -104,7 +104,7 @@ const VipPrepaidNumber = () => {
         headingPart3="?"
       />
       <PreImageWithText
-        image={`${panelImg}/assets/img/vip-images/download_lcbynz.png`}
+        image={`${panelImg}/assets/img/vip-images/download_lcbynz.webp`}
         heading="Enjoy Exclusive Offers and Rewards on Your Purchase"
         subHeading="When you shop prepaid VIP mobile numbers with us, you get some extra perks! Enjoy special offers and rewards, like discounts on future purchases and access to limited edition items. It's our way of saying thanks for choosing us. Your purchase comes with a little something extra, just for you!"
         subHeading1=""
@@ -118,7 +118,7 @@ const VipPrepaidNumber = () => {
         }}
       />
       <PreImageWithText
-        image={`${panelImg}/assets/img/vip-images/download_iveffc.png`}
+        image={`${panelImg}/assets/img/vip-images/download_iveffc.webp`}
         heading="Buy Any Prepaid VIP Number Online Over In India"
         subHeading="Explore a wide selection of prepaid VIP numbers online in India at your convenience. From Airtel and BSNL to Jio, Idea, and VI, find unique combinations that suit your style. Enjoy the ease of online purchase, securing your preferred VIP number hassle-free and adding a personalized touch to your communication."
         subHeading1=""

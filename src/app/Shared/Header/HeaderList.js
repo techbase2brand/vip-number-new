@@ -44,7 +44,7 @@ const HeaderList = ({
           <div className="header_discount_coupon">
             <Link href="/">
               <Image
-                src={`${panelImg}/assets/img/vip-images/download_mty3kf.png`}
+                src={`${panelImg}/assets/img/vip-images/download_mty3kf.webp`}
                 className="vipLogo-rs"
                 width={500}
                 height={430}

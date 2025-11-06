@@ -114,7 +114,7 @@ const CityJaipur = () => {
         text1="At VIP Number Shop, we take pride in being Jaipur’s premier provider of high-end mobile numbers. Discover our curated collection of VIP mobile numbers in Jaipur which redefine how you communicate with others. Trust our expertise to guide you in selecting a VIP mobile number that reflects your status and enhances your communication with style and grace."
         text2=""
         link="/"
-        image={`${panelImg}/assets/img/vip-images/download_c38fpn.png`}
+        image={`${panelImg}/assets/img/vip-images/download_c38fpn.webp`}
         imageAlt="Phone Screen with VIP Numbers Jaipur"
       />
       <CityDifferentFromOthers

@@ -106,7 +106,7 @@ const CityPatna = () => {
         text1="At VIP Number Shop, we are proud to be Patna’s top source for high-end mobile numbers. Explore our specially curated selection of VIP numbers in Patna, designed to elevate the way you connect with others. Trust our expertise to help you choose a VIP number that reflects your status and enhances your communication with sophistication and style."
         text2=""
         link="/"
-        image={`${panelImg}/assets/img/vip-images/download_fhdzlc.png`}
+        image={`${panelImg}/assets/img/vip-images/download_fhdzlc.webp`}
         imageAlt="Phone Screen with VIP Numbers Patna"
       />
       <CityDifferentFromOthers

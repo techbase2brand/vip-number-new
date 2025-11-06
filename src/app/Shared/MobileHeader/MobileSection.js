@@ -186,7 +186,7 @@ const MobileSection = ({
                     <div className="vip-logo-mobile-rs">
                       <Link href="/">
                         <Image
-                          src={`${panelImg}/assets/img/vip-images/download_mty3kf.png`}
+                          src={`${panelImg}/assets/img/vip-images/download_mty3kf.webp`}
                           className="vipLogo-rs"
                           alt="Vip logo"
                           width={500}

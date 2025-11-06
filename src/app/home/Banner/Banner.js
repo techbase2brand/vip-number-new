@@ -28,27 +28,27 @@ const Banner = () => {
       link:"/deals"
     },
     {
-      image: `${panelImg}/assets/img/vip-images/mobilebanner1.png`,
+      image: `${panelImg}/assets/img/vip-images/mobilebanner1.webp`,
       alt: "International Business Award with Shilpa Shetty - VIP Number & VIP Mobile Numbers",
       link:"/"
     },
     {
-      image: `${panelImg}/assets/img/vip-images/mobilebanner2.png`,
+      image: `${panelImg}/assets/img/vip-images/mobilebanner2.webp`,
       alt: "International Business Award with Malaika Arora - VIP Number & VIP Mobile Numbers",
       link:"/family-pack"
     },
     {
-      image: `${panelImg}/assets/img/vip-images/mobilebanner3.png`,
+      image: `${panelImg}/assets/img/vip-images/mobilebanner3.webp`,
       alt: "International Business Award with Sonu Sood - VIP Number & VIP Mobile Numbers",
        link:"/business"
     },
     {
-      image: `${panelImg}/assets/img/vip-images/mobilebanner4.png`,
+      image: `${panelImg}/assets/img/vip-images/mobilebanner4.webp`,
       alt: "Choice is yours - VIP Number & VIP Mobile Numbers",
        link:"/"
     },
     {
-      image: `${panelImg}/assets/img/vip-images/businesstoday.png`,
+      image: `${panelImg}/assets/img/vip-images/businesstoday.webp`,
        alt: "Business Today - VIP Number & VIP Mobile Numbers",
         link:"/"
     },

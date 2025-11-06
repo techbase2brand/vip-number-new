@@ -121,7 +121,7 @@ const CityMoradabad = () => {
           text1="At VIP Number Shop, we are proud to be Moradabad’s top provider of elite mobile numbers. Explore our curated collection of VIP mobile numbers, handpicked to redefine the way you communicate. Trust our expertise to help you select the ideal VIP mobile number that not only enhances your communication but also reflects your status with style and sophistication."
           text2=""
           link="/"
-          image={`${panelImg}/assets/img/vip-images/download_nhw2bm.png`}
+          image={`${panelImg}/assets/img/vip-images/download_nhw2bm.webp`}
           imageAlt="Phone Screen with VIP Numbers Moradabad"
         />
         <CityDifferentFromOthers

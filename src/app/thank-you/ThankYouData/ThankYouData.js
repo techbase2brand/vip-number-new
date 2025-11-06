@@ -120,7 +120,7 @@ const OrderSubmitData = () => {
             </div>
             <div className="OrderSubmitData-submitted-col-2-os">
               <Image
-                src={`${panelImg}/assets/img/vip-images/download_mblksn.png`}
+                src={`${panelImg}/assets/img/vip-images/download_mblksn.webp`}
                 alt="order completed"
                 width={300}
                 height={100}

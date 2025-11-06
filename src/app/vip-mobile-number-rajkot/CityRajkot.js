@@ -123,7 +123,7 @@ const CityRajkot = () => {
           text1="At VIP Number Shop, we pride ourselves on being Rajkot’s top provider of VIP mobile numbers. Discover our hand-picked collection of elite and fancy mobile numbers that redefine how you connect with others. Trust our expertise to guide you in selecting a VIP number that not only represents your status but also enhances your communication with elegance and flair."
           text2=""
           link="/"
-          image={`${panelImg}/assets/img/vip-images/download_rniuau.png`}
+          image={`${panelImg}/assets/img/vip-images/download_rniuau.webp`}
           imageAlt="Phone Screen with VIP Numbers Rajkot"
         />
         <CityDifferentFromOthers
