@@ -98,7 +98,7 @@ const BusinessCard = () => {
               width={1000}
               height={500}
               alt="centerstar"
-              className="w-[300px] md:max-w-[680px] mx-auto hidden lg:block absolute top-0"
+              className=" md:max-w-[680px] mx-auto hidden lg:block absolute top-0"
             />
 
             <div className="center-star-div relative bottom-[2%] md:bottom-[50%] px-4 pt-6 2xl:pb-[170px]">
@@ -165,7 +165,7 @@ const BusinessCard = () => {
                   className=" max-w-[100px] xl:max-w-[200px] 2xl:max-w-[345px] "
                 />
               </div>
-              <div className="right-scanner absolute bottom-[47%] 2xl:bottom-[60%] right-[5%] xl:right-[8%] 2xl:right-[11%]">
+              <div className="right-scanner absolute  bottom-[62%] xl:bottom-[47%] 2xl:bottom-[60%] right-[15%] xl:right-[8%] 2xl:right-[11%]">
                 <Image
                   src={Rightscanner}
                   width={1000}

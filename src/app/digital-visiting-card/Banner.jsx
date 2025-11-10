@@ -80,24 +80,26 @@ const Banner = () => {
 
   useEffect(() => {
     if (user?.token) {
-      getProfile(user?.token)?.then((res) => {
-        const address = res?.address || {};
-        const fullName = `${res?.firstname || ""} ${
-          res?.lastname || ""
-        }`.trim(); // Remove leading/trailing spaces from the full name
-        setFormData((prevState) => ({
-          ...prevState,
-          name: `${res?.firstname} ${res.lastname}` || "",
-          mobile: res?.mobile || "",
-          email: res.email,
-          pincode: address?.zip_code || "",
-          city: address?.city || "",
-          // district: res?.contact_cf?.district || "",
-          // state_name: address?.state || "",
-          // dob: dateBirth?.date_of_birth || "",
-          address: address?.address,
-        }));
-      });
+      getProfile(user?.token)
+        ?.then((res) => {
+          if (!res) return;
+          const address = res?.address || {};
+          const firstName = res?.firstname || "";
+          const lastName = res?.lastname || "";
+          const fullName = [firstName, lastName].filter(Boolean).join(" ");
+          setFormData((prevState) => ({
+            ...prevState,
+            name: fullName,
+            mobile: res?.mobile || "",
+            email: res?.email || "",
+            pincode: address?.zip_code || "",
+            city: address?.city || "",
+            address: address?.address || "",
+          }));
+        })
+        .catch((error) =>
+          console.error("Failed to prefill banner profile data:", error)
+        );
     }
   }, [user]);
 
@@ -282,7 +284,7 @@ const Banner = () => {
                     height={500}
                     className="savecontactimg max-w-[168px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
-                  <button className="Save Contact relative text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-8px] 2xl:right-[-19px] bottom-[43px] 2xl:bottom-[39px] bg-[#E21A20] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
+                  <button className="Save Contact relative text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-4px] 2xl:right-[-19px] bottom-[43px] 2xl:bottom-[39px] bg-[#E21A20] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Social Links
                   </button>
                 </div>
@@ -308,7 +310,7 @@ const Banner = () => {
                       height={500}
                       className="Allwithsingleclick max-w-[144.81px] xl:max-w-[244.81px] 2xl:max-w-[344.81px] m-auto items-center"
                     />
-                    <button className="Save Contact relative right-[-1  px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[35px] bg-[#22C55E] text-white           w-[170px] xl:w-[270px] 2xl:w-[389px] h-[33px] xl:h-[43px] 2xl:h-[74px] items-center m-auto rounded-[50px]">
+                    <button className="Save Contact relative right-[-1px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[35px] bg-[#22C55E] text-white           w-[170px] xl:w-[270px] 2xl:w-[389px] h-[33px] xl:h-[43px] 2xl:h-[74px] items-center m-auto rounded-[50px]">
                       All With Single Click
                     </button>
                   </div>

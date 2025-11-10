@@ -137,23 +137,26 @@ const DigitalVisitingCard = () => {
 
   useEffect(() => {
     if (user?.token) {
-      getProfile(user?.token)?.then((res) => {
-        const address = res?.address || {};
-        const fullName = `${res?.firstname || ""} ${res?.lastname || ""
-          }`.trim(); // Remove leading/trailing spaces from the full name
-        setFormData((prevState) => ({
-          ...prevState,
-          name: `${res?.firstname} ${res.lastname}` || "",
-          mobile: res?.mobile || "",
-          email: res.email,
-          pincode: address?.zip_code || "",
-          city: address?.city || "",
-          // district: res?.contact_cf?.district || "",
-          // state_name: address?.state || "",
-          // dob: dateBirth?.date_of_birth || "",
-          address: address?.address,
-        }));
-      });
+      getProfile(user?.token)
+        ?.then((res) => {
+          if (!res) return;
+          const address = res?.address || {};
+          const firstName = res?.firstname || "";
+          const lastName = res?.lastname || "";
+          const fullName = [firstName, lastName].filter(Boolean).join(" ");
+          setFormData((prevState) => ({
+            ...prevState,
+            name: fullName,
+            mobile: res?.mobile || "",
+            email: res?.email || "",
+            pincode: address?.zip_code || "",
+            city: address?.city || "",
+            address: address?.address || "",
+          }));
+        })
+        .catch((error) => {
+          console.error("Failed to prefill profile data:", error);
+        });
     }
   }, [user]);
 

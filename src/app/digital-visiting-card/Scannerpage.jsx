@@ -22,7 +22,7 @@ const Scannerpage = () => {
 
   return (
     <div>
-      <div className="relative w-[320px] h-[200px] rounded-2xl bg-gradient-to-br from-[#7b5cf0] to-[#4b1b78] shadow-lg border-2 border-cyan-400 shadow-cyan-500/30 flex items-center justify-start m-auto p-5 lg:hidden">
+      <div className="relative w-[320px] h-[200px] rounded-2xl bg-gradient-to-br from-[#7b5cf0] to-[#4b1b78] shadow-lg border-2 border-cyan-400 shadow-cyan-500/30 flex items-center justify-start m-auto p-5  md:hidden">
         <Image
           src={Goldscanner}
           alt="Goldscanner"
@@ -87,10 +87,11 @@ const Scannerpage = () => {
             <li>✅ Only Digital Visiting Card 14 Days Money Back Guarantee</li>
           </ul>
 
-          <div className="pt-4 space-y-1">
+          <div className="pt-4 space-y-1 flex">
             <p className="text-purple-700 text-xl font-semibold">
-              Base Plan: ₹{basePlan?.amount ?? "--"} /-
+               ₹{basePlan?.amount ?? "--"} /- 
             </p>
+            <p> ₹1599/-</p>
             {addOnTotal > 0 && (
               <p className="text-sm text-gray-600">
                 Add-ons: {checkoutPlan?.addOnLabel} (+₹{addOnTotal})
@@ -148,16 +149,20 @@ const Scannerpage = () => {
             </div>
           </div>
 
-          <div className="pt-6 text-lg font-semibold">
+          <div className="pt-6 text-lg font-semibold flex items-center justify-between">
+            <div className="total-am">
             Total Amount:{" "}
             <span className="text-2xl font-bold">
               ₹{checkoutPlan?.totalAmount ?? "--"}/-
             </span>
-          </div>
-
-          <button className="mt-4 bg-purple-700 text-white font-medium px-6 py-2 rounded-full hover:bg-purple-800 transition-all">
+            </div>
+            
+            <button className="mt-4 bg-[rgba(88,68,127,1)] text-white font-medium px-6 py-2 rounded-full hover:bg-purple-800 transition-all">
             Buy Now
           </button>
+          </div>
+
+         
         </div>
       </section>
     </div>

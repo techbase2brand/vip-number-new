@@ -19,28 +19,28 @@ const pricingData = [
       addOns: { stand: true },
     },
   },
-  {
-    id: 2,
-    title: "Digital Visiting Card + Smart Visiting Card + QR NFC Standee",
-    price: "1299",
-    oldPrice: "1499",
-    img: card1,
-    planConfig: {
-      basePlanId: "digital-365-gold",
-      addOns: { smart: true, stand: true },
+    {
+      id: 2,
+      title: "Digital Visiting Card + Smart Visiting Card + QR NFC Standee",
+      price: "1299",
+      oldPrice: "1499",
+      img: card1,
+      planConfig: {
+        basePlanId: "digital-365-gold",
+        addOns: { smart: true, stand: true },
+      },
     },
-  },
-  {
-    id: 3,
-    title: "Digital Visiting Card + Smart Visiting Card",
-    price: "499",
-    oldPrice: "699",
-    img: card1,
-    planConfig: {
-      basePlanId: "digital-365-gold",
-      addOns: { smart: true },
+    {
+      id: 3,
+      title: "Digital Visiting Card + Smart Visiting Card",
+      price: "499",
+      oldPrice: "699",
+      img: card1,
+      planConfig: {
+        basePlanId: "digital-365-gold",
+        addOns: { smart: true },
+      },
     },
-  },
 ];
 
 const Contectless = () => {
@@ -79,14 +79,14 @@ const Contectless = () => {
                 </div>
 
                 <div className="bg-white rounded-b-3xl text-center text-gray-800 p-4 w-full flex flex-col items-center">
-                  <div className="card-titleordes flex max-w-[447px] ">
-                    <h3 className="font-semibold max-w-[298px] text-[15px] leading-snug mb-2">
+                  <div className="card-titleordes flex max-w-[447px] text-start ">
+                    <h3 className="font-semibold max-w-[298px] text-[18px] leading-snug mb-2">
                       {item.title}
                     </h3>
 
-                    <p className="text-primary font-bold text-xl">
+                    <p className="text-primary font-bold text-xl flex flex-col gap-[12px] items-center text-[35px] m-auto ">
                       +{item.price}/-
-                      <span className="line-through text-gray-400 text-sm ml-2">
+                      <span className="line-through text-yellow-500 text-[30px]">
                         {item.oldPrice}/-
                       </span>
                     </p>
