@@ -1,0 +1,108 @@
+.Flylogoimg {
+  z-index: 9;
+  left: 50%;
+  transform: translate(-50%, -4%);
+  top: 55%;
+}
+
+@media (max-width: 1500px) {
+  .sharing_easy {
+    right: 4% !important;
+  }
+}
+
+@media (max-width: 1450px) {
+  .digital_img {
+    max-width: 240px;
+  }
+
+  .digital_logo {
+    max-width: 150px;
+  }
+
+  .Flylogoimg {
+    z-index: 9;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -4%);
+  }
+}
+
+@media (max-width: 1200px) {
+  .line_img {
+    width: 750px;
+  }
+
+  .Flylogoimg img {
+    max-width: 400px;
+  }
+
+  .digital_img {
+    max-width: 220px;
+  }
+
+  .digital_logo {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .line_img {
+    width: 550px;
+  }
+
+  .digital_img {
+    max-width: 220px;
+  }
+
+  .digital_logo {
+    max-width: 120px;
+  }
+
+  .Flylogoimg {
+    z-index: 9;
+    /* top: -24%; */
+    left: 50%;
+    transform: translate(-50%, -4%);
+    max-width: 230px;
+  }
+}
+
+@media (max-width: 430px) {
+  .money-back {
+    max-width: 83px;
+    animation: none;
+  }
+
+  .Money-Back-main {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0%;
+  }
+
+  .banner-bg {
+    background-color: #e7defa;
+  }
+
+  .smart-card {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .smart-des {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .mobile-on-ph {
+    max-width: 112px;
+  }
+
+  .Flylogoimg {
+    z-index: 9;
+    max-width: 141px;
+    left: 50%;
+    transform: translate(-50%, -4%);
+    top: -23%;
+  }
+}
