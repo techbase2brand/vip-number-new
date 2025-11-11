@@ -23,15 +23,15 @@ const Ready = () => {
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative top-[-3rem]">
         <Image
           src={lastbackground}
           alt="vip number shop"
           width={1000}
           height={500}
-          className="absolute top-[-2rem]"
+          className="absolute top-[0] h-full object-cover"
         />
-        <section className="relative bg-secondary py-24 px-6 text-center overflow-hidden opacity-[0.9] top-[-3rem]">
+        <section className="relative bg-secondary py-24 px-6 text-center overflow-hidden opacity-[0.9]">
           <div className=" inset-0 bg-secondary/80 backdrop-blur-sm"></div>
           <div className="relative max-w-4xl mx-auto">
             <h1 className="text-3xl md:text-5xl font-extrabold text-primary mb-6 leading-tight">

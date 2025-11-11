@@ -6,13 +6,15 @@ import Contectless from "./Contectless";
 import Ready from "./Ready";
 import Sharingcard from "./Sharingcard";
 import { DigitalCardPlanProvider } from "./PlanContext";
+import BusinessRow from "./BusinessRow";
 
 const Page = () => {
   return (
     <DigitalCardPlanProvider>
       <Banner />
-      <BusinessCard />
+      <BusinessRow/>
       <DigitalVisitingCard />
+      <BusinessCard />
       <Contectless />
       <Sharingcard />
       <Ready />

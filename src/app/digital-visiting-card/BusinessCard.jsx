@@ -2,7 +2,7 @@
 
 import React, { useContext } from "react";
 import Image from "next/image";
-import girl from "../../../public/digital-card-new/descriptiongirl.webp";
+import unionBack from "../../../public/digital-card-new/Union.webp";
 import Leftwave from "../../../public/digital-card-new/start-wave.webp";
 import righttwave from "../../../public/digital-card-new/Right-wave.webp";
 import centerstar from "../../../public/digital-card-new/centerstar.webp";
@@ -35,52 +35,13 @@ const BusinessCard = () => {
 
   return (
     <div>
-      <div className="container-os">
-        <div className="py-16 px-4">
-          <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 gap-8 items-center justify-items-end">
-            {/* Text Section */}
-            <div>
-              <h2 className=" text-[36px] 2xl:text-[52px] leading-tight mb-4 font-bold">
-                Complete <span className="text-primary">Business Card Kit</span>
-              </h2>
-              <p className="text-[15px] text-gray-700 leading-relaxed">
-                Presenting the ultimate NFC Smart Business Kit: A modern way to
-                share your identity with tailored designs, premium print
-                quality, and durable materials. Comes with a complimentary
-                two-year replacement assurance for worry-free use.
-              </p>
-            </div>
-
-            {/* WhatsApp Contact Card */}
-            <div className="bg-primary rounded-full p-4 flex items-center gap-4 shadow-lg">
-              <div className="relative">
-                <div className="w-20 h-20 rounded-full bg-white overflow-hidden scale-[1.4]">
-                  <Image
-                    src={girl}
-                    alt="Contact vip shop"
-                    width={1000}
-                    height={100}
-                    className="w-[80px] h-[80px] object-cover rounded-full"
-                  />
-                </div>
-                <div className="absolute top-[-25px] right-[-25px] w-10 h-10 bg-black rounded-full flex items-center justify-center cursor-pointer">
-                  <FaWhatsapp className="text-white text-[20px]" />
-                </div>
-              </div>
-              <div className="ps-5">
-                <h3 className="text-yellow-300 text-[18px]">
-                  Contact VIP Number Shop
-                </h3>
-                <p className="text-white text-[18px]">
-                  Looking for free design assistance?
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <Scannerpage />
-      <section className="bg-[#FFCE00] hidden md:block">
+      <section
+        className="hidden md:block bg-cover bg-no-repeat h-full"
+        style={{
+          backgroundImage: `url(${unionBack.src})`,
+        }}
+      >
         <div className="top-img flex flex-col md:flex-row  w-full items-center justify-between   relative pb-[200px] 2xl:pb-[260px] ">
           <div className="star-left hidden lg:block">
             <Image
@@ -92,7 +53,7 @@ const BusinessCard = () => {
             />
           </div>
 
-          <div className="center-star text-center md:text-left  ">
+          <div className="center-star text-center md:text-left pt-[180px] 2xl:pt-[200px]">
             <Image
               src={centerstar}
               width={1000}
@@ -101,9 +62,9 @@ const BusinessCard = () => {
               className=" md:max-w-[680px] mx-auto hidden lg:block absolute top-0"
             />
 
-            <div className="center-star-div relative bottom-[2%] md:bottom-[50%] px-4 pt-6 2xl:pb-[170px]">
+            <div className="center-star-div relative bottom-[2%] md:bottom-[50%] px-4 pt-6 2xl:pb-[100px]">
               <div className="baner-des max-w-[90%] md:max-w-[708px] text-[16px] md:text-[24px] m-auto items-center text-center">
-                <p className="font-semibold text-[18px] 2xl:text-[24px]">
+                <p className="baner-des max-w-[90%] md:max-w-[708px] text-[16px] md:text-[24px] m-auto items-center text-center">
                   Backed By VIP Number Shop
                 </p>
               </div>
@@ -217,7 +178,7 @@ const BusinessCard = () => {
               <p className="text-[15px] text-center">
                 Backed By VIP Number Shop
               </p>
-              <h5 className="text-[28px] font-extrabold text-primary text-center pt-4">
+              <h5 className="text-[28px] font-extrabold text-primary text-center pt-4 px-4">
                 Smart Business Cards for the Digital Age
               </h5>
               <p className="text-[15px] text-center px-12 pt-4">

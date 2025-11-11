@@ -18,18 +18,46 @@ import Image from "next/image";
 const Sharingcard = () => {
   return (
     <div>
-      <div className="relative pt-[4%] pb-[15%] block md:hidden ">
-        <div className="sharing-content flex flex-col justify-center  gap-[100px]   ">
-          <div className="shearing-icon  items-center m-auto absolute left-[37%] top-[-6%]">
+      <div className="py-16 px-4">
+        <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:gap-8 items-center justify-items-center">
+          <h2 className=" text-[36px] 2xl:text-[52px] leading-tight mb-4 font-bold text-center md:text-left">
+            Benefits of<span className="text-primary">Smart Cards</span>
+          </h2>
+          <div className=" md:p-4 flex items-center gap-4">
+            <div className="ps-5">
+              <p className="text-[18px] text-center md:text-left">
+                Smart Cards transform the way professionals connect by offering
+                a modern, eco-friendly, and versatile solution making networking
+                smarter, faster, and more sustainable than traditional paper
+                cards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="relative pt-[4%] pb-[15%] block lg:hidden ">
+        <div className="sharing-content grid md:grid-cols-2 justify-center  gap-12 lg:gap-[100px]">
+          
+          <div className="relative shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#58447F] text-white pt-[40px]  w-full rounded-[36px] ">
+            <h2 className="shearing-title text-center max-w-[106px]  text-[18px] m-auto">
+              Easy Sharing
+            </h2>
+            <p className="shearing-des text-center m-auto max-w-[269px] text-[13px] leading-[22px]">
+              Instantly share your details via WhatsApp, Email, SMS, QR code, or
+              NFC tap, no apps required, just effortless connectivity.
+            </p>
+            <div className="shearing-icon  items-center m-auto absolute top-[-12%] w-full flex justify-center">
             <Image
               src={Arrowicon}
               alt="Arrowicon"
               width={1000}
               height={500}
-              className="max-w-[97px] m-auto"
+              className="max-w-[50px] md:max-w-[62px] m-auto"
             />
           </div>
-          <div className="shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#58447F] text-white pt-[40px]  w-full rounded-[36px] ">
+          </div>
+         
+          <div className="relative shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#FFCE00] text-white pt-[40px]  w-full rounded-[36px] ">
             <h2 className="shearing-title text-center max-w-[106px]  text-[18px] m-auto">
               Easy Sharing
             </h2>
@@ -37,17 +65,18 @@ const Sharingcard = () => {
               Instantly share your details via WhatsApp, Email, SMS, QR code, or
               NFC tap, no apps required, just effortless connectivity.
             </p>
-          </div>
-          <div className="shearing-icon absolute left-[37%] bottom-[61%]  items-center m-auto">
+            <div className="shearing-icon absolute  top-[-12%] w-full flex justify-center items-center m-auto">
             <Image
               src={Yellowspin}
               alt="Yellowspin"
               width={1000}
               height={500}
-              className="max-w-[97px] m-auto"
+              className="max-w-[50px] md:max-w-[62px] m-auto"
             />
           </div>
-          <div className="shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#FFCE00] text-white pt-[40px]  w-full rounded-[36px] ">
+          </div>
+       
+          <div className="relative shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#58447F] text-white pt-[40px]  w-full rounded-[36px] ">
             <h2 className="shearing-title text-center max-w-[106px]  text-[18px] m-auto">
               Easy Sharing
             </h2>
@@ -55,28 +84,19 @@ const Sharingcard = () => {
               Instantly share your details via WhatsApp, Email, SMS, QR code, or
               NFC tap, no apps required, just effortless connectivity.
             </p>
-          </div>
-          <div className="shearing-icon absolute bottom-[26%] left-[37%] items-center m-auto">
+            <div className="shearing-icon absolute  top-[-12%] w-full flex justify-center items-center m-auto">
             <Image
               src={Leafspin}
               alt="Leafspin"
               width={1000}
               height={500}
-              className="max-w-[97px] m-auto"
+              className="max-w-[50px] md:max-w-[62px] m-auto"
             />
           </div>
-          <div className="shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#58447F] text-white pt-[40px]  w-full rounded-[36px] ">
-            <h2 className="shearing-title text-center max-w-[106px]  text-[18px] m-auto">
-              Easy Sharing
-            </h2>
-            <p className="shearing-des text-center m-auto max-w-[269px] text-[13px] leading-[22px]">
-              Instantly share your details via WhatsApp, Email, SMS, QR code, or
-              NFC tap, no apps required, just effortless connectivity.
-            </p>
           </div>
         </div>
       </div>
-      <section className="block md:hidden">
+      <section className="block lg:hidden">
         <div className="social-setion relative">
           <div className="rope-img flex  ">
             <Image
@@ -124,14 +144,14 @@ const Sharingcard = () => {
                 className="max-w-52px"
               />
             </div>
-            <div className="relative">
-              <div className="Flylogoimg absolute">
+            <div className="relative pt-32 md:pt-12 lg:pt-0 ">
+              <div className=" absolute bottom-[15%] md:bottom-[32%] z-[1] w-full flex justify-center">
                 <Image
                   src={Yourlogos}
                   alt="Flylogoimg"
                   width={1000}
                   height={500}
-                  className="max-w-[970px]"
+                  className="max-w-[250px]"
                 />
               </div>
               <div className="bottom-imgs   mt-4">
@@ -150,7 +170,7 @@ const Sharingcard = () => {
         </div>
       </section>
 
-      <section className=" hidden lg:block">
+      <section className=" hidden lg:block relative">
         <div className="social-setion relative">
           <div className="rope-img relative  ">
             <Image
@@ -172,7 +192,7 @@ const Sharingcard = () => {
           </div>
 
           <div className="social-icon flex justify-evenly">
-            <div className="Whatsapp absolute left-[9%] top-[40%]">
+            <div className="Whatsapp absolute left-[9%] top-[40%] animate-bounce">
               <Image
                 src={Whatsapp}
                 alt="Whatsapp"
@@ -181,7 +201,7 @@ const Sharingcard = () => {
                 className="max-w-[85px] m-auto"
               />
             </div>
-            <div className="Instagram absolute  left-[23%]  top-[13%] ">
+            <div className="Instagram absolute  left-[23%]  top-[13%] animate-bounce">
               <Image
                 src={Instagram}
                 alt="Instagram"
@@ -190,7 +210,7 @@ const Sharingcard = () => {
                 className="max-w-[85px] m-auto"
               />
             </div>
-            <div className="Youtube absolute  right-[23%] top-[13%] ">
+            <div className="Youtube absolute  right-[23%] top-[13%] animate-bounce">
               <Image
                 src={Youtube}
                 alt="Youtube"
@@ -199,7 +219,7 @@ const Sharingcard = () => {
                 className="max-w-[85px] m-auto"
               />
             </div>
-            <div className="facebook absolute right-[9%] top-[40%]">
+            <div className="facebook absolute right-[9%] top-[40%] animate-bounce">
               <Image
                 src={Facebook}
                 alt="Facebook"
@@ -215,8 +235,8 @@ const Sharingcard = () => {
                 <Image
                   src={Arrowicon} // your imported arrow icon image
                   alt="Arrow Icon"
-                  width={32} // adjust size as needed
-                  height={32}
+                  width={500} // adjust size as needed
+                  height={500}
                   className="object-contain"
                 />
               </div>
@@ -234,15 +254,15 @@ const Sharingcard = () => {
                 <Image
                   src={Yellowspin} // your imported refresh icon image
                   alt="Refresh Icon"
-                  width={32}
-                  height={32}
+                  width={500}
+                  height={500}
                   className="object-contain"
                 />
               </div>
 
               {/* Card content */}
               <h2 className="font-bold text-lg mb-4">Always Updatable</h2>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed font-bold">
                 Update your information anytime without reprinting. Keep your
                 card accurate and relevant as your career or business grows.
               </p>
@@ -253,8 +273,8 @@ const Sharingcard = () => {
                 <Image
                   src={Arrowicon} // your imported arrow icon image
                   alt="Arrow Icon"
-                  width={32} // adjust size as needed
-                  height={32}
+                  width={500} // adjust size as needed
+                  height={300}
                   className="object-contain"
                 />
               </div>
@@ -268,16 +288,17 @@ const Sharingcard = () => {
             </div>
           </div>
 
-          <div className="Flylogoimg absolute xl:top-[100%]">
+         
+        </div>
+        <div className=" absolute z-[1] bottom-[15%] xl:bottom-[17%] 2xl:bottom-[18%] flex justify-center w-full">
             <Image
               src={Yourlogos}
               alt="Flylogoimg"
               width={1000}
               height={500}
-              className="max-w-[970px] "
+              className=" max-w-[400px] xl:max-w-[500px] 2xl:max-w-[600px] "
             />
           </div>
-        </div>
         <div className="bottom-imgs   mt-4">
           <div className="Yourlogo-img relative ">
             <Image

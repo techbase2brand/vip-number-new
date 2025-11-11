@@ -85,6 +85,7 @@ const DigitalVisitingCard = () => {
   const [errors, setErrors] = useState({});
   const [isRazorpayReady, setIsRazorpayReady] = useState(false);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     basePlans,
     basePlanId,
@@ -430,6 +431,7 @@ const DigitalVisitingCard = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!validate()) return;
     if (!checkoutPlan) {
       toast.error("Please select a plan before continuing.");
@@ -437,6 +439,7 @@ const DigitalVisitingCard = () => {
     }
     // Submit or next step logic can go here
     try {
+      setIsSubmitting(true);
       const storedReferId = localStorage.getItem("referId");
       await axios.post(
         `/api/web/profile/update`,
@@ -490,6 +493,8 @@ const DigitalVisitingCard = () => {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Unable to submit details. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -601,10 +606,13 @@ const DigitalVisitingCard = () => {
                 </button>
                 <button
                   type="button"
-                  className="px-6 py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 disabled:opacity-60"
+                  className="px-6 py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 disabled:opacity-60 flex items-center justify-center gap-2"
                   onClick={handleRzpClick}
                   disabled={isProcessingPayment || !checkoutPlan}
                 >
+                  {isProcessingPayment && (
+                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  )}
                   {isProcessingPayment ? "Preparing..." : "Proceed to Pay"}
                 </button>
               </div>
@@ -798,10 +806,7 @@ const DigitalVisitingCard = () => {
         </div>
       </div> */}
       <div className=" hidden lg:block">
-        <div className="py-16 px-4">
-          <div className=" mx-auto grid grid-cols-2 sm:grid-cols- gap-8 items-center">
-          </div>
-        </div>
+
 
         {/* third Component */}
         <div className="w-full my-16 flex justify-center">
@@ -981,7 +986,7 @@ const DigitalVisitingCard = () => {
                         <span className="text-[22px]">/-</span>
                       </h2>
                     </div>
-                    <div className="absolute max-w-[195px] bottom-[100px] left-[70%] text-center">
+                    {/* <div className="absolute max-w-[195px] bottom-[100px] left-[70%] text-center">
                       <Image
                         src={poweredBy}
                         alt="tag line"
@@ -992,7 +997,7 @@ const DigitalVisitingCard = () => {
                       <span className="text-secondary text-[18px]">
                         Remove Tagline
                       </span>
-                    </div>
+                    </div> */}
                     <button
                       className="bg-white text-[#5B448A] max-w-[200px] font-bold rounded-full py-3 px-14 text-lg shadow-lg mt-2 transition-all hover:bg-secondary hover:text-white"
                       onClick={() => {
@@ -1671,9 +1676,13 @@ const DigitalVisitingCard = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-primary text-white hover:opacity-90"
+                  className="px-6 py-2.5 rounded-xl bg-primary text-white hover:opacity-90 flex items-center justify-center gap-2 disabled:opacity-60"
+                  disabled={isSubmitting}
                 >
-                  Submit
+                  {isSubmitting && (
+                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  )}
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </form>

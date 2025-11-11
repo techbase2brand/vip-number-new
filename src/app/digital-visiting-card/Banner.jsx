@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Moneybacknew from "../../../public/digital-card-new/Moneybacknew.webp";
@@ -190,34 +190,38 @@ const Banner = () => {
           </div>
 
           {/* Floating Moneyback Images */}
-          <div className="moneyback-main flex justify-evenly gap-[137px] items-center">
-            <div className="moneyimg-one max-md:max-w-[83px]">
-              <Image
-                src={Moneybacknew}
-                alt="moneyback"
-                width={1000}
-                height={500}
-                className="max-w-[83px] 2xl:max-w-[191px] m-auto"
-              />
-            </div>
-            <div className="moneyimg-two">
-              <Image
-                src={Moneybacknew}
-                alt="moneyback"
-                width={1000}
-                height={500}
-                className="max-w-[83px] 2xl:max-w-[191px] m-auto"
-              />
-            </div>
-          </div>
+
           {/* Main Banner Content */}
-          <div className="banner-main-box custom-container flex flex-col items-center justify-center  w-full px-4 md:px-0">
+          <div className="banner-main-box custom-container flex flex-col items-center justify-center  w-full px-4 md:px-0 pb-[30px] 2xl:pb-[60px]">
             {/* Title */}
-            <div className="banner-title flex flex-col items-center text-center text-[28px] 2xl:text-[70px] max-w-[90%] md:max-w-[923px] mx-auto">
-              <h1 className="smart card font-bold leading-3">Smart Card</h1>
-              <h2 className="how-work font-semibold mt-2 text-[#58447F]">
-                How It Works
-              </h2>
+            <div className="banner-title flex flex-col items-center text-center text-[28px] 2xl:text-[70px] md:max-w-[90%] mx-auto">
+              <div className="moneyback-main flex justify-evenly gap-3 lg:gap-[137px] items-center">
+                <div className=" ">
+                  <Image
+                    src={Moneybacknew}
+                    alt="moneyback"
+                    width={1000}
+                    height={500}
+                    className="max-w-[75px] md:max-w-[113px] 2xl:max-w-[191px] m-auto"
+                  />
+                </div>
+                <div>
+                  <h1 className="smart card font-bold leading-[normal]">
+                    Smart Card <br />{" "}
+                    <span className="text-primary">How It Works </span>
+                  </h1>
+                </div>
+
+                <div className="">
+                  <Image
+                    src={Moneybacknew}
+                    alt="moneyback"
+                    width={1000}
+                    height={500}
+                    className="max-w-[75px] md:max-w-[113px] 2xl:max-w-[191px] m-auto"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Description */}
@@ -231,15 +235,17 @@ const Banner = () => {
 
             {/* Button */}
             <div className="banner-btn mt-6  z-[10]">
-              <button className="bg-[#58447F] text-white text-[16px] md:text-[18px] font-medium w-[130px] md:w-[160px] h-[40px] md:h-[43px] rounded-full hover:bg-[#4b3b70] transition-all"
-              onClick={() => {
-                if (!user?.token) {
-                  setActiveSignInWithOtp(true);
-                  localStorage.setItem("Lead-Page", "Digital Card");
-                } else {
-                  openModal();
-                }
-              }}>
+              <button
+                className="bg-[#58447F] text-white text-[16px] md:text-[18px] font-medium w-[130px] md:w-[160px] h-[40px] md:h-[43px] rounded-full hover:bg-[#4b3b70] transition-all"
+                onClick={() => {
+                  if (!user?.token) {
+                    setActiveSignInWithOtp(true);
+                    localStorage.setItem("Lead-Page", "Digital Card");
+                  } else {
+                    openModal();
+                  }
+                }}
+              >
                 Buy Now
               </button>
             </div>
@@ -256,7 +262,7 @@ const Banner = () => {
                     alt="savecontactimg"
                     width={1000}
                     height={500}
-                    className="savecontactimg max-w-[168px] xl:max-w-[178px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                    className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
                   <button className="Save Contact relative  text-[12px]  2xl:text-[14px] right-[4px] xl:right-[18px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Save Contact
@@ -269,7 +275,7 @@ const Banner = () => {
                     alt="Accountdetails"
                     width={1000}
                     height={500}
-                    className="savecontactimg max-w-[168px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                    className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
                   <button className="Save Contact relative text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-8px] 2xl:right-[-22px] bottom-[43px] 2xl:bottom-[39px] bg-[#3B82F6] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Account Details
@@ -282,7 +288,7 @@ const Banner = () => {
                     alt="Sociallink"
                     width={1000}
                     height={500}
-                    className="savecontactimg max-w-[168px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                    className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
                   <button className="Save Contact relative text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-4px] 2xl:right-[-19px] bottom-[43px] 2xl:bottom-[39px] bg-[#E21A20] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Social Links
@@ -324,7 +330,7 @@ const Banner = () => {
                     alt="Clicktocall"
                     width={1000}
                     height={500}
-                    className="savecontactimg max-w-[158px] xl:max-w-[178px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                    className="savecontactimg max-w-[158px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
                   <button className="Save Contact relative right-[-18px] xl:right-[-18px] 2xl:right-[-20px] bottom-[23px] 2xl:bottom-[23px] bg-[#3B82F6] text-white              w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Call
@@ -337,7 +343,7 @@ const Banner = () => {
                     alt="Scanqr"
                     width={1000}
                     height={500}
-                    className="savecontactimg max-w-[158px] xl:max-w-[178px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                    className="savecontactimg max-w-[158px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
                   <button className="Save Contact relative right-[-18px] 2xl:right-[-20px] xl:right-[-18px] bottom-[23px] 2xl:bottom-[23px] bg-[#E21A20] text-white             w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Qr Code
@@ -350,7 +356,7 @@ const Banner = () => {
                     alt="ClickonWhatsapp"
                     width={1000}
                     height={500}
-                    className="savecontactimg max-w-[158px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                    className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
                   <button className="Save Contact relative right-[-18px] xl:right-[-18px] 2xl:right-[-20px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white             w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to WhatsApp
@@ -378,9 +384,9 @@ const Banner = () => {
                 alt="savecontactimg"
                 width={1000}
                 height={500}
-                className="savecontactimg max-w-[123px] xl:max-w-[178px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                className="savecontactimg max-w-[123px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
               />
-              <button className="Save Contact relative  text-[8px]  2xl:text-[14px] left-[18%]   sm:left-[32%]  xl:right-[18px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white w-[120px] xl:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px]">
+              <button className="Save Contact relative   2xl:text-[14px] left-[18%]   md:left-[23%]  xl:right-[18px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white w-[120px] md:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px] text-[10px] md:text-base">
                 Save Contact
               </button>
             </div>
@@ -390,9 +396,9 @@ const Banner = () => {
                 alt="Clicktocall"
                 width={1000}
                 height={500}
-                className="savecontactimg max-w-[123px] xl:max-w-[178px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                className="savecontactimg max-w-[123px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
               />
-              <button className="Save Contact relative left-[25%] sm:left-[37%] xl:right-[-18px] 2xl:right-[-20px] bottom-[28px] 2xl:bottom-[23px] bg-[#3B82F6] text-white  text-[8px]            w-[120px] xl:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px]">
+              <button className="Save Contact relative left-[25%] md:left-[32%] xl:right-[-18px] 2xl:right-[-20px] bottom-[28px] 2xl:bottom-[23px] bg-[#3B82F6] text-white             w-[120px] md:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px] text-[10px] md:text-base">
                 Click to Call
               </button>
             </div>
@@ -402,9 +408,9 @@ const Banner = () => {
                 alt="Sociallink"
                 width={1000}
                 height={500}
-                className="savecontactimg max-w-[123px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                className="savecontactimg max-w-[123px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
               />
-              <button className="Save Contact relative text-[8px]  2xl:text-[14px] left-[22%] sm:left-[36%] xl:right-[-8px] 2xl:right-[-19px] bottom-[29px] 2xl:bottom-[39px] bg-[#E21A20] text-white w-[120px] xl:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px]">
+              <button className="Save Contact relative  2xl:text-[14px] left-[22%] md:left-[30%] xl:right-[-8px] 2xl:right-[-19px] bottom-[29px] 2xl:bottom-[39px] bg-[#E21A20] text-white w-[120px] md:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px] text-[10px] md:text-base">
                 Click to Social Links
               </button>
             </div>
@@ -414,9 +420,9 @@ const Banner = () => {
                 alt="Accountdetails"
                 width={1000}
                 height={500}
-                className="savecontactimg max-w-[123px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                className="savecontactimg max-w-[123px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
               />
-              <button className="Save Contact relative text-[8px]  2xl:text-[14px] left-[23%] sm:left-[36%] xl:right-[-8px] 2xl:right-[-22px] bottom-[33px] 2xl:bottom-[39px] bg-[#3B82F6] text-white w-[120px] xl:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px]">
+              <button className="Save Contact relative  2xl:text-[14px] left-[23%] md:left-[30%] xl:right-[-8px] 2xl:right-[-22px] bottom-[33px] 2xl:bottom-[39px] bg-[#3B82F6] text-white w-[120px] md:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px] text-[10px] md:text-base">
                 Click to Account Details
               </button>
             </div>
@@ -426,9 +432,9 @@ const Banner = () => {
                 alt="Scanqr"
                 width={1000}
                 height={500}
-                className="savecontactimg max-w-[123px] xl:max-w-[178px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                className="savecontactimg max-w-[123px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
               />
-              <button className="Save Contact relative left-[27%] sm:left-[37%] 2xl:right-[-20px] xl:right-[-18px] bottom-[23px] 2xl:bottom-[23px] bg-[#E21A20] text-white      text-[8px]             w-[120px] xl:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px]">
+              <button className="Save Contact relative left-[27%] md:left-[31%] 2xl:right-[-20px] xl:right-[-18px] bottom-[23px] 2xl:bottom-[23px] bg-[#E21A20] text-white                  w-[120px] md:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px] text-[10px] md:text-base">
                 Click to Qr Code
               </button>
             </div>
@@ -438,9 +444,9 @@ const Banner = () => {
                 alt="ClickonWhatsapp"
                 width={1000}
                 height={500}
-                className="savecontactimg max-w-[123px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
+                className="savecontactimg max-w-[123px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
               />
-              <button className="Save Contact relative left-[27%] sm:left-[37%] xl:right-[-18px] 2xl:right-[-20px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white text-[8px]             w-[120px] xl:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px]">
+              <button className="Save Contact relative left-[27%] md:left-[30%] xl:right-[-18px] 2xl:right-[-20px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white             w-[120px] md:w-[200px] 2xl:w-[217px] h-[30px] xl:h-[43px] items-center m-auto rounded-[50px] text-[10px] md:text-base">
                 Click to WhatsApp
               </button>
             </div>
@@ -453,7 +459,7 @@ const Banner = () => {
               alt="Allwithsingleclick"
               width={1000}
               height={500}
-              className="Allwithsingleclick max-w-[179.81px] xl:max-w-[244.81px] 2xl:max-w-[344.81px] m-auto items-center"
+              className="Allwithsingleclick max-w-[179.81px] md:max-w-[250px] xl:max-w-[244.81px] 2xl:max-w-[344.81px] m-auto items-center"
             />
             <button className="Save Contact relative right-[-1px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[35px] bg-[#FFCE00] text-white w-[202px] xl:w-[270px] 2xl:w-[389px] h-[38px] xl:h-[43px] 2xl:h-[74px] items-center m-auto rounded-[50px]">
               All With Single Click
@@ -469,7 +475,9 @@ const Banner = () => {
           ></div>
           <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-xl mx-4">
             <div className="flex items-center justify-between px-6 py-4 border-b">
-              <h3 className="text-[20px] font-semibold">Complete Your Details</h3>
+              <h3 className="text-[20px] font-semibold">
+                Complete Your Details
+              </h3>
               <button
                 className="text-gray-600 hover:text-black text-[20px]"
                 aria-label="Close"
@@ -494,10 +502,11 @@ const Banner = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.name
-                      ? "border-red-400 focus:ring-red-300"
-                      : "border-gray-300 focus:ring-primary"
-                      }`}
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                      errors.name
+                        ? "border-red-400 focus:ring-red-300"
+                        : "border-gray-300 focus:ring-primary"
+                    }`}
                     placeholder="Enter your full name"
                   />
                   {errors.name && (
@@ -519,16 +528,19 @@ const Banner = () => {
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.mobile
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.mobile
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="10-digit mobile"
                       maxLength={10}
                       disabled={formData.mobile.length === 10}
                     />
                     {errors.mobile && (
-                      <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.mobile}
+                      </p>
                     )}
                   </div>
 
@@ -545,14 +557,17 @@ const Banner = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.email
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.email
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="you@example.com"
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -571,15 +586,18 @@ const Banner = () => {
                       name="pincode"
                       value={formData.pincode}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.pincode
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.pincode
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="6-digit pincode"
                       maxLength={6}
                     />
                     {errors.pincode && (
-                      <p className="text-red-500 text-sm mt-1">{errors.pincode}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.pincode}
+                      </p>
                     )}
                   </div>
 
@@ -596,10 +614,11 @@ const Banner = () => {
                       name="city"
                       value={formData.city}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.city
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.city
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="Enter city"
                     />
                     {errors.city && (
@@ -620,15 +639,18 @@ const Banner = () => {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.address
-                      ? "border-red-400 focus:ring-red-300"
-                      : "border-gray-300 focus:ring-primary"
-                      }`}
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                      errors.address
+                        ? "border-red-400 focus:ring-red-300"
+                        : "border-gray-300 focus:ring-primary"
+                    }`}
                     placeholder="House no, street, area"
                     rows={3}
                   />
                   {errors.address && (
-                    <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.address}
+                    </p>
                   )}
                 </div>
               </div>
