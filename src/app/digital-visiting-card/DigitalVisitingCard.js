@@ -603,7 +603,7 @@ const DigitalVisitingCard = () => {
                 </button>
                 <button
                   type="button"
-                  className="px-6 py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 disabled:opacity-60 flex items-center justify-center gap-2"
+                  className="px-6 py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   onClick={handleRzpClick}
                   disabled={isProcessingPayment || !checkoutPlan}
                 >

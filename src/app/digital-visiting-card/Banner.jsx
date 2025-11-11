@@ -45,6 +45,7 @@ const Banner = () => {
     address: "",
   });
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { openPlanModal, resetPlanSelections } = useDigitalCardPlan();
 
   const openModal = () => {
@@ -105,8 +106,10 @@ const Banner = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!validate()) return;
     try {
+      setIsSubmitting(true);
       const storedReferId = localStorage.getItem("referId");
       await axios.post(
         `/api/web/profile/update`,
@@ -160,6 +163,8 @@ const Banner = () => {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Unable to submit details. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -665,9 +670,13 @@ const Banner = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-primary text-white hover:opacity-90"
+                  className="px-6 py-2.5 rounded-xl bg-primary text-white hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
                 >
-                  Submit
+                  {isSubmitting && (
+                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  )}
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </form>
