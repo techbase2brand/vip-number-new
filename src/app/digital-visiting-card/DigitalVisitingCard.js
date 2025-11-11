@@ -4,19 +4,21 @@ import axios from "axios";
 import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
 import { HiCurrencyRupee } from "react-icons/hi2";
 import sideImg from "../../../public/digital-card-new/sideImg.webp";
-import poweredBy from "../../../public/digital-card-new/poweredBy.webp";
-import { FaStar, FaWhatsapp } from "react-icons/fa";
+import { FaStar} from "react-icons/fa";
 import Image from "next/image";
 import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
 import qrCenter from "../../../public/digital-card-new/qrCenter.webp";
 import qrRight from "../../../public/digital-card-new/qrRight.webp";
-import qrbackimg from '../../../public/digital-card-new/qrbackimg.webp'
+import qrbackimg from "../../../public/digital-card-new/qrbackimg.webp";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { getProfile } from "../Services/Services";
 import { AppStateContext } from "../contexts/AppStateContext/AppStateContext";
 import { MyRegisterSignInContext } from "../contexts/MyRegisterSignInContext/MyRegisterSignInContext";
-import "./digital.css"
+import card1 from "../../../public/digital-card-new/Infowithscanner.webp";
+import allInOne from "../../../public/digital-card-new/allInOne.webp";
+import digitalSmart from "../../../public/digital-card-new/digital-smart-visting.webp";
+import "./digital.css";
 import { useDigitalCardPlan } from "./PlanContext";
 const invalidNames = [
   "loged-in",
@@ -40,27 +42,21 @@ const carouselImages = [
   },
   {
     id: 2,
-    src: qrCenter,
+    src: card1,
     backimg: qrbackimg,
     alt: "product 2",
     title: "Premium NFC Card Only",
     desc: "Fast contact sharing, tap-to-save experience, custom branding available!",
   },
   {
-    src: qrRight,
+    src: allInOne,
     backimg: qrbackimg,
     alt: "product 3",
     title: "All-in-One Professional Kit",
     desc: "Includes standee, NFC card, & digital business profile access.",
   },
   {
-    src: sideImg,
-    alt: "product 3",
-    title: "All-in-One Professional Kit",
-    desc: "Includes standee, NFC card, & digital business profile access.",
-  },
-  {
-    src: sideImg,
+    src: digitalSmart,
     alt: "product 3",
     title: "All-in-One Professional Kit",
     desc: "Includes standee, NFC card, & digital business profile access.",
@@ -179,7 +175,9 @@ const DigitalVisitingCard = () => {
     script.async = true;
     script.onload = () => setIsRazorpayReady(true);
     script.onerror = () =>
-      toast.error("Payment gateway failed to load. Please refresh and try again.");
+      toast.error(
+        "Payment gateway failed to load. Please refresh and try again."
+      );
     document.body.appendChild(script);
 
     return () => {
@@ -498,7 +496,6 @@ const DigitalVisitingCard = () => {
     }
   };
 
-
   return (
     <div className="pt-5 container-os">
       {isPlanModalOpen && (
@@ -620,194 +617,7 @@ const DigitalVisitingCard = () => {
           </div>
         </div>
       )}
-      {/* <div className="w-full">
-        <div className="bg-[url('/digital-visiting-card/Frame.webp')] bg-no-repeat bg-contain pb-40 overflow-hidden pt-16">
-          <div className="flex justify-evenly m-auto pt-8 Money-Back-main ">
-            <Image
-              src={MoneyBack}
-              alt="dsfds"
-              width={400}
-              height={300}
-              className="max-w-[191px] animate-bounce [animation-delay:0.8s] money-back"
-            />
-            <div>
-              <h1 className="text-[71px] max-w-[923px] leading-[81px] text-center font-bold smart-card">
-                Smart Card <br />{" "}
-                <span className="text-primary">How It Works</span>
-              </h1>
-            </div>
-            <Image
-              src={MoneyBack}
-              alt="dsfds"
-              width={400}
-              height={300}
-              className="max-w-[191px] animate-bounce [animation-delay:0s] money-back"
-            />
-          </div>
-          <div className="text-center">
-            <p className="text-[24px] max-w-[862px] m-auto leading-10 font-normal text-center py-[10px] smart-des">
-              These business essentials are backed by VIP Number Shop, offering
-              exclusive VIP mobile numbers to enhance your brand’s
-              professional identity.
-            </p>
-            <button
-              className="py-2 px-8 bg-primary rounded-3xl text-white"
-              onClick={() => {
-                if (!user?.token) {
-                  setActiveSignInWithOtp(true);
-                  localStorage.setItem("Lead-Page", "Digital Card");
-                } else {
-      handleOpenProfileModal();
-                }
-              }}
-            >
-              Buy Now
-            </button>
-          </div>
-          <div className="grid grid-cols-2 w-full relative">
-            <div className="relative z-[5]">
-              <div className="flex flex-col items-center w-max relative left-[20%] bottom-[5%] mobile-on-ph">
-                <Image
-                  src={saveContact}
-                  width={1000}
-                  height={300}
-                  alt="Save Contact"
-                  className=" max-w-[144px] 2xl:max-w-[194px]"
-                />
-                <button className="bg-[#22C55E] max-w-[217px] py-3 rounded-full px-8 text-white w-[115%]">
-                  Save Contact
-                </button>
-              </div>
-              <div className="flex flex-col items-center w-max relative left-[16%] bottom-0 mobile-on-ph">
-                <Image
-                  src={accDetail}
-                  width={1000}
-                  height={300}
-                  alt="Click to Account Details"
-                  className=" max-w-[144px] 2xl:max-w-[194px]"
-                />
-                <button className="bg-[#3B82F6]  max-w-[217px] py-3 rounded-full px-8 text-white w-full bottom-1">
-                  Click to Account Details
-                </button>
-              </div>
-              <div className="flex flex-col items-center w-max relative left-[32%] top-[8%] mobile-on-ph">
-                <Image
-                  src={Sociallink}
-                  width={1000}
-                  height={300}
-                  alt="Click to Social Links"
-                  className=" max-w-[144px] 2xl:max-w-[194px]"
-                />
-                <button className="bg-[#E21A20]  max-w-[217px] py-3 rounded-full px-8 text-white w-[115%] bottom-1">
-                  Click to Social Links
-                </button>
-              </div>
-            </div>
-            
-            <div className="absolute z-[4] top-0 w-full h-full flex justify-center items-center mobile-on-ph">
-              <div className="flex flex-col items-center">
-                <Image
-                  src={allLink}
-                  width={1000}
-                  height={300}
-                  alt="All With Single Click"
-                  className="max-w-[250px] 2xl:max-w-[344px]"
-                />
-                <button className="bg-[#FFCE00]  max-w-[389px] py-6 rounded-full px-6 text-white w-[120%] bottom-1 text-[26px]">
-                  All With Single Click
-                </button>
-              </div>
-            </div> 
-
-            <div className="relative z-[5]">
-              <div className="flex flex-col items-center w-max ms-auto relative right-[20%] bottom-[5%] mobile-on-ph">
-                <Image
-                  src={clickCall}
-                  width={1000}
-                  height={300}
-                  alt="Click to Call"
-                  className=" max-w-[144px] 2xl:max-w-[194px] ms-auto"
-                />
-                <button className="ms-auto bg-[#3B82F6]  max-w-[217px] py-3 rounded-full px-8 text-white w-[115%] bottom-1 relative right-3">
-                  Click to Call
-                </button>
-              </div>
-              <div className="flex flex-col items-center w-max ms-auto relative right-[20%] bottom-0 mobile-on-ph">
-                <Image
-                  src={QrCode}
-                  width={1000}
-                  height={300}
-                  alt="Click to Qr Code"
-                  className=" max-w-[144px] 2xl:max-w-[194px] ms-auto"
-                />
-                <button className="ms-auto bg-[#E21A20]  max-w-[217px] py-3 rounded-full px-8 text-white w-[115%] bottom-1 relative right-3">
-                  Click to Qr Code
-                </button>
-              </div>
-              <div className="flex flex-col items-center w-max ms-auto relative right-[29%] top-[8%] mobile-on-ph ">
-                <Image
-                  src={WhatsApp}
-                  width={1000}
-                  height={300}
-                  alt="Click to WhatsApp"
-                  className=" max-w-[144px] 2xl:max-w-[194px] ms-auto"
-                />
-                <button className="ms-auto bg-[#22C55E]  max-w-[217px] py-3 rounded-full px-8 text-white w-[115%] bottom-1 relative right-3">
-                  Click to WhatsApp
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* Second component .... */}
-      {/* <div className="">
-        <div className="py-16 px-4">
-          <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
-   
-            <div>
-              <h2 className="text-[52px] leading-tight mb-4 font-bold">
-                Complete <span className="text-primary">Business Card Kit</span>
-              </h2>
-              <p className="text-[18px] text-gray-700 leading-relaxed">
-                Presenting the ultimate NFC Smart Business Kit: A modern way to
-                share your identity with tailored designs, premium print
-                quality, and durable materials. Comes with a complimentary
-                two-year replacement assurance for worry-free use.
-              </p>
-            </div>
-
- 
-            <div className="bg-primary rounded-full p-4 flex items-center gap-4 shadow-lg">
-              <div className="relative">
-                <div className="w-20 h-20 rounded-full bg-white overflow-hidden scale-[1.4]">
-                  <Image
-                    src={girl}
-                    alt="Contact vip shop"
-                    width={1000}
-                    height={100}
-                    className="w-[80px] h-[80px] object-cover rounded-full"
-                  />
-                </div>
-                <div className="absolute top-[-25px] right-[-25px] w-10 h-10 bg-black rounded-full flex items-center justify-center cursor-pointer">
-                  <FaWhatsapp className="text-white text-[20px]" />
-                </div>
-              </div>
-              <div className="ps-5">
-                <h3 className="text-yellow-300 text-[18px]">
-                  Contact VIP Number Shop
-                </h3>
-                <p className="text-white text-[18px]">
-                  Looking for free design assistance?
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className=" hidden lg:block">
-
-
         {/* third Component */}
         <div className="w-full my-16 flex justify-center">
           <div className="flex gap-10 w-full">
@@ -834,10 +644,11 @@ const DigitalVisitingCard = () => {
                   .map((img, idx) => (
                     <div
                       key={idx + carouselWindowStart}
-                      className={`p-[2px] rounded-[56px] border-[5px] ${selectedIdx === idx + carouselWindowStart
-                        ? "border-secondary"
-                        : "border-transparent"
-                        } cursor-pointer bg-primary`}
+                      className={`p-[2px] rounded-[56px] border-[5px] ${
+                        selectedIdx === idx + carouselWindowStart
+                          ? "border-secondary"
+                          : "border-transparent"
+                      } cursor-pointer bg-primary`}
                       onClick={() => setSelectedIdx(idx + carouselWindowStart)}
                     >
                       <Image
@@ -868,9 +679,9 @@ const DigitalVisitingCard = () => {
             <div className="flex-1 flex items-center">
               <div
                 className="relative w-full max-h-[940px] drop-shadow-xl bg-[#5B448A] flex justify-start items-center rounded-[56px] p-[25px]"
-              // style={{
-              //   backgroundImage: `url(${carouselImages[selectedIdx].src})`,
-              // }}
+                // style={{
+                //   backgroundImage: `url(${carouselImages[selectedIdx].src})`,
+                // }}
               >
                 <div className=" flex-1 flex flex-col gap-1 ps-14 py-10 left-0 top-3 max-w-[540px] min-w-[340px] z-10">
                   <h2 className="text-[41px] font-bold mb-3 leading-snug text-white">
@@ -986,18 +797,6 @@ const DigitalVisitingCard = () => {
                         <span className="text-[22px]">/-</span>
                       </h2>
                     </div>
-                    {/* <div className="absolute max-w-[195px] bottom-[100px] left-[70%] text-center">
-                      <Image
-                        src={poweredBy}
-                        alt="tag line"
-                        width={400}
-                        height={300}
-                        className="max-w-[200px]"
-                      />
-                      <span className="text-secondary text-[18px]">
-                        Remove Tagline
-                      </span>
-                    </div> */}
                     <button
                       className="bg-white text-[#5B448A] max-w-[200px] font-bold rounded-full py-3 px-14 text-lg shadow-lg mt-2 transition-all hover:bg-secondary hover:text-white"
                       onClick={() => {
@@ -1014,12 +813,6 @@ const DigitalVisitingCard = () => {
                   </div>
                 </div>
                 <div className="absolute flex items-start  right-[2rem] w-[50%]">
-                  {/* <Image
-                    src={carouselImages[selectedIdx].backimg}
-                    alt="qrbackimg"
-                    width={800}
-                    height={500}
-                    className="max-w-[250px]  digital_logo relative left-[5rem]" /> */}
                   <Image
                     src={carouselImages[selectedIdx].src}
                     alt={carouselImages[selectedIdx].alt}
@@ -1027,7 +820,6 @@ const DigitalVisitingCard = () => {
                     height={350}
                     className="rounded-3x max-w-[600px] relative z-10  digital_img"
                   />
-
                 </div>
                 <div className="absolute top-[-70px] right-[-40px]">
                   <Image
@@ -1043,457 +835,6 @@ const DigitalVisitingCard = () => {
           </div>
         </div>
       </div>
-      {/* fourth component */}
-
-      {/* <div className="relative ">
-        <Image
-          src={Frame4}
-          width={3000}
-          height={500}
-          alt=""
-          className="w-full"
-        />
-        <div className="absolute w-full h-[88%] bottom-0">
-          <div className="text-center">
-            <h4 className="font-medium text-[24px]">
-              Backed By VIP Number Shop
-            </h4>
-            <h2 className="font-extrabold text-[52px] text-primary leading-none">
-              Smart Business Cards for
-              <br /> the Digital Age
-            </h2>
-            <p className="font-normal text-[24px]">
-              Always updated, Change your phone, email, website, or social
-              <br /> links anytime, no reprinting needed.
-            </p>
-            <button
-            
-              className="bg-primary py-2 px-10 text-white rounded-2xl"
-              onClick={() => {
-                if (!user?.token) {
-                  setActiveSignInWithOtp(true);
-                  localStorage.setItem("Lead-Page", "Digital Card");
-                } else {
-                  handleOpenProfileModal({
-                    basePlanId: "digital-365-gold",
-                    addOns: { stand: true },
-                  });
-                }
-              }}
-            >
-              buy Now
-            </button>
-          </div>
-          <div className="absolute bottom-[13%] left-[8%]">
-            <Image
-              src={qrRight}
-              width={400}
-              height={300}
-              className="max-w-[280px] 2xl:max-w-[383px]"
-              alt="digital cards"
-            />
-          </div>
-          <div className="absolute right-[45%] 2xl:right-[43%] bottom-[6%]">
-            <Image
-              src={qrCenter}
-              width={400}
-              height={300}
-              className=" max-w-[190px] 2xl:max-w-[300px]"
-              alt="digital cards"
-            />
-          </div>
-          <div className="absolute right-[12%] bottom-[12%]">
-            <Image
-              src={qrRight}
-              width={400}
-              height={300}
-              className="max-w-[280px] 2xl:max-w-[383px]"
-              alt="digital cards"
-            />
-          </div>
-        </div>
-      </div> */}
-
-      {/* <div className="relative">
-        <Image
-          src={Frame4}
-          width={3000}
-          height={500}
-          alt=""
-          className="w-full h-auto object-cover"
-        />
-        <div className="absolute w-full h-[88%] bottom-0 flex flex-col items-center justify-center text-center px-4">
-          <div className="text-center">
-            <h4 className="font-medium text-[18px] sm:text-[20px] md:text-[24px]">
-              Backed By VIP Number Shop
-            </h4>
-            <h2 className="font-extrabold text-[28px] sm:text-[40px] md:text-[52px] text-primary leading-tight">
-              Smart Business Cards for
-              <br className="hidden sm:block" /> the Digital Age
-            </h2>
-            <p className="font-normal text-[16px] sm:text-[18px] md:text-[24px]">
-              Always updated, Change your phone, email, website, or social
-              <br className="hidden md:block" /> links anytime, no reprinting needed.
-            </p>
-            <button
-              className="bg-primary py-2 px-6 sm:px-8 md:px-10 text-white rounded-2xl text-[16px] sm:text-[18px] mt-3"
-              onClick={() => {
-                if (!user?.token) {
-                  setActiveSignInWithOtp(true);
-                  localStorage.setItem("Lead-Page", "Digital Card");
-                } else {
-                  handleOpenProfileModal();
-                }
-              }}
-            >
-              buy Now
-            </button>
-          </div>
-
-          <div className="absolute bottom-[10%] left-[5%] sm:left-[8%] hidden sm:block">
-            <Image
-              src={qrRight}
-              width={400}
-              height={300}
-              className="max-w-[150px] sm:max-w-[220px] md:max-w-[280px] 2xl:max-w-[383px]"
-              alt="digital cards"
-            />
-          </div>
-
-          <div className="absolute right-[50%] translate-x-[50%] bottom-[6%]">
-            <Image
-              src={qrCenter}
-              width={400}
-              height={300}
-              className="max-w-[130px] sm:max-w-[190px] md:max-w-[250px] 2xl:max-w-[300px]"
-              alt="digital cards"
-            />
-          </div>
-
-          <div className="absolute right-[5%] sm:right-[12%] bottom-[10%] hidden sm:block">
-            <Image
-              src={qrRight}
-              width={400}
-              height={300}
-              className="max-w-[150px] sm:max-w-[220px] md:max-w-[280px] 2xl:max-w-[383px]"
-              alt="digital cards"
-            />
-          </div>
-        </div>
-      </div> */}
-
-      {/* fifth screen */}
-
-      {/* <div className="">
-        <div className=" ">
-          <div className="text-center my-20">
-            <h3 className="font-bold text-[52px]">
-              Go contactless in{" "}
-              <span className="text-primary">3 easy steps!</span>
-            </h3>
-            <p className="font-normal text-[20px]">
-              Presenting the NFC Smart Card: Tailored designs, premium print and
-              materials, with a complimentary
-              <br /> two-year replacement assurance.
-            </p>
-          </div>
-          <div className="grid grid-cols-3 gap-5 justify-center pb-12">
-            <div className="max-w-[523px] h-full bg-white rounded-[60px] border-2 border-primary ">
-              <div className="bg-primary p-7 rounded-tl-[52px] rounded-tr-[52px]">
-                <Image
-                  src={qrCenter}
-                  width={500}
-                  height={300}
-                  className="max-w-[200px] 2xl:max-w-[300px] m-auto"
-                  alt="nft smart cards"
-                />
-              </div>
-              <div className=" p-10">
-                <div className="min-h-[108px] flex items-center justify-around">
-                  <h4 className="font-semibold 2xl:text-[28px] text-primary leading-9 pr-[50px]  border-r-[3px] border-primary">
-                    Digital Visiting Card +QR NFC Standee
-                  </h4>
-                  <h3 className="ps-3 font-semibold leading-8">
-                    <span className="text-2xl 2xl:text-[37px] text-primary">
-                      +999/-
-                    </span>
-                    <br />{" "}
-                    <span className="text-[30px] text-secondary">1300/-</span>
-                  </h3>
-                </div>
-                <button
-                  className="bg-primary w-[90%] flex m-auto p-2 justify-center mt-6 rounded-[50px] text-white"
-                  onClick={() => {
-                    if (!user?.token) {
-                      setActiveSignInWithOtp(true);
-                      localStorage.setItem("Lead-Page", "Digital Card");
-                    } else {
-                  handleOpenProfileModal({
-                    basePlanId: "digital-365-gold",
-                    addOns: { smart: true, stand: true },
-                  });
-                    }
-                  }}
-                >
-                  Buy Now
-                </button>
-              </div>
-            </div>
-            <div className="max-w-[523px] h-full bg-white rounded-[60px] border-2 border-primary ">
-              <div className="bg-primary p-7 rounded-tl-[52px] rounded-tr-[52px]">
-                <Image
-                  src={qrCenter}
-                  width={500}
-                  height={300}
-                  className="max-w-[200px] 2xl:max-w-[300px] m-auto"
-                  alt="nft smart cards"
-                />
-              </div>
-              <div className=" p-10">
-                <div className="min-h-[108px] flex items-center justify-around">
-                  <h4 className="font-semibold 2xl:text-[28px] text-primary leading-9 pr-[50px]  border-r-[3px] border-primary">
-                    Digital Visiting Card + Smart Visiting Card +<br /> QR NFC
-                    Standee
-                  </h4>
-                  <h3 className="ps-3 font-semibold leading-8">
-                    <span className="text-2xl 2xl:text-[37px] text-primary">
-                      +999/-
-                    </span>
-                    <br />{" "}
-                    <span className="text-[30px] text-secondary">1300/-</span>
-                  </h3>
-                </div>
-                <button
-                  className="bg-primary w-[90%] flex m-auto p-2 justify-center mt-6 rounded-[50px] text-white"
-                  onClick={() => {
-                    if (!user?.token) {
-                      setActiveSignInWithOtp(true);
-                      localStorage.setItem("Lead-Page", "Digital Card");
-                    } else {
-                      handleOpenProfileModal({
-                        basePlanId: "digital-365-gold",
-                        addOns: { smart: true },
-                      });
-                    }
-                  }}
-                >
-                  Buy Now
-                </button>
-              </div>
-            </div>
-            <div className="max-w-[523px] h-full bg-white rounded-[60px] border-2 border-primary ">
-              <div className="bg-primary p-7 rounded-tl-[52px] rounded-tr-[52px]">
-                <Image
-                  src={qrCenter}
-                  width={500}
-                  height={300}
-                  className="max-w-[200px] 2xl:max-w-[300px] m-auto"
-                  alt="nft smart cards"
-                />
-              </div>
-              <div className=" p-10">
-                <div className="min-h-[108px] flex items-center justify-around">
-                  <h4 className="font-semibold 2xl:text-[28px] text-primary leading-9 pr-[50px]  border-r-[3px] border-primary">
-                    Digital Visiting Card + Smart Visiting Card
-                  </h4>
-                  <h3 className="ps-3 font-semibold leading-8">
-                    <span className="text-2xl 2xl:text-[37px] text-primary">
-                      +999/-
-                    </span>
-                    <br />{" "}
-                    <span className="text-[30px] text-secondary">1300/-</span>
-                  </h3>
-                </div>
-                <button
-                  className="bg-primary w-[90%] flex m-auto p-2 justify-center mt-6 rounded-[50px] text-white"
-                  onClick={() => {
-                    if (!user?.token) {
-                      setActiveSignInWithOtp(true);
-                      localStorage.setItem("Lead-Page", "Digital Card");
-                    } else {
-                      handleOpenProfileModal({ basePlanId: "digital-365-silver" });
-                    }
-                  }}
-                >
-                  Buy Now
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Six screen */}
-
-      {/* <div className="top-0">
-        <div className="flex justify-around items-center py-20">
-          <div>
-            <h3 className="font-bold text-[52px] leading-[3.5rem]">
-              Benefits of <br />
-              <span className="text-primary">Smart Cards</span>
-            </h3>
-          </div>
-          <p>
-            Smart Cards transform the way professionals connect by offering a{" "}
-            <br /> modern, eco-friendly, and versatile solution making
-            networking smarter,
-            <br /> faster, and more sustainable than traditional paper cards.
-          </p>
-        </div>
-      </div> */}
-
-      {/* seven screen */}
-
-      {/* <div className="relative">
-        <Image
-          src={circleline}
-          alt="circle line"
-          width={3000}
-          height={1000}
-          className="w-full h-full"
-        />
-        <div className="absolute top-[3%] flex justify-center w-full">
-          <div className="flex max-w-[1500px] justify-between w-full m-auto items-center cursor-pointer z-10">
-            <Image
-              src={whatsapp}
-              alt="social link"
-              width={1000}
-              height={500}
-              className="w-[85px] relative top-[10rem] animate-bounce [animation-delay:0s]"
-            />
-            <Image
-              src={instagram}
-              alt="social link"
-              width={1000}
-              height={500}
-              className="w-[85px] relative top-[-1rem] animate-bounce [animation-delay:0.5s]"
-            />
-            <div className="relative bottom-[6rem] left-0 rounded-full bg-white z-10 w-[60px] flex justify-center p-2">
-              <Image
-                src={spinner}
-                alt="social link"
-                width={1000}
-                height={500}
-                className="w-[50px] "
-              />
-            </div>
-            <div className="absolute w-[372px] bg-secondary rounded-3xl p-[36px] text-center left-[41rem] top-[-3rem]">
-              <h3 className="text-primary font-bold text-[29px]">
-                Always Updatable
-              </h3>
-              <p className="font-normal text-[17px]">
-                Update your information anytime without reprinting. Keep your
-                card accurate and relevant as your career or business grows.
-              </p>
-            </div>
-            <Image
-              src={Youtube}
-              alt="social link"
-              width={1000}
-              height={500}
-              className="w-[85px] relative left-[4rem] animate-bounce [animation-delay:0.5s]"
-            />
-            <Image
-              src={facebook}
-              alt="social link"
-              width={1000}
-              height={500}
-              className="w-[85px] relative top-[8rem] right-[3rem] animate-bounce [animation-delay:0s]"
-            />
-          </div>
-        </div>
-        <div className="absolute top-[18%] flex justify-center w-full">
-          <div className="flex justify-between w-full m-auto items-center">
-            <div className="grid grid-cols-2 w-full">
-              <div className="">
-                <div className="m-auto w-max">
-                  <div className="relative top-[2rem] left-[9rem] rounded-full bg-white z-10 w-[60px] flex justify-center p-2">
-                    <Image
-                      src={ecoFriendly}
-                      alt="social link"
-                      width={1000}
-                      height={500}
-                      className="w-[50px] "
-                    />
-                  </div>
-                  <div className="w-[372px] bg-primary rounded-3xl p-[36px] text-center left-[26rem] top-[10rem]">
-                    <h3 className="text-white font-bold text-[29px]">
-                      Eco-Friendly
-                    </h3>
-                    <p className="font-normal text-[17px] text-white">
-                      Ditch the paper clutter and go green with a reusable card
-                      that reduces waste while reflecting your commitment to
-                      sustainability.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="m-auto w-max">
-                  <div className="relative top-[2rem] left-[9rem] rounded-full bg-white z-10 w-[60px] flex justify-center p-2">
-                    <Image
-                      src={forward}
-                      alt="social link"
-                      width={1000}
-                      height={500}
-                      className="w-[45px] "
-                    />
-                  </div>
-                  <div className="w-[372px] bg-primary rounded-3xl p-[36px] text-center">
-                    <h3 className="text-white font-bold text-[29px]">
-                      Easy Sharing
-                    </h3>
-                    <p className="font-normal text-[17px] text-white">
-                      Instantly share your details via WhatsApp, Email, SMS, QR
-                      code, or NFC tap, no apps required, just effortless
-                      connectivity.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="absolute w-full flex justify-center bottom-[20%] right-4">
-          <Image
-            src={yourLogo}
-            alt="your logo"
-            width={1000}
-            height={500}
-            className="max-w-[590px]"
-          />
-        </div>
-      </div> */}
-
-      {/* eight screen */}
-
-      {/* <div className="relative">
-        <Image
-          src={lastbackground}
-          alt="vip number shop"
-          width={1000}
-          height={500}
-          className="absolute top-[-2rem]"
-        />
-        <section className="relative bg-secondary py-24 px-6 text-center overflow-hidden opacity-[0.9] top-[-3rem]">
-          <div className="absolute inset-0 bg-secondary/80 backdrop-blur-sm"></div>
-          <div className="relative max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-indigo-800 mb-6 leading-tight">
-              Ready to Start Something Amazing with <br />
-              <span className="text-indigo-800">VIP Number Shop? Let’s Talk!</span>
-            </h1>
-            <p className="text-gray-800 text-base md:text-lg mb-10">
-              At VIP Number Shop, we help you stand out with smart solutions and
-              creative strategies. From digital cards to premium designs, let’s
-              collaborate, innovate, and make your vision a reality.
-            </p>
-            <button className="bg-indigo-700 hover:bg-indigo-800 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-transform transform hover:-translate-y-1">
-              Lorem Ipsum
-            </button>
-          </div>
-        </section>
-      </div>  */}
-      {/* Modal Section */}
       {isProfileModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center">
           <div
@@ -1502,7 +843,9 @@ const DigitalVisitingCard = () => {
           ></div>
           <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-xl mx-4">
             <div className="flex items-center justify-between px-6 py-4 border-b">
-              <h3 className="text-[20px] font-semibold">Complete Your Details</h3>
+              <h3 className="text-[20px] font-semibold">
+                Complete Your Details
+              </h3>
               <button
                 className="text-gray-600 hover:text-black text-[20px]"
                 aria-label="Close"
@@ -1527,10 +870,11 @@ const DigitalVisitingCard = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.name
-                      ? "border-red-400 focus:ring-red-300"
-                      : "border-gray-300 focus:ring-primary"
-                      }`}
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                      errors.name
+                        ? "border-red-400 focus:ring-red-300"
+                        : "border-gray-300 focus:ring-primary"
+                    }`}
                     placeholder="Enter your full name"
                   />
                   {errors.name && (
@@ -1552,16 +896,19 @@ const DigitalVisitingCard = () => {
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.mobile
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.mobile
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="10-digit mobile"
                       maxLength={10}
                       disabled={formData.mobile.length === 10}
                     />
                     {errors.mobile && (
-                      <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.mobile}
+                      </p>
                     )}
                   </div>
 
@@ -1578,14 +925,17 @@ const DigitalVisitingCard = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.email
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.email
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="you@example.com"
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -1604,15 +954,18 @@ const DigitalVisitingCard = () => {
                       name="pincode"
                       value={formData.pincode}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.pincode
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.pincode
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="6-digit pincode"
                       maxLength={6}
                     />
                     {errors.pincode && (
-                      <p className="text-red-500 text-sm mt-1">{errors.pincode}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.pincode}
+                      </p>
                     )}
                   </div>
 
@@ -1629,10 +982,11 @@ const DigitalVisitingCard = () => {
                       name="city"
                       value={formData.city}
                       onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.city
-                        ? "border-red-400 focus:ring-red-300"
-                        : "border-gray-300 focus:ring-primary"
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                        errors.city
+                          ? "border-red-400 focus:ring-red-300"
+                          : "border-gray-300 focus:ring-primary"
+                      }`}
                       placeholder="Enter city"
                     />
                     {errors.city && (
@@ -1653,15 +1007,18 @@ const DigitalVisitingCard = () => {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${errors.address
-                      ? "border-red-400 focus:ring-red-300"
-                      : "border-gray-300 focus:ring-primary"
-                      }`}
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                      errors.address
+                        ? "border-red-400 focus:ring-red-300"
+                        : "border-gray-300 focus:ring-primary"
+                    }`}
                     placeholder="House no, street, area"
                     rows={3}
                   />
                   {errors.address && (
-                    <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.address}
+                    </p>
                   )}
                 </div>
               </div>

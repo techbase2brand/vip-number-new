@@ -1,11 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Goldscanner from "../../../public/digital-card-new/Goldscanner.webp";
 import { useDigitalCardPlan } from "./PlanContext";
+import qrRight from "../../../public/digital-card-new/qrRight.webp";
+import card1 from "../../../public/digital-card-new/Infowithscanner.webp";
+import allInOne from "../../../public/digital-card-new/allInOne.webp";
+import digitalSmart from "../../../public/digital-card-new/digital-smart-visting.webp";
+
+const carouselImages = [
+  {
+    id: 1,
+    src: qrRight,
+    alt: "Digital Visiting Card",
+  },
+  {
+    id: 2,
+    src: card1,
+    alt: "Digital Visiting Card + QR NFC Standee",
+  },
+  {
+    id:3,
+    src: allInOne,
+    alt: "Premium NFC Card Only",
+  },
+  {
+    id:4,
+    src: digitalSmart,
+    alt: "All-in-One Professional Kit",
+  },
+];
 
 const Scannerpage = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const {
     basePlans,
     basePlanId,
@@ -19,13 +47,27 @@ const Scannerpage = () => {
   const addOnTotal = checkoutPlan
     ? checkoutPlan.totalAmount - (checkoutPlan.basePlan?.amount ?? 0)
     : 0;
+  const currentCarouselImage =
+    carouselImages[currentImageIndex] ?? carouselImages[0];
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? carouselImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex + 1) % carouselImages.length
+    );
+  };
 
   return (
     <div>
-      <div className="relative w-[320px] h-[200px] rounded-2xl bg-gradient-to-br from-[#7b5cf0] to-[#4b1b78] shadow-lg border-2 border-cyan-400 shadow-cyan-500/30 flex items-center justify-start m-auto p-5  md:hidden">
+      <div className="relative w-[320px] h-[450px] rounded-2xl bg-gradient-to-br from-[#7b5cf0] to-[#4b1b78] shadow-lg border-2 border-cyan-400 shadow-cyan-500/30 flex items-center justify-start m-auto p-5  md:hidden">
         <Image
-          src={Goldscanner}
-          alt="Goldscanner"
+          src={currentCarouselImage?.src ?? Goldscanner}
+          alt={currentCarouselImage?.alt ?? "Goldscanner"}
           width={1000}
           height={500}
           className="max-w-[255px] absolute z-10"
@@ -33,7 +75,11 @@ const Scannerpage = () => {
         {/* Navigation Buttons */}
         <div className="absolute bottom-4 left-4 flex gap-3">
           {/* Left Button */}
-          <button className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:scale-105 transition-transform duration-200">
+          <button
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:scale-105 transition-transform duration-200"
+            onClick={handlePrevImage}
+            aria-label="View previous image"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4 text-purple-800"
@@ -50,7 +96,11 @@ const Scannerpage = () => {
             </svg>
           </button>
           {/* Right Button */}
-          <button className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:scale-105 transition-transform duration-200">
+          <button
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:scale-105 transition-transform duration-200"
+            onClick={handleNextImage}
+            aria-label="View next image"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4 text-purple-800"
