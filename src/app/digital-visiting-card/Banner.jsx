@@ -42,9 +42,12 @@ const Banner = () => {
     email: "",
     pincode: "",
     city: "",
+    state: "",
     address: "",
   });
   const [errors, setErrors] = useState({});
+  const [cities, setCities] = useState([]);
+  const [isLoadingCities, setIsLoadingCities] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { openPlanModal, resetPlanSelections } = useDigitalCardPlan();
 
@@ -57,6 +60,49 @@ const Banner = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePincodeChange = async (e) => {
+    const pincode = e.target.value.replace(/\D/g, ""); // Only numbers
+    setFormData((prev) => ({ ...prev, pincode }));
+    
+    if (pincode.length === 6) {
+      setIsLoadingCities(true);
+      try {
+        const response = await axios.get(
+          `https://api.postalpincode.in/pincode/${pincode}`
+        );
+        if (response.data && response.data[0]?.Status === "Success") {
+          const { PostOffice } = response.data[0];
+          if (PostOffice && PostOffice.length > 0) {
+            const cityNames = PostOffice.map((office) => office.Name);
+            const state = PostOffice[0].State || "";
+            const district = PostOffice[0].District || "";
+            
+            setCities(cityNames);
+            setFormData((prev) => ({
+              ...prev,
+              city: cityNames[0] || "", // Auto-select first city
+              state: state,
+            }));
+          }
+        } else {
+          setCities([]);
+          setFormData((prev) => ({ ...prev, city: "", state: "" }));
+        }
+      } catch (error) {
+        console.error("Error fetching pincode details:", error);
+        setCities([]);
+        setFormData((prev) => ({ ...prev, city: "", state: "" }));
+      } finally {
+        setIsLoadingCities(false);
+      }
+    } else {
+      setCities([]);
+      if (pincode.length < 6) {
+        setFormData((prev) => ({ ...prev, city: "", state: "" }));
+      }
+    }
   };
 
   const validate = () => {
@@ -95,6 +141,7 @@ const Banner = () => {
             email: res?.email || "",
             pincode: address?.zip_code || "",
             city: address?.city || "",
+            state: address?.state || "",
             address: address?.address || "",
           }));
         })
@@ -120,7 +167,7 @@ const Banner = () => {
           zip_code: formData.pincode,
           address: formData.address,
           city: formData.city,
-          // state: formData.state_name,
+          state: formData.state || "",
           // lag_lat: formData.lag_lat,
           time_zone: "GMT+5:30",
           // district: formData.district,
@@ -590,7 +637,7 @@ const Banner = () => {
                       id="pincode"
                       name="pincode"
                       value={formData.pincode}
-                      onChange={handleChange}
+                      onChange={handlePincodeChange}
                       className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
                         errors.pincode
                           ? "border-red-400 focus:ring-red-300"
@@ -599,6 +646,11 @@ const Banner = () => {
                       placeholder="6-digit pincode"
                       maxLength={6}
                     />
+                    {isLoadingCities && (
+                      <p className="text-sm text-gray-500 mt-1">
+                        Fetching city details...
+                      </p>
+                    )}
                     {errors.pincode && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.pincode}
@@ -613,23 +665,69 @@ const Banner = () => {
                     >
                       City
                     </label>
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
-                        errors.city
-                          ? "border-red-400 focus:ring-red-300"
-                          : "border-gray-300 focus:ring-primary"
-                      }`}
-                      placeholder="Enter city"
-                    />
+                    {cities.length > 0 ? (
+                      <select
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                          errors.city
+                            ? "border-red-400 focus:ring-red-300"
+                            : "border-gray-300 focus:ring-primary"
+                        }`}
+                      >
+                        <option value="">Select city</option>
+                        {cities.map((city, idx) => (
+                          <option key={idx} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                          errors.city
+                            ? "border-red-400 focus:ring-red-300"
+                            : "border-gray-300 focus:ring-primary"
+                        }`}
+                        placeholder="Enter city"
+                      />
+                    )}
                     {errors.city && (
                       <p className="text-red-500 text-sm mt-1">{errors.city}</p>
                     )}
                   </div>
+                </div>
+
+                <div className="relative">
+                  <label
+                    htmlFor="state"
+                    className="text-primary font-medium -top-3 left-3 bg-white px-2 mb-1 absolute text-[12px]"
+                  >
+                    State
+                  </label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                      errors.state
+                        ? "border-red-400 focus:ring-red-300"
+                        : "border-gray-300 focus:ring-primary"
+                    }`}
+                    placeholder="Enter state"
+                  />
+                  {errors.state && (
+                    <p className="text-red-500 text-sm mt-1">{errors.state}</p>
+                  )}
                 </div>
 
                 <div className="relative">

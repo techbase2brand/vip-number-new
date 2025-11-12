@@ -4,7 +4,7 @@ import axios from "axios";
 import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
 import { HiCurrencyRupee } from "react-icons/hi2";
 import sideImg from "../../../public/digital-card-new/sideImg.webp";
-import { FaStar} from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
 import qrCenter from "../../../public/digital-card-new/qrCenter.webp";
@@ -18,8 +18,13 @@ import { MyRegisterSignInContext } from "../contexts/MyRegisterSignInContext/MyR
 import card1 from "../../../public/digital-card-new/Infowithscanner.webp";
 import allInOne from "../../../public/digital-card-new/allInOne.webp";
 import digitalSmart from "../../../public/digital-card-new/digital-smart-visting.webp";
+import goldbatch from "../../../public/digital-card-new/goldbatch.webp";
+import silverbatch from "../../../public/digital-card-new/Silverbatch.webp";
 import "./digital.css";
 import { useDigitalCardPlan } from "./PlanContext";
+import { RiExchangeDollarLine } from "react-icons/ri";
+import { BsQuestionCircleFill } from "react-icons/bs";
+import { TbCreditCardPay } from "react-icons/tb";
 const invalidNames = [
   "loged-in",
   "loged in",
@@ -37,7 +42,7 @@ const carouselImages = [
     src: qrRight,
     backimg: qrbackimg,
     alt: "Digital Visiting Card",
-    title: "Digital Visiting",
+    title: "Digital Visiting Card",
     desc: "digital visiting card branding",
   },
   {
@@ -52,13 +57,13 @@ const carouselImages = [
     src: allInOne,
     backimg: qrbackimg,
     alt: "Premium NFC Card Only",
-    title: "All-in-One Professional Kit",
+    title: "Digital Visiting Card + Smart Visiting Card + QR NFC Standee",
     desc: "Fast contact sharing, tap-to-save experience, custom branding available!",
   },
   {
     src: digitalSmart,
-    alt: "All-in-One Professional Kit",
-    title: "All-in-One Professional Kit",
+    alt: "Digital Visiting Card + Smart Visiting Card",
+    title: "Digital Visiting Card + Smart Visiting Card",
     desc: "Includes standee, NFC card, & digital business profile access.",
   },
 ];
@@ -70,15 +75,19 @@ const DigitalVisitingCard = () => {
   const Router = useRouter();
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [carouselWindowStart, setCarouselIdx] = useState(0);
+  const [isImageClick, setIsImageClick] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
     email: "",
     pincode: "",
     city: "",
+    state: "",
     address: "",
   });
   const [errors, setErrors] = useState({});
+  const [cities, setCities] = useState([]);
+  const [isLoadingCities, setIsLoadingCities] = useState(false);
   const [isRazorpayReady, setIsRazorpayReady] = useState(false);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -96,12 +105,207 @@ const DigitalVisitingCard = () => {
     isProfileModalOpen,
     closeProfileModal,
     startProfileFlow,
+    resetPlanSelections,
   } = useDigitalCardPlan();
   const activePlanRef = React.useRef(checkoutPlan);
   const basePlan = checkoutPlan?.basePlan;
   const addOnTotal = checkoutPlan
     ? checkoutPlan.totalAmount - (checkoutPlan.basePlan?.amount ?? 0)
     : 0;
+
+  // Map carousel images to plan configurations
+  const getPlanConfigForImage = (imageIndex) => {
+    switch (imageIndex) {
+      case 0: // "Digital Visiting Card" - Just digital card, no add-ons
+        return {
+          basePlanId: "digital-365-gold", // Default to Gold plan
+          addOns: { smart: false, stand: false },
+        };
+      case 1: // "Digital Visiting Card + QR NFC Standee" - Digital card + stand
+        return {
+          basePlanId: "digital-365-gold",
+          addOns: { smart: false, stand: true },
+        };
+      case 2: // "Digital Visiting Card + Smart Visiting Card + QR NFC Standee" - All-in-One
+        return {
+          basePlanId: "digital-365-gold",
+          addOns: { smart: true, stand: true },
+        };
+      case 3: // "Digital Visiting Card + Smart Visiting Card" - Digital + Smart only
+        return {
+          basePlanId: "digital-365-gold",
+          addOns: { smart: true, stand: false },
+        };
+      default:
+        return {
+          basePlanId: "digital-365-gold",
+          addOns: { smart: false, stand: false },
+        };
+    }
+  };
+
+  // Find image index based on plan configuration
+  const getImageIndexForPlan = (planId, addOns) => {
+    const hasSmart = !!addOns?.smart;
+    const hasStand = !!addOns?.stand;
+
+    // Match based on add-ons (basePlanId is same for all, so we match by add-ons)
+    if (hasSmart && hasStand) {
+      return 2; // All-in-One
+    } else if (hasSmart && !hasStand) {
+      return 3; // Digital + Smart
+    } else if (!hasSmart && hasStand) {
+      return 1; // Digital + Stand
+    } else {
+      return 0; // Digital only
+    }
+  };
+
+  // Get dynamic content based on selected image/plan
+  const getContentForImage = (imageIndex) => {
+    const planType = basePlan?.type || "gold";
+    const isGold = planType.toLowerCase() === "gold";
+
+    switch (imageIndex) {
+      case 0: // Digital Visiting Card only
+        return {
+          features: [
+            {
+              icon: "RiExchangeDollarLine",
+              iconSize: 24,
+              text: "14 Days No Question ask money back guarantee",
+            },
+            {
+              icon: "TbCreditCardPay",
+              iconSize: 24,
+              text: "Share Your Socials Instantly – All in One Digital Visiting card",
+            },
+          ],
+          offers: [
+            "You can Renew your plan for next 365 days package just ₹499",
+            isGold
+              ? "Removed Branding (Powerd by Vip Number shop)"
+              : "Added Branding (Powerd by Vip Number shop)",
+          ],
+        };
+      case 1: // Digital Visiting Card + QR NFC Standee
+        return {
+          features: [
+            {
+              icon: "TbCreditCardPay",
+              iconSize: 24,
+              text: "Payments for QR Standee are non-refundable",
+            },
+            {
+              icon: "BsQuestionCircleFill",
+              iconSize: 22,
+              text: "No Question Ask?",
+            },
+            {
+              icon: "RiExchangeDollarLine",
+              iconSize: 24,
+              text: "Only Digital visiting Card 14 Days Money Back Guarantee",
+            },
+          ],
+          offers: [
+            "You can Renew your plan for next 365 days package just ₹499",
+            isGold
+              ? "Removed Branding (Powerd by Vip Number shop)"
+              : "Added Branding (Powerd by Vip Number shop)",
+          ],
+        };
+      case 2: // All-in-One (Digital + Smart + Stand)
+        return {
+          features: [
+            {
+              icon: "TbCreditCardPay",
+              iconSize: 24,
+              text: "Payments for QR Standee are non-refundable",
+            },
+            {
+              icon: "BsQuestionCircleFill",
+              iconSize: 22,
+              text: "No Question Ask?",
+            },
+            {
+              icon: "RiExchangeDollarLine",
+              iconSize: 24,
+              text: "Only Digital visiting Card 14 Days Money Back Guarantee",
+            },
+          ],
+          offers: [
+            "Renew your Digital Visiting Card plan and get the 365-day package just ₹499",
+            isGold
+              ? "Remove Tagline (Powerd by Vip Number shop)"
+              : "Tagline not Remove (Powerd by Vip Number shop)",
+          ],
+        };
+      case 3: // Digital Visiting Card + Smart Visiting Card
+        return {
+          features: [
+            {
+              icon: "RiExchangeDollarLine",
+              iconSize: 24,
+              text: "14 Days No Question ask money back guarantee",
+            },
+            {
+              icon: "TbCreditCardPay",
+              iconSize: 24,
+              text: "Share Your Socials Instantly – All in One Digital Visiting card",
+            },
+          ],
+          offers: [
+            "You can Renew your plan for next 365 days package just ₹499",
+            isGold
+              ? "Removed Branding (Powerd by Vip Number shop)"
+              : "Added Branding (Powerd by Vip Number shop)",
+          ],
+        };
+      default:
+        return {
+          features: [
+            {
+              icon: "RiExchangeDollarLine",
+              iconSize: 24,
+              text: "14 Days No Question ask money back guarantee",
+            },
+          ],
+          offers: [
+            "You can Renew your plan for next 365 days package just ₹499",
+            isGold
+              ? "Removed Branding (Powerd by Vip Number shop)"
+              : "Added Branding (Powerd by Vip Number shop)",
+          ],
+        };
+    }
+  };
+
+  // Render icon component based on icon name
+  const renderIcon = (iconName, size) => {
+    const iconProps = {
+      fontSize: size,
+      className: "text-secondary mr-1",
+    };
+    switch (iconName) {
+      case "RiExchangeDollarLine":
+        return <RiExchangeDollarLine {...iconProps} />;
+      case "TbCreditCardPay":
+        return <TbCreditCardPay {...iconProps} />;
+      case "BsQuestionCircleFill":
+        return <BsQuestionCircleFill {...iconProps} />;
+      default:
+        return <RiExchangeDollarLine {...iconProps} />;
+    }
+  };
+
+  const handleImageClick = (imageIndex) => {
+    setIsImageClick(true);
+    setSelectedIdx(imageIndex);
+    const planConfig = getPlanConfigForImage(imageIndex);
+    resetPlanSelections(planConfig);
+    // Reset flag after a short delay to allow plan update to complete
+    setTimeout(() => setIsImageClick(false), 100);
+  };
 
   const handleOpenProfileModal = (config) => {
     startProfileFlow(config);
@@ -110,6 +314,49 @@ const DigitalVisitingCard = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePincodeChange = async (e) => {
+    const pincode = e.target.value.replace(/\D/g, ""); // Only numbers
+    setFormData((prev) => ({ ...prev, pincode }));
+    
+    if (pincode.length === 6) {
+      setIsLoadingCities(true);
+      try {
+        const response = await axios.get(
+          `https://api.postalpincode.in/pincode/${pincode}`
+        );
+        if (response.data && response.data[0]?.Status === "Success") {
+          const { PostOffice } = response.data[0];
+          if (PostOffice && PostOffice.length > 0) {
+            const cityNames = PostOffice.map((office) => office.Name);
+            const state = PostOffice[0].State || "";
+            const district = PostOffice[0].District || "";
+            
+            setCities(cityNames);
+            setFormData((prev) => ({
+              ...prev,
+              city: cityNames[0] || "", // Auto-select first city
+              state: state,
+            }));
+          }
+        } else {
+          setCities([]);
+          setFormData((prev) => ({ ...prev, city: "", state: "" }));
+        }
+      } catch (error) {
+        console.error("Error fetching pincode details:", error);
+        setCities([]);
+        setFormData((prev) => ({ ...prev, city: "", state: "" }));
+      } finally {
+        setIsLoadingCities(false);
+      }
+    } else {
+      setCities([]);
+      if (pincode.length < 6) {
+        setFormData((prev) => ({ ...prev, city: "", state: "" }));
+      }
+    }
   };
 
   const validate = () => {
@@ -148,6 +395,7 @@ const DigitalVisitingCard = () => {
             email: res?.email || "",
             pincode: address?.zip_code || "",
             city: address?.city || "",
+            state: address?.state || "",
             address: address?.address || "",
           }));
         })
@@ -188,6 +436,27 @@ const DigitalVisitingCard = () => {
   useEffect(() => {
     activePlanRef.current = checkoutPlan;
   }, [checkoutPlan]);
+
+  // Set initial plan based on selected image when component mounts
+  useEffect(() => {
+    const planConfig = getPlanConfigForImage(selectedIdx);
+    resetPlanSelections(planConfig);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run on mount - resetPlanSelections is stable from context
+
+  // Update image when plan changes (but not when change comes from image click)
+  useEffect(() => {
+    if (!isImageClick) {
+      const matchingImageIndex = getImageIndexForPlan(
+        basePlanId,
+        selectedAddOns
+      );
+      if (matchingImageIndex !== selectedIdx) {
+        setSelectedIdx(matchingImageIndex);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [basePlanId, selectedAddOns]); // Watch for plan changes
   const PAYMENT_API_URL =
     "https://staging.fancymobilenumber.in/index.php/web/razorpay/digital_card/payment";
 
@@ -448,7 +717,7 @@ const DigitalVisitingCard = () => {
           zip_code: formData.pincode,
           address: formData.address,
           city: formData.city,
-          // state: formData.state_name,
+          state: formData.state || "",
           // lag_lat: formData.lag_lat,
           time_zone: "GMT+5:30",
           // district: formData.district,
@@ -475,7 +744,7 @@ const DigitalVisitingCard = () => {
           postal_code: formData.pincode,
           city: formData.city,
           billing_address: formData.address,
-          // state: data.state_name,
+          state: formData.state || "",
           // district: data.district,
           ...(storedReferId && {
             refer_id: storedReferId === "undefined" ? "" : storedReferId,
@@ -555,7 +824,7 @@ const DigitalVisitingCard = () => {
                     >
                       <input
                         type="checkbox"
-                        className="mt-[3px]"
+                        className="mt-[3px] w-5 h-5 cursor-pointer rounded accent-secondary"
                         checked={!!selectedAddOns?.[option.id]}
                         onChange={() => toggleAddOn(option.id)}
                       />
@@ -649,7 +918,9 @@ const DigitalVisitingCard = () => {
                           ? "border-secondary"
                           : "border-transparent"
                       } cursor-pointer bg-primary`}
-                      onClick={() => setSelectedIdx(idx + carouselWindowStart)}
+                      onClick={() =>
+                        handleImageClick(idx + carouselWindowStart)
+                      }
                     >
                       <Image
                         src={img.src}
@@ -698,35 +969,26 @@ const DigitalVisitingCard = () => {
                       4.9 (30 Reviews)
                     </span>
                   </span>
-                  <div className="flex items-center mb-1 gap-2">
-                    <HiCurrencyRupee
-                      fontSize={22}
-                      className="text-secondary mr-1"
-                    />
-                    <h4 className="text-white font-normal text-[18px]">
-                      Payments for QR Standee are <br /> non-refundable
-                    </h4>
-                  </div>
-                  <div className="flex items-center mb-1 gap-2">
-                    <HiCurrencyRupee
-                      fontSize={22}
-                      className="text-secondary mr-1"
-                    />
-                    <h4 className="text-white font-normal text-[18px]">
-                      No Question Ask?
-                    </h4>
-                  </div>
-                  <div className="flex items-center mb-2 gap-2">
-                    <HiCurrencyRupee
-                      fontSize={22}
-                      className="text-secondary mr-1"
-                    />
-                    <h4 className="text-white font-normal text-[18px]">
-                      Only Digital visiting Card 14 Days Money Back <br />{" "}
-                      Guarantee
-                    </h4>
-                  </div>
-                  <div className="mb-1">
+                  {getContentForImage(selectedIdx).features.map(
+                    (feature, idx) => (
+                      <div key={idx} className="flex items-center mb-1 gap-2">
+                        {renderIcon(feature.icon, feature.iconSize)}
+                        <h4 className="text-white font-normal text-[18px]">
+                          {feature.text.includes("\n")
+                            ? feature.text.split("\n").map((line, i) => (
+                                <span key={i}>
+                                  {line}
+                                  {i < feature.text.split("\n").length - 1 && (
+                                    <br />
+                                  )}
+                                </span>
+                              ))
+                            : feature.text}
+                        </h4>
+                      </div>
+                    )
+                  )}
+                  {/* <div className="mb-1">
                     <h2 className="font-bold text-[29px] text-white">
                       Base Plan: ₹{basePlan?.amount ?? "--"}/-
                     </h2>
@@ -738,20 +1000,24 @@ const DigitalVisitingCard = () => {
                         Add-ons: {checkoutPlan?.addOnLabel} (+₹{addOnTotal})
                       </p>
                     )}
-                  </div>
+                  </div> */}
                   {/* Pricing & Plan Dropdown + offers section */}
                   <div className="flex flex-col gap-3 mt-3 max-w-xs relative">
                     <label className="text-secondary font-normal -top-3 left-3 bg-primary px-2 mb-1 absolute text-[15px]">
                       Choose a Plan
                     </label>
                     <select
-                      className="rounded-lg px-4 py-4 border-2 border-white bg-[#5B448A] text-white font-bold focus:outline-none focus:border-secondary"
+                      className="rounded-lg px-4 py-4 border-2 border-secondary bg-[#5B448A] text-white font-bold focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50 cursor-pointer appearance-none"
                       style={{ minWidth: 210, maxWidth: 320 }}
                       value={basePlanId}
                       onChange={(e) => setBasePlanId(e.target.value)}
                     >
                       {basePlans?.map((planOption) => (
-                        <option key={planOption.id} value={planOption.id}>
+                        <option
+                          key={planOption.id}
+                          value={planOption.id}
+                          className="bg-[#5B448A] text-white py-2"
+                        >
                           {`${planOption.label} — ₹${planOption.amount}`}
                         </option>
                       ))}
@@ -767,7 +1033,7 @@ const DigitalVisitingCard = () => {
                         >
                           <input
                             type="checkbox"
-                            className="mt-[3px]"
+                            className="mt-[3px] w-6 h-6 cursor-pointer rounded accent-secondary"
                             checked={!!selectedAddOns?.[option.id]}
                             onChange={() => toggleAddOn(option.id)}
                           />
@@ -783,12 +1049,27 @@ const DigitalVisitingCard = () => {
                           </span>
                         </label>
                       ))}
-                      <span className="text-[11px] text-[#E2DFF5]">
+                      {/* <span className="text-[11px] text-[#E2DFF5]">
                         Bundle smart accessories with your digital card to boost
                         offline sharing.
-                      </span>
+                      </span> */}
                     </div>
-                    <div className="mt-6">
+                    {/* Offers/Bullet Points */}
+                    <div className="flex flex-col gap-2 mt-4">
+                      {getContentForImage(selectedIdx).offers?.map(
+                        (offer, idx) => (
+                          <div key={idx} className="flex items-start gap-2">
+                            <span className="text-secondary text-[16px] mt-1">
+                              •
+                            </span>
+                            <span className="text-secondary text-[18px] font-semibold leading-relaxed">
+                              {offer}
+                            </span>
+                          </div>
+                        )
+                      )}
+                    </div>
+                    <div className="">
                       <span className="text-white font-normal">
                         Total Amount
                       </span>
@@ -804,7 +1085,10 @@ const DigitalVisitingCard = () => {
                           setActiveSignInWithOtp(true);
                           localStorage.setItem("Lead-Page", "Digital Card");
                         } else {
-                          handleOpenProfileModal();
+                          // Pass current plan config based on selected image
+                          const currentPlanConfig =
+                            getPlanConfigForImage(selectedIdx);
+                          handleOpenProfileModal(currentPlanConfig);
                         }
                       }}
                     >
@@ -812,22 +1096,61 @@ const DigitalVisitingCard = () => {
                     </button>
                   </div>
                 </div>
-                <div className="absolute flex items-start  right-[2rem] w-[50%]">
+                <div className="absolute flex   right-[2rem] w-[50%] h-full justify-center items-center">
                   <Image
                     src={carouselImages[selectedIdx].src}
                     alt={carouselImages[selectedIdx].alt}
                     width={450}
                     height={350}
-                    className="rounded-3x max-w-[600px] relative z-10  digital_img"
+                    className="rounded-3x w-auto object-contain h-[80%] relative z-10  digital_img"
                   />
                 </div>
-                <div className="absolute top-[-70px] right-[-40px]">
+                {getContentForImage(selectedIdx).features.some(
+                  (feature) =>
+                    feature.text.includes(
+                      "Only Digital visiting Card 14 Days Money Back Guarantee"
+                    )
+                ) && (
+                  <div className="absolute top-[-70px] right-[-40px]">
+                    <Image
+                      src={MoneyBack}
+                      alt="Money Back Guarantee"
+                      width={400}
+                      height={300}
+                      className="max-w-[191px] "
+                    />
+                  </div>
+                )}
+
+                <div className="absolute bottom-[20%] left-0 w-full flex justify-center items-end ">
+                  <div className="text-center h-max relative right-[10%] z-[10]">
+                    <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
+                      <span className="text-primary">Powerd by</span> VIP Number
+                      shop
+                    </p>
+                    <span className="text-secondary text-base font-semibold mt-3">
+                      {basePlan?.type?.toLowerCase() === "gold"
+                        ? "Gold Pack | Removed Branding"
+                        : "Silver Pack | Added Branding"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="absolute top-[20%] right-0 w-full flex justify-center items-end ">
                   <Image
-                    src={MoneyBack}
-                    alt="dsfds"
-                    width={400}
-                    height={300}
-                    className="max-w-[191px] "
+                    src={
+                      basePlan?.type?.toLowerCase() === "gold"
+                        ? goldbatch
+                        : silverbatch
+                    }
+                    alt={
+                      basePlan?.type?.toLowerCase() === "gold"
+                        ? "goldbatch"
+                        : "silverbatch"
+                    }
+                    width={100}
+                    height={100}
+                    className="w-auto object-contain max-w-[170px] relative z-10  digital_img bottom-[8rem] left-[15%]"
                   />
                 </div>
               </div>
@@ -953,7 +1276,7 @@ const DigitalVisitingCard = () => {
                       id="pincode"
                       name="pincode"
                       value={formData.pincode}
-                      onChange={handleChange}
+                      onChange={handlePincodeChange}
                       className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
                         errors.pincode
                           ? "border-red-400 focus:ring-red-300"
@@ -962,6 +1285,11 @@ const DigitalVisitingCard = () => {
                       placeholder="6-digit pincode"
                       maxLength={6}
                     />
+                    {isLoadingCities && (
+                      <p className="text-sm text-gray-500 mt-1">
+                        Fetching city details...
+                      </p>
+                    )}
                     {errors.pincode && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.pincode}
@@ -976,23 +1304,69 @@ const DigitalVisitingCard = () => {
                     >
                       City
                     </label>
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleChange}
-                      className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
-                        errors.city
-                          ? "border-red-400 focus:ring-red-300"
-                          : "border-gray-300 focus:ring-primary"
-                      }`}
-                      placeholder="Enter city"
-                    />
+                    {cities.length > 0 ? (
+                      <select
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                          errors.city
+                            ? "border-red-400 focus:ring-red-300"
+                            : "border-gray-300 focus:ring-primary"
+                        }`}
+                      >
+                        <option value="">Select city</option>
+                        {cities.map((city, idx) => (
+                          <option key={idx} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                          errors.city
+                            ? "border-red-400 focus:ring-red-300"
+                            : "border-gray-300 focus:ring-primary"
+                        }`}
+                        placeholder="Enter city"
+                      />
+                    )}
                     {errors.city && (
                       <p className="text-red-500 text-sm mt-1">{errors.city}</p>
                     )}
                   </div>
+                </div>
+
+                <div className="relative">
+                  <label
+                    htmlFor="state"
+                    className="text-primary font-medium -top-3 left-3 bg-white px-2 mb-1 absolute text-[12px]"
+                  >
+                    State
+                  </label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    className={`w-full rounded-xl border px-4 py-3 focus:outline-none focus:ring-2 ${
+                      errors.state
+                        ? "border-red-400 focus:ring-red-300"
+                        : "border-gray-300 focus:ring-primary"
+                    }`}
+                    placeholder="Enter state"
+                  />
+                  {errors.state && (
+                    <p className="text-red-500 text-sm mt-1">{errors.state}</p>
+                  )}
                 </div>
 
                 <div className="relative">
