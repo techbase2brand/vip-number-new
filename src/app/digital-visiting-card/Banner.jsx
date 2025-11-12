@@ -763,6 +763,7 @@ const Banner = () => {
                   type="button"
                   className="px-5 py-2.5 rounded-xl border border-gray-300"
                   onClick={closeModal}
+                  disabled={isSubmitting}
                 >
                   Cancel
                 </button>

@@ -296,7 +296,7 @@ const Scannerpage = () => {
         <Image
           src={currentCarouselImage?.src ?? Goldscanner}
           alt={currentCarouselImage?.alt ?? "Goldscanner"}
-          width={1000}
+          width={3000}
           height={500}
           className="max-w-[255px] relative z-10 object-contain w-auto h-full"
         />
@@ -383,8 +383,8 @@ const Scannerpage = () => {
                 ? "goldbatch"
                 : "silverbatch"
             }
-            width={100}
-            height={100}
+            width={1000}
+            height={300}
             className="w-auto object-contain max-w-[170px] relative z-10  digital_img bottom-[8rem] right-[8rem]"
           />
         </div>
