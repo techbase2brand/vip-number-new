@@ -145,7 +145,7 @@ const Sharingcard = () => {
               />
             </div>
             <div className="relative pt-32 md:pt-12 lg:pt-0 ">
-              <div className=" absolute bottom-[15%] md:bottom-[32%] z-[1] w-full flex justify-center">
+              <div className=" absolute bottom-[10%] md:bottom-[32%] z-[1] w-full flex justify-center">
                 <Image
                   src={Yourlogos}
                   alt="Flylogoimg"
@@ -290,7 +290,7 @@ const Sharingcard = () => {
 
          
         </div>
-        <div className=" absolute z-[1] bottom-[15%] xl:bottom-[17%] 2xl:bottom-[18%] flex justify-center w-full">
+        <div className=" absolute z-[1] bottom-[15%] xl:bottom-[17%] 2xl:bottom-[18%] flex justify-center w-full flyover_hht">
             <Image
               src={Yourlogos}
               alt="Flylogoimg"

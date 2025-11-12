@@ -25,22 +25,23 @@ const carouselImages = [
   },
   {
     id: 2,
+    src: digitalSmart,
+    alt: "Digital Visiting Card + Smart Visiting Card",
+    title: "Digital Visiting Card + Smart Visiting Card",
+  },
+  {
+    id: 3,
     src: card1,
     alt: "Digital Visiting Card + QR NFC Standee",
     title: "Digital Visiting Card + QR NFC Standee",
   },
   {
-    id: 3,
+    id: 4,
     src: allInOne,
     alt: "Digital Visiting Card + Smart Visiting Card + QR NFC Standee",
     title: "Digital Visiting Card + Smart Visiting Card + QR NFC Standee",
   },
-  {
-    id: 4,
-    src: digitalSmart,
-    alt: "Digital Visiting Card + Smart Visiting Card",
-    title: "Digital Visiting Card + Smart Visiting Card",
-  },
+
 ];
 
 const Scannerpage = () => {
@@ -72,20 +73,20 @@ const Scannerpage = () => {
           basePlanId: "digital-365-gold",
           addOns: { smart: false, stand: false },
         };
-      case 1: // "Digital Visiting Card + QR NFC Standee" - Digital card + stand
+      case 1: // "Digital Visiting Card + Smart Visiting Card" - Digital + Smart only
+        return {
+          basePlanId: "digital-365-gold",
+          addOns: { smart: true, stand: false },
+        };
+      case 2: // "Digital Visiting Card + QR NFC Standee" - Digital card + stand
         return {
           basePlanId: "digital-365-gold",
           addOns: { smart: false, stand: true },
         };
-      case 2: // "Digital Visiting Card + Smart Visiting Card + QR NFC Standee" - All-in-One
+      case 3: // "Digital Visiting Card + Smart Visiting Card + QR NFC Standee" - All-in-One
         return {
           basePlanId: "digital-365-gold",
           addOns: { smart: true, stand: true },
-        };
-      case 3: // "Digital Visiting Card + Smart Visiting Card" - Digital + Smart only
-        return {
-          basePlanId: "digital-365-gold",
-          addOns: { smart: true, stand: false },
         };
       default:
         return {
@@ -101,11 +102,11 @@ const Scannerpage = () => {
     const hasStand = !!addOns?.stand;
 
     if (hasSmart && hasStand) {
-      return 2; // All-in-One
+      return 3; // All-in-One
     } else if (hasSmart && !hasStand) {
-      return 3; // Digital + Smart
+      return 1; // Digital + Smart
     } else if (!hasSmart && hasStand) {
-      return 1; // Digital + Stand
+      return 2; // Digital + Stand
     } else {
       return 0; // Digital only
     }
@@ -138,7 +139,28 @@ const Scannerpage = () => {
               : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
-      case 1: // Digital Visiting Card + QR NFC Standee
+      case 1: // Digital Visiting Card + Smart Visiting Card
+        return {
+          features: [
+            {
+              icon: "RiExchangeDollarLine",
+              iconSize: 24,
+              text: "14 Days No Question ask money back guarantee",
+            },
+            {
+              icon: "TbCreditCardPay",
+              iconSize: 24,
+              text: "Share Your Socials Instantly – All in One Digital Visiting card",
+            },
+          ],
+          offers: [
+            "You can Renew your plan for next 365 days package just ₹499",
+            isGold
+              ? "Removed Branding (Powerd by Vip Number shop)"
+              : "Added Branding (Powerd by Vip Number shop)",
+          ],
+        };
+      case 2: // Digital Visiting Card + QR NFC Standee
         return {
           features: [
             {
@@ -164,7 +186,7 @@ const Scannerpage = () => {
               : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
-      case 2: // All-in-One (Digital + Smart + Stand)
+      case 3: // All-in-One (Digital + Smart + Stand)
         return {
           features: [
             {
@@ -188,27 +210,6 @@ const Scannerpage = () => {
             isGold
               ? "Remove Tagline (Powerd by Vip Number shop)"
               : "Tagline not Remove (Powerd by Vip Number shop)",
-          ],
-        };
-      case 3: // Digital Visiting Card + Smart Visiting Card
-        return {
-          features: [
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-            {
-              icon: "TbCreditCardPay",
-              iconSize: 24,
-              text: "Share Your Socials Instantly – All in One Digital Visiting card",
-            },
-          ],
-          offers: [
-            "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       default:

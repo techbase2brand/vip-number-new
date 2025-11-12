@@ -46,6 +46,12 @@ const carouselImages = [
     desc: "digital visiting card branding",
   },
   {
+    src: digitalSmart,
+    alt: "Digital Visiting Card + Smart Visiting Card",
+    title: "Digital Visiting Card + Smart Visiting Card",
+    desc: "Includes standee, NFC card, & digital business profile access.",
+  },
+  {
     id: 2,
     src: card1,
     backimg: qrbackimg,
@@ -59,12 +65,6 @@ const carouselImages = [
     alt: "Premium NFC Card Only",
     title: "Digital Visiting Card + Smart Visiting Card + QR NFC Standee",
     desc: "Fast contact sharing, tap-to-save experience, custom branding available!",
-  },
-  {
-    src: digitalSmart,
-    alt: "Digital Visiting Card + Smart Visiting Card",
-    title: "Digital Visiting Card + Smart Visiting Card",
-    desc: "Includes standee, NFC card, & digital business profile access.",
   },
 ];
 
@@ -121,20 +121,20 @@ const DigitalVisitingCard = () => {
           basePlanId: "digital-365-gold", // Default to Gold plan
           addOns: { smart: false, stand: false },
         };
-      case 1: // "Digital Visiting Card + QR NFC Standee" - Digital card + stand
+      case 1: // "Digital Visiting Card + Smart Visiting Card" - Digital + Smart only
+        return {
+          basePlanId: "digital-365-gold",
+          addOns: { smart: true, stand: false },
+        };
+      case 2: // "Digital Visiting Card + QR NFC Standee" - Digital card + stand
         return {
           basePlanId: "digital-365-gold",
           addOns: { smart: false, stand: true },
         };
-      case 2: // "Digital Visiting Card + Smart Visiting Card + QR NFC Standee" - All-in-One
+      case 3: // "Digital Visiting Card + Smart Visiting Card + QR NFC Standee" - All-in-One
         return {
           basePlanId: "digital-365-gold",
           addOns: { smart: true, stand: true },
-        };
-      case 3: // "Digital Visiting Card + Smart Visiting Card" - Digital + Smart only
-        return {
-          basePlanId: "digital-365-gold",
-          addOns: { smart: true, stand: false },
         };
       default:
         return {
@@ -151,11 +151,11 @@ const DigitalVisitingCard = () => {
 
     // Match based on add-ons (basePlanId is same for all, so we match by add-ons)
     if (hasSmart && hasStand) {
-      return 2; // All-in-One
+      return 3; // All-in-One
     } else if (hasSmart && !hasStand) {
-      return 3; // Digital + Smart
+      return 1; // Digital + Smart
     } else if (!hasSmart && hasStand) {
-      return 1; // Digital + Stand
+      return 2; // Digital + Stand
     } else {
       return 0; // Digital only
     }
@@ -188,7 +188,28 @@ const DigitalVisitingCard = () => {
               : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
-      case 1: // Digital Visiting Card + QR NFC Standee
+      case 1: // Digital Visiting Card + Smart Visiting Card
+        return {
+          features: [
+            {
+              icon: "RiExchangeDollarLine",
+              iconSize: 24,
+              text: "14 Days No Question ask money back guarantee",
+            },
+            {
+              icon: "TbCreditCardPay",
+              iconSize: 24,
+              text: "Share Your Socials Instantly – All in One Digital Visiting card",
+            },
+          ],
+          offers: [
+            "You can Renew your plan for next 365 days package just ₹499",
+            isGold
+              ? "Removed Branding (Powerd by Vip Number shop)"
+              : "Added Branding (Powerd by Vip Number shop)",
+          ],
+        };
+      case 2: // Digital Visiting Card + QR NFC Standee
         return {
           features: [
             {
@@ -214,7 +235,7 @@ const DigitalVisitingCard = () => {
               : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
-      case 2: // All-in-One (Digital + Smart + Stand)
+      case 3: // All-in-One (Digital + Smart + Stand)
         return {
           features: [
             {
@@ -238,27 +259,6 @@ const DigitalVisitingCard = () => {
             isGold
               ? "Remove Tagline (Powerd by Vip Number shop)"
               : "Tagline not Remove (Powerd by Vip Number shop)",
-          ],
-        };
-      case 3: // Digital Visiting Card + Smart Visiting Card
-        return {
-          features: [
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-            {
-              icon: "TbCreditCardPay",
-              iconSize: 24,
-              text: "Share Your Socials Instantly – All in One Digital Visiting card",
-            },
-          ],
-          offers: [
-            "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       default:
@@ -301,11 +301,11 @@ const DigitalVisitingCard = () => {
   const handleImageClick = (imageIndex) => {
     setIsImageClick(true);
     setSelectedIdx(imageIndex);
-    
+
     // Auto-scroll carousel to show selected image
     const visibleStart = carouselWindowStart;
     const visibleEnd = carouselWindowStart + 2; // Shows 3 images (0, 1, 2)
-    
+
     if (imageIndex < visibleStart) {
       // Image is above visible window, scroll up
       setCarouselIdx(imageIndex);
@@ -313,7 +313,7 @@ const DigitalVisitingCard = () => {
       // Image is below visible window, scroll down
       setCarouselIdx(Math.max(0, imageIndex - 2)); // Show selected image in middle or bottom
     }
-    
+
     const planConfig = getPlanConfigForImage(imageIndex);
     resetPlanSelections(planConfig);
     // Reset flag after a short delay to allow plan update to complete
@@ -332,7 +332,7 @@ const DigitalVisitingCard = () => {
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value.replace(/\D/g, ""); // Only numbers
     setFormData((prev) => ({ ...prev, pincode }));
-    
+
     if (pincode.length === 6) {
       setIsLoadingCities(true);
       try {
@@ -345,7 +345,7 @@ const DigitalVisitingCard = () => {
             const cityNames = PostOffice.map((office) => office.Name);
             const state = PostOffice[0].State || "";
             const district = PostOffice[0].District || "";
-            
+
             setCities(cityNames);
             setFormData((prev) => ({
               ...prev,
@@ -466,11 +466,11 @@ const DigitalVisitingCard = () => {
       );
       if (matchingImageIndex !== selectedIdx) {
         setSelectedIdx(matchingImageIndex);
-        
+
         // Auto-scroll carousel to show selected image
         const visibleStart = carouselWindowStart;
         const visibleEnd = carouselWindowStart + 2; // Shows 3 images (0, 1, 2)
-        
+
         if (matchingImageIndex < visibleStart) {
           // Image is above visible window, scroll up
           setCarouselIdx(matchingImageIndex);
@@ -918,16 +918,18 @@ const DigitalVisitingCard = () => {
           <div className="flex gap-10 w-full">
             {/* Carousel Thumbnails (Left) */}
             <div className="flex flex-col items-center min-w-[267px] relative">
-              {/* Top button */}
-              <button
-                className="flex items-center justify-center rounded-full bg-[#CDC5DF] min-w-[267px]  h-[60px] mb-3 text-3xl shadow-md transition hover:bg-[#bbaed8]"
-                onClick={() =>
-                  setCarouselIdx((idx) => (idx > 0 ? idx - 1 : idx))
-                }
-                aria-label="Scroll to top images"
-              >
-                <HiChevronUp className="text-[#8773b6]" size={34} />
-              </button>
+              {/* Top button - only show if there are images above */}
+              {carouselWindowStart > 0 && (
+                <button
+                  className="flex items-center justify-center rounded-full bg-[#CDC5DF] min-w-[100px] h-[60px] mb-3 text-3xl shadow-md transition hover:bg-[#bbaed8] opacity-100"
+                  onClick={() =>
+                    setCarouselIdx((idx) => (idx > 0 ? idx - 1 : idx))
+                  }
+                  aria-label="Scroll to top images"
+                >
+                  <HiChevronUp className="text-[#8773b6]" size={34} />
+                </button>
+              )}
               {/* Haldi scroll indicator */}
               <div className="absolute left-[-30px] -translate-x-1/2 top-[70px] bottom-[70px] flex flex-col items-center z-0">
                 <div className="w-2 h-full rounded-full bg-[#FFD600] opacity-80"></div>
@@ -958,18 +960,20 @@ const DigitalVisitingCard = () => {
                     </div>
                   ))}
               </div>
-              {/* Bottom button */}
-              <button
-                className="flex items-center justify-center rounded-full bg-[#CDC5DF] min-w-[267px]  h-[60px] mt-3 text-3xl shadow-md transition hover:bg-[#bbaed8]"
-                onClick={() =>
-                  setCarouselIdx((idx) =>
-                    idx < carouselImages.length - 3 ? idx + 1 : idx
-                  )
-                }
-                aria-label="Scroll to bottom images"
-              >
-                <HiChevronDown className="text-[#8773b6]" size={34} />
-              </button>
+              {/* Bottom button - only show if there are images below, with highlight */}
+              {carouselWindowStart < carouselImages.length - 3 && (
+                <button
+                  className="flex items-center justify-center rounded-full bg-[#CDC5DF] min-w-[100px] h-[60px] mt-3 text-3xl shadow-md transition hover:bg-[#bbaed8] opacity-100 ring-2 ring-secondary/50"
+                  onClick={() =>
+                    setCarouselIdx((idx) =>
+                      idx < carouselImages.length - 3 ? idx + 1 : idx
+                    )
+                  }
+                  aria-label="Scroll to bottom images"
+                >
+                  <HiChevronDown className="text-[#8773b6]" size={34} />
+                </button>
+              )}
             </div>
 
             {/* Main Image + Details (Right) */}
@@ -1084,8 +1088,8 @@ const DigitalVisitingCard = () => {
                     <div className="flex flex-col gap-2 mt-4">
                       {getContentForImage(selectedIdx).offers?.map(
                         (offer, idx) => (
-                          <div key={idx} className="flex items-start gap-2">
-                            <span className="text-secondary text-[16px] mt-1">
+                          <div key={idx} className="flex items-center gap-2">
+                            <span className="text-secondary text-[50px] mt-1">
                               •
                             </span>
                             <span className="text-secondary text-[18px] font-semibold leading-relaxed">
@@ -1105,7 +1109,7 @@ const DigitalVisitingCard = () => {
                       </h2>
                     </div>
                     <button
-                      className="bg-white text-[#5B448A] max-w-[200px] font-bold rounded-full py-3 px-14 text-lg shadow-lg mt-2 transition-all hover:bg-secondary hover:text-white"
+                      className="bg-white text-[#5B448A] max-w-[200px] font-bold rounded-full py-3 px-14 text-lg shadow-lg mt-2 transition-all hover:bg-secondary hover:text-black"
                       onClick={() => {
                         if (!user?.token) {
                           setActiveSignInWithOtp(true);
@@ -1131,11 +1135,10 @@ const DigitalVisitingCard = () => {
                     className="rounded-3x w-auto object-contain h-[80%] relative z-10  digital_img"
                   />
                 </div>
-                {getContentForImage(selectedIdx).features.some(
-                  (feature) =>
-                    feature.text.includes(
-                      "Only Digital visiting Card 14 Days Money Back Guarantee"
-                    )
+                {getContentForImage(selectedIdx).features.some((feature) =>
+                  feature.text.includes(
+                    "Only Digital visiting Card 14 Days Money Back Guarantee"
+                  )
                 ) && (
                   <div className="absolute top-[-70px] right-[-40px]">
                     <Image
@@ -1148,7 +1151,7 @@ const DigitalVisitingCard = () => {
                   </div>
                 )}
 
-                <div className="absolute bottom-[20%] left-0 w-full flex justify-center items-end ">
+                <div className="absolute bottom-[20%] left-0 w-full flex justify-center items-end leading-[3rem]">
                   <div className="text-center h-max relative right-[10%] z-[10]">
                     <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
                       <span className="text-primary">Powerd by</span> VIP Number

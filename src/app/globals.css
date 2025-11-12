@@ -785,3 +785,15 @@ color: var(--primary)  ;
     width: 18px;
     right: -18px;
 }
+
+@media screen and (min-width: 2100px) {
+  .flyover_hht {
+    bottom: 22% !important;
+  }
+  .left-scanner{
+    left: 18% !important;
+  }
+  .right-scanner{
+    right: 18% !important;
+  }
+}

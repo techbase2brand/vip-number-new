@@ -8,10 +8,32 @@ import digitalSmart from "../../../public/digital-card-new/digital-smart-visting
 import { AppStateContext } from "../contexts/AppStateContext/AppStateContext";
 import { MyRegisterSignInContext } from "../contexts/MyRegisterSignInContext/MyRegisterSignInContext";
 import { useDigitalCardPlan } from "./PlanContext";
-
+import qrRight from "../../../public/digital-card-new/qrRight.webp";
 const pricingData = [
   {
     id: 1,
+    title: "Digital Visiting Card",
+    price: "199",
+    oldPrice: "300",
+    img: qrRight,
+    planConfig: {
+      basePlanId: "digital-30-silver",
+      addOns: { smart: false, stand: false },
+    },
+  },
+  {
+    id: 2,
+    title: "Digital Visiting Card + Smart Visiting Card",
+    price: "499",
+    oldPrice: "699",
+    img: digitalSmart,
+    planConfig: {
+      basePlanId: "digital-365-gold",
+      addOns: { smart: true },
+    },
+  },
+  {
+    id: 3,
     title: "Digital Visiting Card + QR NFC Standee",
     price: "999",
     oldPrice: "1300",
@@ -22,7 +44,7 @@ const pricingData = [
     },
   },
   {
-    id: 2,
+    id: 4,
     title: "Digital Visiting Card + Smart Visiting Card + QR NFC Standee",
     price: "1299",
     oldPrice: "1499",
@@ -30,17 +52,6 @@ const pricingData = [
     planConfig: {
       basePlanId: "digital-365-gold",
       addOns: { smart: true, stand: true },
-    },
-  },
-  {
-    id: 3,
-    title: "Digital Visiting Card + Smart Visiting Card",
-    price: "499",
-    oldPrice: "699",
-    img: digitalSmart,
-    planConfig: {
-      basePlanId: "digital-365-gold",
-      addOns: { smart: true },
     },
   },
 ];
@@ -75,8 +86,8 @@ const Contectless = () => {
         </p>
       </section>
       <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto px-4">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {pricingData.map((item) => (
               <div
                 key={item.id}
@@ -88,13 +99,13 @@ const Contectless = () => {
                       src={item.img}
                       alt={item.title}
                       fill
-                      className="object-contain rounded-t-3xl"
+                      className="object-contain rounded-t-3xl p-2"
                     />
                   </div>
                 </div>
 
                 <div className="bg-white rounded-b-3xl text-center text-gray-800 p-4 w-full flex flex-col items-center">
-                  <div className="card-titleordes flex max-w-[447px] text-start ">
+                  <div className="card-titleordes flex max-w-[447px] text-start items-center">
                     <h3 className="font-semibold max-w-[298px] text-[18px] leading-snug mb-2 pr-4 py-2 border-r-2 border-primary">
                       {item.title}
                     </h3>
