@@ -385,7 +385,7 @@ const Scannerpage = () => {
             }
             width={1000}
             height={300}
-            className="w-auto object-contain max-w-[170px] relative z-10  digital_img bottom-[8rem] right-[8rem]"
+            className="w-auto object-contain max-w-[170px] relative z-10  digital_img bottom-[10rem] right-[7rem]"
           />
         </div>
         {/* Soft Glow and Light Center */}

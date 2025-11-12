@@ -301,6 +301,19 @@ const DigitalVisitingCard = () => {
   const handleImageClick = (imageIndex) => {
     setIsImageClick(true);
     setSelectedIdx(imageIndex);
+    
+    // Auto-scroll carousel to show selected image
+    const visibleStart = carouselWindowStart;
+    const visibleEnd = carouselWindowStart + 2; // Shows 3 images (0, 1, 2)
+    
+    if (imageIndex < visibleStart) {
+      // Image is above visible window, scroll up
+      setCarouselIdx(imageIndex);
+    } else if (imageIndex > visibleEnd) {
+      // Image is below visible window, scroll down
+      setCarouselIdx(Math.max(0, imageIndex - 2)); // Show selected image in middle or bottom
+    }
+    
     const planConfig = getPlanConfigForImage(imageIndex);
     resetPlanSelections(planConfig);
     // Reset flag after a short delay to allow plan update to complete
@@ -453,6 +466,18 @@ const DigitalVisitingCard = () => {
       );
       if (matchingImageIndex !== selectedIdx) {
         setSelectedIdx(matchingImageIndex);
+        
+        // Auto-scroll carousel to show selected image
+        const visibleStart = carouselWindowStart;
+        const visibleEnd = carouselWindowStart + 2; // Shows 3 images (0, 1, 2)
+        
+        if (matchingImageIndex < visibleStart) {
+          // Image is above visible window, scroll up
+          setCarouselIdx(matchingImageIndex);
+        } else if (matchingImageIndex > visibleEnd) {
+          // Image is below visible window, scroll down
+          setCarouselIdx(Math.max(0, matchingImageIndex - 2)); // Show selected image in middle or bottom
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
