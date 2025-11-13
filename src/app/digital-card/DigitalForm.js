@@ -865,6 +865,7 @@ const DigitalForm = () => {
                 >
                   Domain Url <span className="text-red-500">*</span>
                 </label>
+                
                 <input
                   type="text"
                   id="url_extension"
