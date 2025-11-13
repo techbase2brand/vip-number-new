@@ -52,15 +52,26 @@ export async function POST(request, { params }) {
     const resolvedParams = await params;
     const slug = resolvedParams.slug.join("/");
 
-    const body = await request.json();
+    const contentType = request.headers.get("content-type") || "";
     const incomingAuthHeader = request.headers.get("authorization");
     const apiUrl = `${process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL}/${slug}`;
 
     const fetchOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      headers: {},
     };
+
+    // Check if it's FormData (multipart/form-data)
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await request.formData();
+      fetchOptions.body = formData;
+      // Don't set Content-Type header for FormData, let fetch set it with boundary
+    } else {
+      // Handle JSON data
+      const body = await request.json();
+      fetchOptions.headers["Content-Type"] = "application/json";
+      fetchOptions.body = JSON.stringify(body);
+    }
 
     if (incomingAuthHeader) {
       fetchOptions.headers["Authorization"] = incomingAuthHeader;

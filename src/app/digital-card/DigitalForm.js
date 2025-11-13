@@ -420,7 +420,7 @@ const DigitalForm = () => {
 
       // Make API call to upload image
       const response = await axios.post(
-        `https://admin.fancymobilenumber.in/web/digital/card/imageUpload`,
+        `/api/web/digital/card/imageUpload`,
         uploadFormData,
         {
           headers: {
