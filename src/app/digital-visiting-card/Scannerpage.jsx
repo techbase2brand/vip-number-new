@@ -13,6 +13,7 @@ import { BsQuestionCircleFill } from "react-icons/bs";
 import { TbCreditCardPay } from "react-icons/tb";
 import goldbatch from "../../../public/digital-card-new/goldbatch.webp";
 import silverbatch from "../../../public/digital-card-new/Silverbatch.webp";
+import Powerdby from "../../../public/digital-card-new/poweredby.webp";
 import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
 import { FaStar } from "react-icons/fa";
 
@@ -293,7 +294,7 @@ const Scannerpage = () => {
 
   return (
     <div>
-      <div className="relative w-[390px] h-[500px] rounded-[50px] bg-[#644B97] shadow-lg border-2 flex items-center m-auto p-5  md:hidden justify-center">
+      <div className="relative w-[390px] h-[500px] rounded-[50px] bg-[#644B97] shadow-lg border-2 flex items-center m-auto p-5  md:hidden justify-center mb-[30px] lg:mb-0">
         <Image
           src={currentCarouselImage?.src ?? Goldscanner}
           alt={currentCarouselImage?.alt ?? "Goldscanner"}
@@ -362,12 +363,19 @@ const Scannerpage = () => {
             />
           </div>
         )}
-        <div className="absolute bottom-[-4rem] left-0 w-full flex justify-center items-end ">
-          <div className="text-center h-max relative right-[2%] z-[10]">
-            <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
+        <div className="absolute bottom-[-5rem] left-0 w-full flex justify-center items-end  ">
+          <div className="text-center h-max relative right-[1%] z-[10] flex flex-col items-center">
+            {/* <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
               <span className="text-primary">Powerd by</span> VIP Number shop
-            </p>
-            <span className="text-primary text-base font-semibold mt-3">
+            </p> */}
+            <Image
+            src={Powerdby}
+            alt="Powerdby"
+            width={3000}
+            height={1000}
+            className="object-contain max-w-[200px] w-full rounded-[16px]"
+          />
+            <span className="text-primary text-base font-semibold">
               {basePlan?.type?.toLowerCase() === "gold"
                 ? "Gold Pack l Removed Branding"
                 : "Silver Pack l Added Branding"}
@@ -386,7 +394,7 @@ const Scannerpage = () => {
             }
             width={1000}
             height={300}
-            className="w-auto object-contain max-w-[170px] relative z-10  digital_img bottom-[10rem] right-[7rem]"
+            className="w-auto object-contain max-w-[100px] relative z-10  bottom-[10rem] right-[7rem]"
           />
         </div>
         {/* Soft Glow and Light Center */}

@@ -2,12 +2,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
-import { HiCurrencyRupee } from "react-icons/hi2";
-import sideImg from "../../../public/digital-card-new/sideImg.webp";
 import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
-import qrCenter from "../../../public/digital-card-new/qrCenter.webp";
+import Powerdby from "../../../public/digital-card-new/poweredby.webp";
 import qrRight from "../../../public/digital-card-new/qrRight.webp";
 import qrbackimg from "../../../public/digital-card-new/qrbackimg.webp";
 import { toast } from "react-toastify";
@@ -22,6 +20,7 @@ import goldbatch from "../../../public/digital-card-new/goldbatch.webp";
 import silverbatch from "../../../public/digital-card-new/Silverbatch.webp";
 import "./digital.css";
 import { useDigitalCardPlan } from "./PlanContext";
+import { ALL_IN_ONE_ADD_ON_AMOUNT } from "./planOptions";
 import { RiExchangeDollarLine } from "react-icons/ri";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import { TbCreditCardPay } from "react-icons/tb";
@@ -701,6 +700,22 @@ const DigitalVisitingCard = () => {
             const planAddOns = planSnapshot?.addOnLabel || "Digital Only";
             const basePlanId = planSnapshot?.basePlan?.id || "";
 
+            // Save full plan details to localStorage for thank-you page
+            const planDetails = {
+              orderId: orderId || "",
+              amount: String(planAmount || ""),
+              planLabel,
+              addOns: planAddOns,
+              planId: basePlanId,
+              basePlan: planSnapshot?.basePlan || null,
+              hasSmart: planSnapshot?.hasSmart || false,
+              hasStand: planSnapshot?.hasStand || false,
+              totalAmount: planSnapshot?.totalAmount || planAmount || 0,
+              addOnLabelParts: planSnapshot?.addOnLabelParts || [],
+              timestamp: new Date().toISOString(),
+            };
+            localStorage.setItem("digitalCardPaymentDetails", JSON.stringify(planDetails));
+
             const thankYouQuery = new URLSearchParams({
               orderId: orderId || "",
               amount: String(planAmount || ""),
@@ -793,7 +808,7 @@ const DigitalVisitingCard = () => {
   return (
     <div className="pt-5 container-os">
       {isPlanModalOpen && (
-        <div className="fixed inset-0 z-[150] flex items-center justify-center">
+        <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 overflow-y-auto">
           <div
             className="absolute inset-0 bg-black/60"
             onClick={() => {
@@ -802,8 +817,8 @@ const DigitalVisitingCard = () => {
               }
             }}
           ></div>
-          <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-2xl mx-4">
-            <div className="flex items-center justify-between px-6 py-4 border-b">
+          <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-2xl mr-4 my-auto max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-6 py-4 border-b sticky top-0 bg-white z-10 rounded-t-3xl">
               <h3 className="text-[20px] font-semibold text-gray-900">
                 Choose Your Plan
               </h3>
@@ -824,6 +839,28 @@ const DigitalVisitingCard = () => {
                 <label className="text-sm font-semibold text-gray-700 mb-2 block">
                   Digital Visiting Card Plan
                 </label>
+                {basePlanId && basePlans && (() => {
+                  const selectedPlan = basePlans.find(plan => plan.id === basePlanId);
+                  const isGold = selectedPlan?.type?.toLowerCase() === "gold";
+                  return (
+                    <div className="mb-3 flex flex-col items-center gap-2">
+                      <Image
+                        src={Powerdby}
+                        alt="Powered by"
+                        width={300}
+                        height={100}
+                        className="object-contain max-w-[200px] h-auto"
+                      />
+                      <span className="text-red-600 text-base font-semibold">
+                        {isGold
+                          ? "Gold Pack | Removed Branding"
+                          : "Silver Pack | Added Branding"}
+
+                        <span className="text-primary text-base font-semibold"> Powerd by</span> <span className="text-black text-base font-semibold">VIP Number shop</span>
+                      </span>
+                    </div>
+                  );
+                })()}
                 <select
                   className="w-full rounded-xl border border-gray-300 px-4 py-3 font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
                   value={basePlanId}
@@ -869,18 +906,107 @@ const DigitalVisitingCard = () => {
               </div>
 
               <div className="rounded-2xl bg-primary/10 border border-primary/30 px-5 py-4">
-                <h4 className="text-sm font-semibold text-primary mb-1">
+                <h4 className="text-sm font-semibold text-primary mb-3">
                   Order Summary
                 </h4>
-                <p className="text-sm text-gray-800">
-                  {checkoutPlan?.displayLabel || "Select a plan to continue"}
-                </p>
-                <div className="flex justify-between items-center mt-3">
-                  <span className="text-sm text-gray-600">Total Payable</span>
-                  <span className="text-2xl font-bold text-primary">
-                    ₹{checkoutPlan?.totalAmount ?? "--"}
-                  </span>
-                </div>
+                {checkoutPlan ? (
+                  <div className="space-y-2">
+                    {/* Base Plan */}
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-800">
+                        {checkoutPlan.basePlan?.label}
+                      </span>
+                      <span className="text-sm font-semibold text-gray-800">
+                        ₹{checkoutPlan.basePlan?.amount ?? 0}
+                      </span>
+                    </div>
+                    
+                    {/* Add-ons Breakdown */}
+                    {(() => {
+                      const smartAmount = addOnOptions?.find(opt => opt.id === 'smart')?.amount ?? 499;
+                      const standAmount = addOnOptions?.find(opt => opt.id === 'stand')?.amount ?? 999;
+                      const addOnTotal = checkoutPlan.totalAmount - (checkoutPlan.basePlan?.amount ?? 0);
+                      
+                      if (checkoutPlan.hasSmart && checkoutPlan.hasStand) {
+                        // Both selected - show bundle
+                        return (
+                          <>
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-gray-800">
+                                Smart Visiting Card
+                              </span>
+                              <span className="text-sm text-gray-500 line-through">
+                                +₹{smartAmount}
+                              </span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-gray-800">
+                                QR NFC Stand
+                              </span>
+                              <span className="text-sm text-gray-500 line-through">
+                                +₹{standAmount}
+                              </span>
+                            </div>
+                            <div className="flex justify-between items-center bg-primary/5 -mx-2 px-2 py-1 rounded">
+                              <span className="text-sm font-semibold text-gray-800">
+                                Smart Visiting Card + QR NFC Stand (Bundle)
+                              </span>
+                              <span className="text-sm font-semibold text-primary">
+                                +₹{addOnTotal}
+                              </span>
+                            </div>
+                            <div className="text-xs text-gray-600 italic mt-1">
+                              * You save ₹{(smartAmount + standAmount) - addOnTotal} with bundle offer
+                            </div>
+                          </>
+                        );
+                      } else {
+                        // Individual add-ons
+                        return (
+                          <>
+                            {checkoutPlan.hasSmart && (
+                              <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-800">
+                                  Smart Visiting Card
+                                </span>
+                                <span className="text-sm font-semibold text-gray-800">
+                                  +₹{smartAmount}
+                                </span>
+                              </div>
+                            )}
+                            {checkoutPlan.hasStand && (
+                              <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-800">
+                                  QR NFC Stand
+                                </span>
+                                <span className="text-sm font-semibold text-gray-800">
+                                  +₹{standAmount}
+                                </span>
+                              </div>
+                            )}
+                          </>
+                        );
+                      }
+                    })()}
+                    
+                    {/* Divider */}
+                    {(checkoutPlan.hasSmart || checkoutPlan.hasStand) && (
+                      <div className="border-t border-primary/20 my-2"></div>
+                    )}
+                    
+                    {/* Total */}
+                    <div className="flex justify-between items-center pt-1">
+                      <span className="text-sm font-semibold text-gray-700">Total Payable</span>
+                      <span className="text-2xl font-bold text-primary">
+                        ₹{checkoutPlan.totalAmount ?? 0}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-800">
+                    Select a plan to continue
+                  </p>
+                )}
               </div>
 
               <div className="flex justify-end gap-3 pt-1">
@@ -921,13 +1047,13 @@ const DigitalVisitingCard = () => {
               {/* Top button - only show if there are images above */}
               {carouselWindowStart > 0 && (
                 <button
-                  className="flex items-center justify-center rounded-full bg-[#CDC5DF] min-w-[100px] h-[60px] mb-3 text-3xl shadow-md transition hover:bg-[#bbaed8] opacity-100"
+                  className="flex items-center justify-center rounded-full bg-[#9077c9] min-w-[100px] h-[60px] mb-3 text-3xl shadow-md transition hover:bg-primary opacity-100"
                   onClick={() =>
                     setCarouselIdx((idx) => (idx > 0 ? idx - 1 : idx))
                   }
                   aria-label="Scroll to top images"
                 >
-                  <HiChevronUp className="text-[#8773b6]" size={34} />
+                  <HiChevronUp className="text-[black]" size={34} />
                 </button>
               )}
               {/* Haldi scroll indicator */}
@@ -963,7 +1089,7 @@ const DigitalVisitingCard = () => {
               {/* Bottom button - only show if there are images below, with highlight */}
               {carouselWindowStart < carouselImages.length - 3 && (
                 <button
-                  className="flex items-center justify-center rounded-full bg-[#CDC5DF] min-w-[100px] h-[60px] mt-3 text-3xl shadow-md transition hover:bg-[#bbaed8] opacity-100 ring-2 ring-secondary/50"
+                  className="flex items-center justify-center rounded-full bg-[#9077c9] min-w-[100px] h-[60px] mt-3 text-3xl shadow-md transition hover:bg-primary opacity-100 ring-2 ring-secondary/50"
                   onClick={() =>
                     setCarouselIdx((idx) =>
                       idx < carouselImages.length - 3 ? idx + 1 : idx
@@ -971,7 +1097,7 @@ const DigitalVisitingCard = () => {
                   }
                   aria-label="Scroll to bottom images"
                 >
-                  <HiChevronDown className="text-[#8773b6]" size={34} />
+                  <HiChevronDown className="text-black" size={34} />
                 </button>
               )}
             </div>
@@ -1032,7 +1158,7 @@ const DigitalVisitingCard = () => {
                     )}
                   </div> */}
                   {/* Pricing & Plan Dropdown + offers section */}
-                  <div className="flex flex-col gap-3 mt-3 max-w-xs relative">
+                  <div className="flex flex-col gap-3 max-w-xs relative">
                     <label className="text-secondary font-normal -top-3 left-3 bg-primary px-2 mb-1 absolute text-[15px]">
                       Choose a Plan
                     </label>
@@ -1085,7 +1211,7 @@ const DigitalVisitingCard = () => {
                       </span> */}
                     </div>
                     {/* Offers/Bullet Points */}
-                    <div className="flex flex-col gap-2 mt-4">
+                    <div className="flex flex-col gap-2">
                       {getContentForImage(selectedIdx).offers?.map(
                         (offer, idx) => (
                           <div key={idx} className="flex items-center gap-2">
@@ -1152,11 +1278,18 @@ const DigitalVisitingCard = () => {
                 )}
 
                 <div className="absolute bottom-[20%] left-0 w-full flex justify-center items-end leading-[3rem]">
-                  <div className="text-center h-max relative right-[10%] z-[10]">
-                    <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
+                  <div className="text-center h-max relative right-[6%] z-[10]">
+                    {/* <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
                       <span className="text-primary">Powerd by</span> VIP Number
                       shop
-                    </p>
+                    </p> */}
+                    <Image
+                      src={Powerdby}
+                      alt="Powerdby"
+                      width={3000}
+                      height={1000}
+                      className="object-contain max-w-[225px] z-10 bottom-[8rem] left-[15%] w-full rounded-[16px]"
+                    />
                     <span className="text-secondary text-base font-semibold mt-3">
                       {basePlan?.type?.toLowerCase() === "gold"
                         ? "Gold Pack | Removed Branding"

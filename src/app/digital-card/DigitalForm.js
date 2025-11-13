@@ -561,6 +561,9 @@ const DigitalForm = () => {
                 ? `${formData.name} digital business card`
                 : "Create your professional digital business card"}
             </p>
+            <p className="text-secondary text-center mt-2 text-sm font-semibold animate-bounce">
+              You will receive your domain only after submitting the complete form.
+            </p>
           </div>
 
           {/* Form */}
@@ -803,6 +806,9 @@ const DigitalForm = () => {
                     {errors.url_extension}
                   </p>
                 )}
+                <span className="text-sm font-semibold text-primary block mt-2">
+                      https://vipnumbershop.com/{formData.url_extension}
+                    </span>
               </div>
 
               {/* Business Information Section */}

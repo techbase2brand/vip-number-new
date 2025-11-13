@@ -259,8 +259,7 @@ const Banner = () => {
                 </div>
                 <div>
                   <h1 className="smart card font-bold leading-[normal]">
-                    Smart Card <br />{" "}
-                    <span className="text-primary">How It Works </span>
+                    Smart Card
                   </h1>
                 </div>
 

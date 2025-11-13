@@ -21,7 +21,7 @@ const Sharingcard = () => {
       <div className="py-16 px-4">
         <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:gap-8 items-center justify-items-center">
           <h2 className=" text-[36px] 2xl:text-[52px] leading-tight mb-4 font-bold text-center md:text-left">
-            Benefits of<span className="text-primary">Smart Cards</span>
+            Benefits of <span className="text-primary">Smart Cards</span>
           </h2>
           <div className=" md:p-4 flex items-center gap-4">
             <div className="ps-5">
@@ -37,7 +37,6 @@ const Sharingcard = () => {
       </div>
       <div className="relative pt-[4%] pb-[15%] block lg:hidden ">
         <div className="sharing-content grid md:grid-cols-2 justify-center  gap-12 lg:gap-[100px]">
-          
           <div className="relative shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#58447F] text-white pt-[40px]  w-full rounded-[36px] ">
             <h2 className="shearing-title text-center max-w-[106px]  text-[18px] m-auto">
               Easy Sharing
@@ -47,52 +46,52 @@ const Sharingcard = () => {
               NFC tap, no apps required, just effortless connectivity.
             </p>
             <div className="shearing-icon  items-center m-auto absolute top-[-12%] w-full flex justify-center">
-            <Image
-              src={Arrowicon}
-              alt="Arrowicon"
-              width={1000}
-              height={500}
-              className="max-w-[50px] md:max-w-[62px] m-auto"
-            />
+              <Image
+                src={Arrowicon}
+                alt="Arrowicon"
+                width={1000}
+                height={500}
+                className="max-w-[50px] md:max-w-[62px] m-auto"
+              />
+            </div>
           </div>
-          </div>
-         
+
           <div className="relative shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#FFCE00] text-white pt-[40px]  w-full rounded-[36px] ">
             <h2 className="shearing-title text-center max-w-[106px]  text-[18px] m-auto">
-              Easy Sharing
+              Always Updatable
             </h2>
             <p className="shearing-des text-center m-auto max-w-[269px] text-[13px] leading-[22px]">
-              Instantly share your details via WhatsApp, Email, SMS, QR code, or
-              NFC tap, no apps required, just effortless connectivity.
+              Update your information anytime without reprinting. Keep your card
+              accurate and relevant as your career or business grows.
             </p>
             <div className="shearing-icon absolute  top-[-12%] w-full flex justify-center items-center m-auto">
-            <Image
-              src={Yellowspin}
-              alt="Yellowspin"
-              width={1000}
-              height={500}
-              className="max-w-[50px] md:max-w-[62px] m-auto"
-            />
+              <Image
+                src={Yellowspin}
+                alt="Yellowspin"
+                width={1000}
+                height={500}
+                className="max-w-[50px] md:max-w-[62px] m-auto"
+              />
+            </div>
           </div>
-          </div>
-       
+
           <div className="relative shearing-card-on max-w-[302px] m-auto h-[178px] bg-[#58447F] text-white pt-[40px]  w-full rounded-[36px] ">
             <h2 className="shearing-title text-center max-w-[106px]  text-[18px] m-auto">
-              Easy Sharing
+              Eco-Friendly
             </h2>
             <p className="shearing-des text-center m-auto max-w-[269px] text-[13px] leading-[22px]">
-              Instantly share your details via WhatsApp, Email, SMS, QR code, or
-              NFC tap, no apps required, just effortless connectivity.
+              Ditch the paper clutter and go green with a reusable card that
+              reduces waste while reflecting your commitment to sustainability.
             </p>
             <div className="shearing-icon absolute  top-[-12%] w-full flex justify-center items-center m-auto">
-            <Image
-              src={Leafspin}
-              alt="Leafspin"
-              width={1000}
-              height={500}
-              className="max-w-[50px] md:max-w-[62px] m-auto"
-            />
-          </div>
+              <Image
+                src={Leafspin}
+                alt="Leafspin"
+                width={1000}
+                height={500}
+                className="max-w-[50px] md:max-w-[62px] m-auto"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -233,7 +232,7 @@ const Sharingcard = () => {
               {/* White circle with arrow icon image overlapping */}
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-md">
                 <Image
-                  src={Arrowicon} // your imported arrow icon image
+                  src={Leafspin} // your imported arrow icon image
                   alt="Arrow Icon"
                   width={500} // adjust size as needed
                   height={500}
@@ -242,10 +241,11 @@ const Sharingcard = () => {
               </div>
 
               {/* Card content */}
-              <h2 className="font-bold text-lg mb-4">Easy Sharing</h2>
+              <h2 className="font-bold text-lg mb-4">Eco-Friendly</h2>
               <p className="text-sm leading-relaxed text-[14px] max-w-[270px]">
-                Instantly share your details via WhatsApp, Email, SMS, QR code,
-                or NFC tap, no apps required, just effortless connectivity.
+                Ditch the paper clutter and go green with a reusable card that
+                reduces waste while reflecting your commitment to
+                sustainability.
               </p>
             </div>
             <div className=" max-w-xs bg-yellow-400 rounded-3xl text-gray-800 p-10 text-center mx-auto shadow-md absolute top-[-6%]">
@@ -287,18 +287,16 @@ const Sharingcard = () => {
               </p>
             </div>
           </div>
-
-         
         </div>
         <div className=" absolute z-[1] bottom-[15%] xl:bottom-[17%] 2xl:bottom-[18%] flex justify-center w-full flyover_hht">
-            <Image
-              src={Yourlogos}
-              alt="Flylogoimg"
-              width={1000}
-              height={500}
-              className=" max-w-[400px] xl:max-w-[500px] 2xl:max-w-[600px] "
-            />
-          </div>
+          <Image
+            src={Yourlogos}
+            alt="Flylogoimg"
+            width={1000}
+            height={500}
+            className=" max-w-[400px] xl:max-w-[500px] 2xl:max-w-[600px] "
+          />
+        </div>
         <div className="bottom-imgs   mt-4">
           <div className="Yourlogo-img relative ">
             <Image

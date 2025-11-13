@@ -2,20 +2,63 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import { FaCheckCircle, FaWhatsapp } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
+import { ADD_ON_OPTIONS, ALL_IN_ONE_ADD_ON_AMOUNT } from "../planOptions";
 
 const ThankYouPage = () => {
   const searchParams = useSearchParams();
-  const orderId = searchParams.get("orderId");
-  const amount = searchParams.get("amount");
-  const planSummary =
-    searchParams.get("planLabel") || "Digital Visiting Card Plan";
-  const addOnCopy =
-    searchParams.get("addOns") || "Digital Card Only";
-  const planId = searchParams.get("planId") || "";
+  const [planDetails, setPlanDetails] = useState(null);
+
+  useEffect(() => {
+    // Try to get from localStorage first (persists on reload)
+    const savedDetails = localStorage.getItem("digitalCardPaymentDetails");
+    if (savedDetails) {
+      try {
+        const parsed = JSON.parse(savedDetails);
+        setPlanDetails(parsed);
+      } catch (e) {
+        console.error("Error parsing saved details:", e);
+      }
+    } else {
+      // Fallback to query params if localStorage doesn't have data
+      const orderId = searchParams.get("orderId");
+      const amount = searchParams.get("amount");
+      const planLabel = searchParams.get("planLabel") || "Digital Visiting Card Plan";
+      const addOns = searchParams.get("addOns") || "Digital Card Only";
+      const planId = searchParams.get("planId") || "";
+
+      if (orderId || amount) {
+        setPlanDetails({
+          orderId: orderId || "",
+          amount: amount || "",
+          planLabel,
+          addOns,
+          planId,
+          totalAmount: amount ? parseInt(amount) : 0,
+        });
+      }
+    }
+  }, [searchParams]);
+
+  const orderId = planDetails?.orderId || searchParams.get("orderId") || "";
+  const amount = planDetails?.amount || searchParams.get("amount") || "";
+  const planSummary = planDetails?.planLabel || searchParams.get("planLabel") || "Digital Visiting Card Plan";
+  const addOnCopy = planDetails?.addOns || searchParams.get("addOns") || "Digital Card Only";
+  const planId = planDetails?.planId || searchParams.get("planId") || "";
+  const basePlan = planDetails?.basePlan || null;
+  const hasSmart = planDetails?.hasSmart || false;
+  const hasStand = planDetails?.hasStand || false;
+  const totalAmount = planDetails?.totalAmount || (amount ? parseInt(amount) : 0);
 
   const effectiveAmount = amount || "";
+  
+  // Calculate pricing breakdown
+  const basePrice = basePlan?.amount || 0;
+  const addOnTotal = totalAmount - basePrice;
+  const smartAmount = ADD_ON_OPTIONS.find(opt => opt.id === 'smart')?.amount ?? 499;
+  const standAmount = ADD_ON_OPTIONS.find(opt => opt.id === 'stand')?.amount ?? 999;
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-[#f5f3ff] via-white to-[#fff7ed] overflow-hidden">
@@ -42,48 +85,133 @@ const ThankYouPage = () => {
           </div>
 
           <div className="px-6 sm:px-10 py-10 flex flex-col gap-10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="">
               <div className="md:col-span-2 bg-gradient-to-br from-white to-[#f6f3ff] border border-primary/10 rounded-2xl p-6 shadow-sm">
-                <h2 className="text-xl font-semibold text-[#43387c] flex items-center gap-2">
+                <h2 className="text-xl font-semibold text-[#43387c] flex items-center gap-2 mb-6">
                   <HiSparkles className="text-secondary text-2xl" />
                   Order Snapshot
                 </h2>
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
-                  <div className="rounded-xl bg-white border border-primary/10 p-4">
-                    <p className="text-gray-500">Order ID</p>
+                
+                {/* Order ID and Basic Info */}
+                <div className="gap-4 mb-6">
+                  {/* <div className="rounded-xl bg-white border border-primary/10 p-4">
+                    <p className="text-gray-500 text-sm mb-1">Order ID</p>
                     <p className="font-semibold text-[#43387c]">
                       {orderId || "Processing"}
                     </p>
-                  </div>
-                  <div className="rounded-xl bg-white border border-primary/10 p-4 space-y-1">
-                    <p className="text-gray-500">Amount Paid</p>
-                    <p className="font-semibold text-[#43387c] text-lg">
-                      {effectiveAmount ? `₹${effectiveAmount}` : "₹—"}
-                    </p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">
-                      {planSummary}
-                    </p>
-                  </div>
+                  </div> */}
                   <div className="rounded-xl bg-white border border-primary/10 p-4">
-                    <p className="text-gray-500">Plan Details</p>
+                    <p className="text-gray-500 text-sm mb-1">Plan Type</p>
+                    <p className="font-semibold text-[#43387c]">{planSummary}</p>
+                  </div>
+                </div>
+
+                {/* Detailed Pricing Breakdown */}
+                <div className="bg-white border border-primary/10 rounded-xl p-5 mb-6">
+                  <h3 className="text-lg font-semibold text-[#43387c] mb-4">Pricing Breakdown</h3>
+                  <div className="space-y-3">
+                    {/* Base Plan */}
+                    {basePlan ? (
+                      <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span className="text-gray-700 font-medium">
+                          {basePlan.label}
+                        </span>
+                        <span className="font-semibold text-[#43387c]">
+                          ₹{basePrice}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span className="text-gray-700 font-medium">
+                          {planSummary}
+                        </span>
+                        <span className="font-semibold text-[#43387c]">
+                          ₹{basePrice || totalAmount}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Add-ons Breakdown */}
+                    {hasSmart && hasStand ? (
+                      // Both add-ons - show bundle
+                      <>
+                        <div className="space-y-1">
+                          <div className="flex justify-between items-center text-sm text-gray-400 line-through">
+                            <span>Smart Visiting Card</span>
+                            <span>+₹{smartAmount}</span>
+                          </div>
+                          <div className="flex justify-between items-center text-sm text-gray-400 line-through">
+                            <span>QR NFC Stand</span>
+                            <span>+₹{standAmount}</span>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center py-2 bg-primary/10 rounded-lg px-3 border-2 border-primary/30">
+                          <span className="font-semibold text-primary flex items-center gap-1">
+                            <span className="text-yellow-500">✨</span>
+                            Bundle (Smart + Stand)
+                          </span>
+                          <span className="font-semibold text-primary">
+                            +₹{addOnTotal}
+                          </span>
+                        </div>
+                        <div className="text-sm text-green-600 font-semibold bg-green-50 px-2 py-1 rounded-md text-center">
+                          💰 Save ₹{(smartAmount + standAmount) - addOnTotal}
+                        </div>
+                      </>
+                    ) : hasSmart ? (
+                      // Only smart card
+                      <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span className="text-gray-700 font-medium">
+                          Smart Visiting Card
+                        </span>
+                        <span className="font-semibold text-[#43387c]">
+                          +₹{addOnTotal}
+                        </span>
+                      </div>
+                    ) : hasStand ? (
+                      // Only stand
+                      <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span className="text-gray-700 font-medium">
+                          QR NFC Stand
+                        </span>
+                        <span className="font-semibold text-[#43387c]">
+                          +₹{addOnTotal}
+                        </span>
+                      </div>
+                    ) : null}
+
+                    {/* Divider */}
+                    {(hasSmart || hasStand) && (
+                      <div className="border-t-2 border-dashed border-gray-300 my-3"></div>
+                    )}
+
+                    {/* Total */}
+                    <div className="flex justify-between items-center pt-3 border-t-2 border-primary bg-gradient-to-r from-primary/10 to-purple-50 rounded-lg px-3 py-3 -mx-1">
+                      <span className="font-bold text-[#43387c] text-lg">Total Paid</span>
+                      <span className="text-primary font-extrabold text-2xl">
+                        ₹{totalAmount}
+                        <span className="text-sm font-normal">/-</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Additional Info */}
+                <div className="">
+                  <div className="rounded-xl bg-white border border-primary/10 p-4">
+                    <p className="text-gray-500 text-sm mb-1">Add-ons</p>
                     <p className="font-semibold text-[#43387c]">{addOnCopy}</p>
                   </div>
-                  <div className="rounded-xl bg-white border border-primary/10 p-4">
-                    <p className="text-gray-500">Next Step</p>
-                    <p className="font-semibold text-[#43387c]">
+                  {/* <div className="rounded-xl bg-white border border-primary/10 p-4">
+                    <p className="text-gray-500 text-sm mb-1">Next Step</p>
+                    <p className="font-semibold text-[#43387c] text-sm">
                       Share your design & business details
                     </p>
-                  </div>
-                  <div className="rounded-xl bg-white border border-primary/10 p-4">
-                    <p className="text-gray-500">Support</p>
-                    <p className="font-semibold text-[#43387c]">
-                      We just sent a confirmation on WhatsApp & email.
-                    </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
-              <div className="bg-white border border-secondary/20 rounded-2xl p-6 shadow-sm flex flex-col gap-4 justify-between">
+              {/* <div className="bg-white border border-secondary/20 rounded-2xl p-6 shadow-sm flex flex-col gap-4 justify-between">
                 <div>
                   <h3 className="text-lg font-semibold text-secondary">What's Next?</h3>
                   <ul className="mt-3 space-y-2 text-sm text-gray-600">
@@ -96,6 +224,24 @@ const ThankYouPage = () => {
                   <FaWhatsapp className="text-lg" />
                   <span>Need help? Reply to the WhatsApp we just sent.</span>
                 </div>
+              </div> */}
+            </div>
+
+            {/* Connect Soon Message */}
+            <div className="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl p-6 sm:p-8 text-center shadow-lg">
+              <div className="flex flex-col items-center gap-3">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 mb-2">
+                  <FaWhatsapp className="text-3xl" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold">
+                  We'll Connect With You Soon!
+                </h3>
+                <p className="text-base sm:text-lg text-white/90 max-w-2xl">
+                  Our team will reach out to you shortly via WhatsApp and email for the next steps in setting up your Digital Visiting Card.
+                </p>
+                <p className="text-sm text-white/80 font-medium mt-2">
+                  Please keep your phone and email handy for further process.
+                </p>
               </div>
             </div>
 
