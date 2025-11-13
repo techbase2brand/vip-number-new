@@ -7,6 +7,7 @@ import Ready from "./Ready";
 import Sharingcard from "./Sharingcard";
 import { DigitalCardPlanProvider } from "./PlanContext";
 import BusinessRow from "./BusinessRow";
+import FAQs from "../Shared/FAQs/FAQs";
 
 const Page = () => {
   return (
@@ -18,6 +19,7 @@ const Page = () => {
       <Contectless />
       <Sharingcard />
       <Ready />
+      <FAQs />
     </DigitalCardPlanProvider>
   );
 };
