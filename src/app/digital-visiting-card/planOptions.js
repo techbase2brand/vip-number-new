@@ -3,7 +3,7 @@
 export const BASE_DIGITAL_CARD_PLANS = [
   {
     id: "digital-30-silver",
-    label: "Digital Visiting Card | 30 Days | Silver",
+    label: "30 Days | Silver",
     plan: "digital_visiting_card",
     duration: 30,
     money_back_guarantee: false,
@@ -12,7 +12,7 @@ export const BASE_DIGITAL_CARD_PLANS = [
   },
   {
     id: "digital-365-silver",
-    label: "Digital Visiting Card | 365 Days | Silver",
+    label: "365 Days | Silver",
     plan: "digital_visiting_card",
     duration: 365,
     money_back_guarantee: false,
@@ -21,7 +21,7 @@ export const BASE_DIGITAL_CARD_PLANS = [
   },
   {
     id: "digital-365-gold",
-    label: "Digital Visiting Card | 365 Days | Gold (14 Day MBG)",
+    label: "365 Days | Gold (14 Day MBG)",
     plan: "digital_visiting_card",
     duration: 365,
     money_back_guarantee: true,
@@ -34,13 +34,13 @@ export const ADD_ON_OPTIONS = [
   {
     id: "smart",
     label: "Add Smart Visiting Card (+₹499)",
-    description: "Premium NFC-enabled tap card",
+    description: "Premium NFC-enabled tap card (smart card non refundable).",
     amount: 499,
   },
   {
     id: "stand",
     label: "Add QR NFC Stand (+₹999)",
-    description: "Counter stand with QR & NFC tap",
+    description: "Counter stand with QR & NFC tap (QR NFC stand non refundable).",
     amount: 999,
   },
 ];

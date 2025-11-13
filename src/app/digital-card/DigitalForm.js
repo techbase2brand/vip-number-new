@@ -104,7 +104,7 @@ const DigitalForm = () => {
           `/api/web/digital/visiting/card/${mobileNumber}`,
           {
             headers: {
-              "Content-Type": "application/json",
+              // "Content-Type": "application/json",
               Authorization: `Bearer ${user?.token}`, // Add Bearer token here
             },
           }
@@ -420,11 +420,10 @@ const DigitalForm = () => {
 
       // Make API call to upload image
       const response = await axios.post(
-        `/api/web/digital/card/imageUpload`,
+        `https://admin.fancymobilenumber.in/web/digital/card/imageUpload`,
         uploadFormData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${user?.token}`,
           },
         }
@@ -482,7 +481,7 @@ const DigitalForm = () => {
         },
         {
           headers: {
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
           },
         }

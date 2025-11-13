@@ -276,7 +276,7 @@ const Banner = () => {
             </div>
 
             {/* Description */}
-            <div className="baner-des max-w-[312px] xl:max-w-[562px] 2xl:max-w-[862px] text-[15px] 2xl:text-[24px] mx-auto mt-4 text-center leading-relaxed">
+            <div className="baner-des max-w-[312px] lg:max-w-[400px] xl:max-w-[562px] 2xl:max-w-[762px] text-[15px] 2xl:text-[24px] mx-auto mt-4 text-center leading-relaxed">
               <p>
                 These business essentials are backed by VIP Number Shop,
                 offering exclusive VIP mobile numbers to enhance your brand’s

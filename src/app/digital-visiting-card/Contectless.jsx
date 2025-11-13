@@ -157,7 +157,8 @@ const Contectless = () => {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-b-3xl text-center text-gray-800 p-4 w-full flex flex-col items-center">
+                <div className="bg-white rounded-b-3xl text-center text-gray-800 p-4 w-full flex flex-col items-center h-[50%] justify-between">
+                  <div className="w-full">
                   <h3 className="font-semibold text-[18px] leading-snug mb-3 text-center w-full">
                     {item.title}
                   </h3>
@@ -268,6 +269,7 @@ const Contectless = () => {
                       </div>
                     );
                   })()}
+                  </div>
 
                   <button
                     className="mt-2 bg-primary text-white rounded-full px-6 py-2 w-full hover:bg-primary/90 transition-all font-semibold"

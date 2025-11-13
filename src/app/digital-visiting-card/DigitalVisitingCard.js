@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
+import Moneybacknew from "../../../public/digital-card-new/Moneybacknew.webp";
 import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
@@ -844,13 +845,24 @@ const DigitalVisitingCard = () => {
                   const isGold = selectedPlan?.type?.toLowerCase() === "gold";
                   return (
                     <div className="mb-3 flex flex-col items-center gap-2">
+                      <div className="flex items-center gap-2">
                       <Image
                         src={Powerdby}
                         alt="Powered by"
-                        width={300}
-                        height={100}
+                        width={3000}
+                        height={1000}
                         className="object-contain max-w-[200px] h-auto"
                       />
+                      {isGold && (
+                          <Image
+                            src={Moneybacknew}
+                            alt="Money Back Guarantee"
+                            width={200}
+                            height={100}
+                            className="object-contain max-w-[80px] h-auto"
+                          />
+                      )}
+                      </div>
                       <span className="text-red-600 text-base font-semibold">
                         {isGold
                           ? "Gold Pack | Removed Branding"
@@ -858,6 +870,7 @@ const DigitalVisitingCard = () => {
 
                         <span className="text-primary text-base font-semibold"> Powerd by</span> <span className="text-black text-base font-semibold">VIP Number shop</span>
                       </span>
+                      
                     </div>
                   );
                 })()}
@@ -1261,7 +1274,8 @@ const DigitalVisitingCard = () => {
                     className="rounded-3x w-auto object-contain h-[80%] relative z-10  digital_img"
                   />
                 </div>
-                {getContentForImage(selectedIdx).features.some((feature) =>
+                {basePlan?.type?.toLowerCase() === "gold" && 
+                 getContentForImage(selectedIdx).features.some((feature) =>
                   feature.text.includes(
                     "Only Digital visiting Card 14 Days Money Back Guarantee"
                   )
