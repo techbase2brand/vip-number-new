@@ -13,7 +13,7 @@ import { BsQuestionCircleFill } from "react-icons/bs";
 import { TbCreditCardPay } from "react-icons/tb";
 import goldbatch from "../../../public/digital-card-new/goldbatch.webp";
 import silverbatch from "../../../public/digital-card-new/Silverbatch.webp";
-import Powerdby from "../../../public/digital-card-new/poweredby.webp";
+import Powerdby from "../../../public/digital-card-new/powered.webp";
 import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
 import { FaStar } from "react-icons/fa";
 

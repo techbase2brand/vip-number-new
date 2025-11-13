@@ -5,7 +5,7 @@ import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
 import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
-import Powerdby from "../../../public/digital-card-new/poweredby.webp";
+import Powerdby from "../../../public/digital-card-new/powered.webp";
 import qrRight from "../../../public/digital-card-new/qrRight.webp";
 import qrbackimg from "../../../public/digital-card-new/qrbackimg.webp";
 import { toast } from "react-toastify";
