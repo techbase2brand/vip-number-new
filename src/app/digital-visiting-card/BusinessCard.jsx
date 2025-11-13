@@ -42,7 +42,7 @@ const BusinessCard = () => {
           backgroundImage: `url(${unionBack.src})`,
         }}
       >
-        <div className="top-img flex flex-col md:flex-row  w-full items-center justify-between   relative pb-[200px] 2xl:pb-[260px] ">
+        <div className="top-img flex flex-col md:flex-row  w-full items-center justify-between   relative pb-[200px] 2xl:pb-[260px] justify-center">
           <div className="star-left hidden lg:block">
             <Image
               src={Leftwave}

@@ -373,7 +373,7 @@ const Scannerpage = () => {
             alt="Powerdby"
             width={3000}
             height={1000}
-            className="object-contain max-w-[200px] w-full rounded-[16px]"
+            className="object-contain max-w-[150px] w-full rounded-[16px]"
           />
             <span className="text-primary text-base font-semibold">
               {basePlan?.type?.toLowerCase() === "gold"

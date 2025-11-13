@@ -157,9 +157,9 @@ const Contectless = () => {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-b-3xl text-center text-gray-800 p-4 w-full flex flex-col items-center h-[50%] justify-between">
+                <div className="bg-white rounded-b-3xl text-center text-gray-800 py-4 md:px-4 w-full flex flex-col items-center h-[58%] justify-between">
                   <div className="w-full">
-                  <h3 className="font-semibold text-[18px] leading-snug mb-3 text-center w-full">
+                  <h3 className="font-semibold text-[18px] leading-snug mb-3 text-center w-full min-h-[50px] flex items-center justify-center">
                     {item.title}
                   </h3>
 
@@ -190,8 +190,9 @@ const Contectless = () => {
                     
                     return (
                       <div className="w-full mb-3 bg-gray-50 rounded-lg p-3 space-y-2">
-                        {/* Base Plan Price */}
-                        <div className="flex justify-between text-sm">
+                       <div>
+                         {/* Base Plan Price */}
+                         <div className="flex justify-between text-sm">
                           <span className="text-black-700">
                             {basePlan?.label || "Base Plan"}
                           </span>
@@ -258,6 +259,7 @@ const Contectless = () => {
                         {(item.planConfig.addOns.smart || item.planConfig.addOns.stand) && (
                           <div className="border-t border-gray-300 my-2"></div>
                         )}
+                       </div>
 
                         {/* Total */}
                         <div className="flex justify-between items-center pt-1 border-t-2 border-primary">

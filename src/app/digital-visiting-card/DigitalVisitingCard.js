@@ -845,7 +845,7 @@ const DigitalVisitingCard = () => {
                   const isGold = selectedPlan?.type?.toLowerCase() === "gold";
                   return (
                     <div className="mb-3 flex flex-col items-center gap-2">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 w-full justify-between">
                       <Image
                         src={Powerdby}
                         alt="Powered by"
@@ -1074,7 +1074,7 @@ const DigitalVisitingCard = () => {
                 <div className="w-2 h-full rounded-full bg-[#FFD600] opacity-80"></div>
               </div>
               {/* Thumbnails */}
-              <div className="flex flex-col gap-2 z-10 pt-[10px] pb-[10px]">
+              <div className="flex flex-col gap-2 z-10 pt-[10px] pb-[10px] m-auto">
                 {carouselImages
                   .slice(carouselWindowStart, carouselWindowStart + 3)
                   .map((img, idx) => (
@@ -1118,7 +1118,7 @@ const DigitalVisitingCard = () => {
             {/* Main Image + Details (Right) */}
             <div className="flex-1 flex items-center">
               <div
-                className="relative w-full max-h-[940px] drop-shadow-xl bg-[#5B448A] flex justify-start items-center rounded-[56px] p-[25px]"
+                className="relative w-full max-h-[1020px] drop-shadow-xl bg-[#5B448A] flex justify-start items-center rounded-[56px] p-[25px]"
                 // style={{
                 //   backgroundImage: `url(${carouselImages[selectedIdx].src})`,
                 // }}
@@ -1292,7 +1292,7 @@ const DigitalVisitingCard = () => {
                 )}
 
                 <div className="absolute bottom-[20%] left-0 w-full flex justify-center items-end leading-[3rem]">
-                  <div className="text-center h-max relative right-[6%] z-[10]">
+                  <div className="text-center h-max relative right-[-25%] xl:right-[-10%] 2xl:right-[6%] z-[10]">
                     {/* <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
                       <span className="text-primary">Powerd by</span> VIP Number
                       shop
@@ -1302,7 +1302,7 @@ const DigitalVisitingCard = () => {
                       alt="Powerdby"
                       width={3000}
                       height={1000}
-                      className="object-contain max-w-[225px] z-10 bottom-[8rem] left-[15%] w-full rounded-[16px]"
+                      className="object-contain max-w-[200px] z-10 bottom-[8rem] left-[15%] w-full rounded-[16px]"
                     />
                     <span className="text-secondary text-base font-semibold mt-3">
                       {basePlan?.type?.toLowerCase() === "gold"
