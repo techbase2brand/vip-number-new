@@ -117,6 +117,20 @@ const Scannerpage = () => {
   const getContentForImage = (imageIndex) => {
     const planType = basePlan?.type || "gold";
     const isGold = planType.toLowerCase() === "gold";
+    const isGold365 = basePlanId === "digital-365-gold";
+    const hasStand = imageIndex === 2 || imageIndex === 3; // QR NFC Standee cases
+
+    // Get guarantee message based on plan and add-ons
+    const getGuaranteeMessage = () => {
+      if (hasStand) {
+        return "14-Day Money Back Guarantee - Digital Visiting Cards Only";
+      }
+      // Only show "No Questions Ask" for Gold 365 days plan
+      if (isGold365) {
+        return "14-Day Money-Back Guarantee - No Questions Ask";
+      }
+      return null; // Don't show guarantee for other plans
+    };
 
     switch (imageIndex) {
       case 0: // Digital Visiting Card only
@@ -128,7 +142,7 @@ const Scannerpage = () => {
               text: "Share Your Socials Instantly – All in One Digital Visiting card",
             },
           ],
-          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
+          guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -145,7 +159,7 @@ const Scannerpage = () => {
               text: "Share Your Socials Instantly – All in One Digital Visiting card",
             },
           ],
-          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
+          guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -167,7 +181,7 @@ const Scannerpage = () => {
               text: "No Question Ask?",
             },
           ],
-          guarantee: "14-Day Money Back Guarantee - Digital Visiting Cards Only",
+          guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -189,7 +203,7 @@ const Scannerpage = () => {
               text: "No Question Ask?",
             },
           ],
-          guarantee: "14-Day Money Back Guarantee - Digital Visiting Cards Only",
+          guarantee: getGuaranteeMessage(),
           offers: [
             "Renew your Digital Visiting Card plan and get the 365-day package just ₹499",
             isGold
@@ -200,7 +214,7 @@ const Scannerpage = () => {
       default:
         return {
           features: [],
-          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
+          guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold

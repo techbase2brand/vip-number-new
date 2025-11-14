@@ -301,16 +301,29 @@ const Contectless = () => {
                   </div>
                   {/* Guarantee Highlight Section */}
                   {(() => {
-                    const guaranteeText = item.planConfig.addOns.stand
-                      ? "14-Day Money Back Guarantee - Digital Visiting Cards Only"
-                      : "14-Day Money-Back Guarantee - No Questions Ask";
+                    const selectedPlanId = selectedPlans[item.id];
+                    const isGold365 = selectedPlanId === "digital-365-gold";
+                    const hasStand = item.planConfig.addOns.stand;
+                    
+                    // Get guarantee message based on plan and add-ons
+                    let guaranteeText = null;
+                    if (hasStand) {
+                      guaranteeText = "14-Day Money Back Guarantee - Digital Visiting Cards Only";
+                    } else if (isGold365) {
+                      // Only show "No Questions Ask" for Gold 365 days plan
+                      guaranteeText = "14-Day Money-Back Guarantee - No Questions Ask";
+                    }
+                    
+                    // Only show guarantee section if guaranteeText exists
+                    if (!guaranteeText) return null;
+                    
                     return (
-                      <div className="flex items-center gap-2 bg-secondary/20 border border-secondary/50 rounded-lg px-3 py-2 mt-2 w-full">
+                      <div className="flex items-center gap-2 bg-secondary border border-secondary/50 rounded-lg px-3 py-2 mt-2 w-full">
                         <RiExchangeDollarLine
-                          className="text-secondary"
+                          className="text-primary"
                           fontSize={18}
                         />
-                        <span className="text-secondary text-[12px] font-semibold">
+                        <span className="text-primary text-[12px] font-semibold">
                           {guaranteeText}
                         </span>
                       </div>
