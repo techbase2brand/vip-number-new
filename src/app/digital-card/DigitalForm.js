@@ -104,7 +104,7 @@ const DigitalForm = () => {
           `/api/web/digital/visiting/card/${mobileNumber}`,
           {
             headers: {
-              "Content-Type": "application/json",
+              // "Content-Type": "application/json",
               Authorization: `Bearer ${user?.token}`, // Add Bearer token here
             },
           }
@@ -424,7 +424,6 @@ const DigitalForm = () => {
         uploadFormData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${user?.token}`,
           },
         }
@@ -482,7 +481,7 @@ const DigitalForm = () => {
         },
         {
           headers: {
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
           },
         }
@@ -495,23 +494,111 @@ const DigitalForm = () => {
       }
     } catch (error) {
       if (error.response) {
-        const errorMessage =
-          error.response.data.message ||
-          "Failed to update digital visiting card. Please try again.";
+        
+        let errorMessage = "Failed to update digital visiting card. Please try again.";
+        
+        // Try multiple error response structures
+        if (error.response.data) {
+          // Check for direct message (from backend API)
+          if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          }
+          // Check for error.message (nested structure)
+          else if (error.response.data.error?.message) {
+            errorMessage = error.response.data.error.message;
+          }
+          // Check if error is a string that contains JSON (legacy format)
+          else if (typeof error.response.data.error === 'string') {
+            try {
+              // Try to parse JSON from error string (e.g., "Backend error 409: {...}")
+              const errorStr = error.response.data.error;
+              const jsonMatch = errorStr.match(/\{.*\}/);
+              if (jsonMatch) {
+                const parsedError = JSON.parse(jsonMatch[0]);
+                errorMessage = parsedError.message || errorMessage;
+              } else {
+                errorMessage = errorStr;
+              }
+            } catch (parseError) {
+              // If parsing fails, use the error string as is
+              errorMessage = error.response.data.error;
+            }
+          }
+          // Check for error.error (nested structure)
+          else if (error.response.data.error) {
+            errorMessage = error.response.data.error;
+          }
+        }
 
         // Check if the error is related to the url_extension field
         if (
           errorMessage.includes(
             "This URL extension is already taken by another user. Please choose a different one."
-          )
+          ) ||
+          errorMessage.includes("URL extension is already taken") ||
+          errorMessage.includes("already taken")
         ) {
           setErrors((prev) => ({
             ...prev,
             url_extension: errorMessage, // Set the specific error message for url_extension
           }));
-          document.getElementById("url_extension").focus();
+          const urlExtensionInput = document.getElementById("url_extension");
+          if (urlExtensionInput) {
+            urlExtensionInput.focus();
+            urlExtensionInput.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          
+          // Clear error after 4 seconds
+          setTimeout(() => {
+            setErrors((prev) => ({
+              ...prev,
+              url_extension: "", // Clear the error message
+            }));
+          }, 4000);
         } else {
           toast.error(errorMessage); // Show other errors in the toast
+        }
+      } else if (error.message) {
+        // Handle error.message (from Next.js route wrapper or network errors)
+        let errorMessage = error.message;
+        try {
+          // Try to parse JSON from error message (e.g., "Backend error 409: {...}")
+          const jsonMatch = error.message.match(/\{.*\}/);
+          if (jsonMatch) {
+            const parsedError = JSON.parse(jsonMatch[0]);
+            errorMessage = parsedError.message || errorMessage;
+          }
+        } catch (parseError) {
+          // If parsing fails, use the error message as is
+        }
+        
+        // Check if it's a URL extension error
+        if (
+          errorMessage.includes(
+            "This URL extension is already taken by another user. Please choose a different one."
+          ) ||
+          errorMessage.includes("URL extension is already taken") ||
+          errorMessage.includes("already taken")
+        ) {
+          setErrors((prev) => ({
+            ...prev,
+            url_extension: errorMessage,
+          }));
+          const urlExtensionInput = document.getElementById("url_extension");
+          if (urlExtensionInput) {
+            urlExtensionInput.focus();
+            urlExtensionInput.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          
+          // Clear error after 4 seconds
+          setTimeout(() => {
+            setErrors((prev) => ({
+              ...prev,
+              url_extension: "", // Clear the error message
+            }));
+          }, 4000);
+        } else {
+          toast.error(errorMessage);
         }
       } else {
         // If no response from API, it's a network error or other issue
@@ -560,6 +647,9 @@ const DigitalForm = () => {
               {formData.name
                 ? `${formData.name} digital business card`
                 : "Create your professional digital business card"}
+            </p>
+            <p className="text-secondary text-center mt-2 text-sm font-semibold animate-bounce">
+              You will receive your domain only after submitting the complete form.
             </p>
           </div>
 
@@ -631,6 +721,7 @@ const DigitalForm = () => {
                           }))
                         }
                         className="h-4 w-4 text-green-600 border-gray-300 rounded"
+                        
                       />
                       <label
                         htmlFor="whatsapp_mobile"
@@ -668,6 +759,7 @@ const DigitalForm = () => {
                       : "border-gray-300"
                   }`}
                   placeholder="+91-9876543210"
+                  disabled={formData.mobile.length === 10}
                 />
                 {errors.mobile && (
                   <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>
@@ -773,6 +865,7 @@ const DigitalForm = () => {
                 >
                   Domain Url <span className="text-red-500">*</span>
                 </label>
+                
                 <input
                   type="text"
                   id="url_extension"
@@ -803,6 +896,9 @@ const DigitalForm = () => {
                     {errors.url_extension}
                   </p>
                 )}
+                <span className="text-sm font-semibold text-primary block mt-2">
+                      https://vipnumbershop.com/{formData.url_extension}
+                    </span>
               </div>
 
               {/* Business Information Section */}

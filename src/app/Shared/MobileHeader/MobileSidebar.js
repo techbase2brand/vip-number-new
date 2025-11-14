@@ -404,6 +404,18 @@ const MobileSidebar = ({
                       Buy QRCode
                     </Link>
                   </li>
+                  {/* <li>
+                    <Link
+                      className="font-medium text-[16px] leading-[20px] text-[#333333] flex items-center gap-4 no-underline w-full relative"
+                      href="/digital-visiting-card"
+                      onClick={mobileToggleInactive}
+                    >
+                      <span className="flex items-center  h-[35px] w-[35px]">
+                        <IoQrCodeSharp fontSize={33} color=" var(--primary) " />
+                      </span>
+                      Digital Visiting Card
+                    </Link>
+                  </li> */}
                   <li>
                     <Link href="/family-pack" onClick={mobileToggleInactive}>
                       <div className="font-medium text-[16px] leading-[20px] text-[#333333] flex items-center gap-4 no-underline w-full relative">

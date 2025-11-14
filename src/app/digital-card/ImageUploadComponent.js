@@ -68,7 +68,9 @@ const ImageUploadComponent = ({
   };
 
   // Clear selected image
-  const clearImage = () => {
+  const clearImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setSelectedImage(null);
     setImagePreview(null);
     if (fileInputRef.current) {
@@ -141,7 +143,7 @@ const ImageUploadComponent = ({
             onDrop={handleDrop}
           >
             {imagePreview ? (
-              <div className="space-y-4">
+              <div className="space-y-4" onClick={(e) => e.stopPropagation()}>
                 {/* Image Preview */}
                 <div className="relative inline-block">
                   <img
@@ -156,7 +158,8 @@ const ImageUploadComponent = ({
                   <button
                     type="button"
                     onClick={clearImage}
-                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition-colors"
+                    onMouseDown={(e) => e.stopPropagation()}
+                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition-colors z-10"
                   >
                     ×
                   </button>
@@ -214,13 +217,15 @@ const ImageUploadComponent = ({
             )}
 
             {/* Hidden File Input */}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleFileSelect}
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-            />
+            {!imagePreview && (
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFileSelect}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            )}
           </div>
         )}
         {/* Action Buttons */}
