@@ -500,7 +500,7 @@ const DigitalVisitingCard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [basePlanId, selectedAddOns]); // Watch for plan changes
   const PAYMENT_API_URL =
-    "https://staging.fancymobilenumber.in/index.php/web/razorpay/digital_card/payment";
+    "/api/web/razorpay/digital_card/payment";
 
   const resolveOrderDetails = (response, planInfo) => {
     const dataLayer = response?.data ?? response ?? {};
