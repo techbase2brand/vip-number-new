@@ -444,16 +444,76 @@ const DigitalForm = () => {
     } catch (error) {
       console.error("Error uploading image:", error);
       setUploadImg(false);
+
+      let errorMessage = "Failed to upload image. Please try again.";
+
+      // First, try to extract error message from error.response.data.error string
+      if (
+        error.response?.data?.error &&
+        typeof error.response.data.error === "string"
+      ) {
+        try {
+          // Try to parse JSON from error string (e.g., "Backend error 422: {...}")
+          const errorStr = error.response.data.error;
+          const jsonMatch = errorStr.match(/\{.*\}/);
+          if (jsonMatch) {
+            const parsedError = JSON.parse(jsonMatch[0]);
+            // Check if message is an object with image array
+            if (
+              parsedError.message &&
+              typeof parsedError.message === "object"
+            ) {
+              if (
+                parsedError.message.image &&
+                Array.isArray(parsedError.message.image)
+              ) {
+                errorMessage = parsedError.message.image[0];
+              } else {
+                // If message is an object, try to get first value
+                const firstKey = Object.keys(parsedError.message)[0];
+                if (firstKey && Array.isArray(parsedError.message[firstKey])) {
+                  errorMessage = parsedError.message[firstKey][0];
+                }
+              }
+            } else if (parsedError.message) {
+              errorMessage = parsedError.message;
+            }
+          }
+        } catch (parseError) {
+          console.error("Error parsing error message:", parseError);
+        }
+      } else if (error.response?.data?.message) {
+        // Check if message is directly in response.data.message
+        if (typeof error.response.data.message === "object") {
+          if (
+            error.response.data.message.image &&
+            Array.isArray(error.response.data.message.image)
+          ) {
+            errorMessage = error.response.data.message.image[0];
+          } else {
+            const firstKey = Object.keys(error.response.data.message)[0];
+            if (
+              firstKey &&
+              Array.isArray(error.response.data.message[firstKey])
+            ) {
+              errorMessage = error.response.data.message[firstKey][0];
+            }
+          }
+        } else {
+          errorMessage = error.response.data.message;
+        }
+      }
+
+      // Handle specific status codes
       if (error.response?.status === 401) {
         toast.error("Authentication failed. Please try again.");
-        setUploadImg(false);
       } else if (error.response?.status === 413) {
         toast.error("Image file is too large. Please select a smaller image.");
-        setUploadImg(false);
       } else {
-        toast.error("Failed to upload image. Please try again.");
-        setUploadImg(false);
+        // Show the extracted error message
+        toast.error(errorMessage);
       }
+      setUploadImg(false);
     }
   };
   // Handle form submission
@@ -494,9 +554,9 @@ const DigitalForm = () => {
       }
     } catch (error) {
       if (error.response) {
-        
-        let errorMessage = "Failed to update digital visiting card. Please try again.";
-        
+        let errorMessage =
+          "Failed to update digital visiting card. Please try again.";
+
         // Try multiple error response structures
         if (error.response.data) {
           // Check for direct message (from backend API)
@@ -508,7 +568,7 @@ const DigitalForm = () => {
             errorMessage = error.response.data.error.message;
           }
           // Check if error is a string that contains JSON (legacy format)
-          else if (typeof error.response.data.error === 'string') {
+          else if (typeof error.response.data.error === "string") {
             try {
               // Try to parse JSON from error string (e.g., "Backend error 409: {...}")
               const errorStr = error.response.data.error;
@@ -545,9 +605,12 @@ const DigitalForm = () => {
           const urlExtensionInput = document.getElementById("url_extension");
           if (urlExtensionInput) {
             urlExtensionInput.focus();
-            urlExtensionInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            urlExtensionInput.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           }
-          
+
           // Clear error after 4 seconds
           setTimeout(() => {
             setErrors((prev) => ({
@@ -571,7 +634,7 @@ const DigitalForm = () => {
         } catch (parseError) {
           // If parsing fails, use the error message as is
         }
-        
+
         // Check if it's a URL extension error
         if (
           errorMessage.includes(
@@ -587,9 +650,12 @@ const DigitalForm = () => {
           const urlExtensionInput = document.getElementById("url_extension");
           if (urlExtensionInput) {
             urlExtensionInput.focus();
-            urlExtensionInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            urlExtensionInput.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           }
-          
+
           // Clear error after 4 seconds
           setTimeout(() => {
             setErrors((prev) => ({
@@ -649,7 +715,8 @@ const DigitalForm = () => {
                 : "Create your professional digital business card"}
             </p>
             <p className="text-secondary text-center mt-2 text-sm font-semibold animate-bounce">
-              You will receive your domain only after submitting the complete form.
+              You will receive your domain only after submitting the complete
+              form.
             </p>
           </div>
 
@@ -721,7 +788,6 @@ const DigitalForm = () => {
                           }))
                         }
                         className="h-4 w-4 text-green-600 border-gray-300 rounded"
-                        
                       />
                       <label
                         htmlFor="whatsapp_mobile"
@@ -865,7 +931,7 @@ const DigitalForm = () => {
                 >
                   Domain Url <span className="text-red-500">*</span>
                 </label>
-                
+
                 <input
                   type="text"
                   id="url_extension"
@@ -897,10 +963,9 @@ const DigitalForm = () => {
                   </p>
                 )}
                 <span className="text-sm font-semibold text-primary block mt-2">
-                      https://vipnumbershop.com/{formData.url_extension}
-                    </span>
+                  https://vipnumbershop.com/vip-{formData.url_extension}
+                </span>
               </div>
-
               {/* Business Information Section */}
               <label className="inline-flex items-center cursor-pointer gap-4">
                 <input
@@ -915,6 +980,12 @@ const DigitalForm = () => {
                   Enable Bank Details
                 </span>
               </label>
+              <div className="md:col-span-3 text-center">
+                <span className="text-sm font-semibold text-primary block mt-2 animate-bounce">
+                  You will receive your domain only after submitting the
+                  complete form.
+                </span>
+              </div>
               {formData.bank_status && (
                 <>
                   <div className="md:col-span-3 mt-2">
