@@ -28,6 +28,7 @@ import NumerologyTrustedNumerology from "./NumerologyTrustedNumerology";
 import NumerologyExplore from "./NumerologyExplore";
 import NumerologyReportDetail from "./NumerologyReportDetail";
 import AwardWinner from "../Shared/AwardWinner/AwardWinner/AwardWinner";
+import FAQs from "../Shared/FAQs/FAQs";
 // import { ResponsiveFooter } from "../ResponsiveModule";
 const NumerologyPage = () => {
   const faqdata = [
@@ -202,6 +203,7 @@ const NumerologyPage = () => {
       <AwardWinner />
       <NumerologyFeatures />
       <NumerologyFaq data={faqdata} faqs_description="To get the best VIP numbers for a lifetime, you must first clear any doubts you may have, if any."/>
+      <FAQs pageName="numberology_report" />
       <NumerologyClient />
 
       <NumerologyConsultation title="Pay 1,999 For Numerology Report" />

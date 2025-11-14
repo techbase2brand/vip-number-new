@@ -5,36 +5,23 @@ import MainHeading from "../MainHeading/MainHeading";
 import MainSubHeading from "../../Shared/MainSubHeading/MainSubHeading";
 import FaqCard from "../FaqCard/FaqCard";
 
-const FAQs = () => {
+const FAQs = ({ pageName }) => {
   const [faqs, setFaqs] = useState({ status: "", message: "", data: [] });
   const [count] = useState(6);
   const [expandedFaqId, setExpandedFaqId] = useState(null); // Track the expanded FAQ
   const apiUrl = process.env.NEXT_PUBLIC_LEAFYMANGO_API_URL;
   const panelImg = process.env.NEXT_PUBLIC_IMAGES;
-  // useEffect(() => {
-  //   fetch(`/api/web/faq`)
-  //     .then((response) => response.json())
-  //     .then((data) => setFaqs(data))
-  //     .catch((error) => console.log(error));
-  // }, [apiUrl]);
-
   useEffect(() => {
-    const storedFaqs = sessionStorage.getItem("faqsData");
-    if (storedFaqs) {
-      // If data exists in sessionStorage, use it and skip the API call
-      setFaqs(JSON.parse(storedFaqs));
-    } else {
-      // Otherwise, fetch from the API
-      fetch(`/api/web/faq`)
-        .then((response) => response.json())
-        .then((data) => {
-          setFaqs(data);
-          // Save the data to sessionStorage
-          sessionStorage.setItem("faqsData", JSON.stringify(data));
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [apiUrl]);
+    // Build API URL with pageName query parameter if provided
+    const apiEndpoint = pageName 
+      ? `/api/web/faq?pageName=${pageName}`
+      : `/api/web/faq`;
+    
+    fetch(apiEndpoint)
+      .then((response) => response.json())
+      .then((data) => setFaqs(data))
+      .catch((error) => console.log(error));
+  }, [apiUrl, pageName]);
 
   // Function to toggle the expansion state
   const toggleExpand = (faqId) => {

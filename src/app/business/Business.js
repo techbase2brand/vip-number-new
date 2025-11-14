@@ -13,6 +13,7 @@ import DeliveryProcess from "../Shared/DeliveryProcess/DeliveryProcess/DeliveryP
 import AwardWinner from "../Shared/AwardWinner/AwardWinner/AwardWinner";
 import OrderPlacementOurCustomers from "../Shared/OrderPlacementOurCustomers/OrderPlacementOurCustomers";
 import CityHowGetVipNumber from "../Shared/City/CityHowGetVipNumber/CityHowGetVipNumber";
+import FAQs from "../Shared/FAQs/FAQs";
 import { ResponsiveFooter } from "../ResponsiveModule";
 
 const Business = () => {
@@ -40,6 +41,7 @@ const Business = () => {
       </div>
       <AwardWinner />
       <OrderPlacementOurCustomers />
+      <FAQs pageName="bussiness_with_us" />
      
     </div>
   );

@@ -89,7 +89,7 @@ const Homepage = () => {
           }}
         /> */}
       <MobileContent />
-      <FAQs />
+      <FAQs pageName="home" />
       <OurCustomers />
       {/* </SearchContext.Provider> */}
     </div>
