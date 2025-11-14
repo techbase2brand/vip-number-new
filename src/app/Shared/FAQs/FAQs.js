@@ -13,10 +13,10 @@ const FAQs = ({ pageName }) => {
   const panelImg = process.env.NEXT_PUBLIC_IMAGES;
   useEffect(() => {
     // Build API URL with pageName query parameter if provided
-    const apiEndpoint = pageName 
+    const apiEndpoint = pageName
       ? `/api/web/faq?pageName=${pageName}`
       : `/api/web/faq`;
-    
+
     fetch(apiEndpoint)
       .then((response) => response.json())
       .then((data) => setFaqs(data))
@@ -28,7 +28,9 @@ const FAQs = ({ pageName }) => {
     // If the clicked FAQ is already expanded, collapse it; otherwise, expand it
     setExpandedFaqId((prev) => (prev === faqId ? null : faqId));
   };
-
+  if (faqs.data.length === 0) {
+    return null;
+  }
   return (
     <section>
       <div className="container-os mx-auto px-4">
