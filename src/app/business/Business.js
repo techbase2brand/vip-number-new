@@ -41,7 +41,7 @@ const Business = () => {
       </div>
       <AwardWinner />
       <OrderPlacementOurCustomers />
-      <FAQs pageName="bussiness_with_us" />
+      <FAQs />
      
     </div>
   );

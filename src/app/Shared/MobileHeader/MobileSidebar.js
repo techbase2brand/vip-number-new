@@ -404,7 +404,7 @@ const MobileSidebar = ({
                       Buy QRCode
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       className="font-medium text-[16px] leading-[20px] text-[#333333] flex items-center gap-4 no-underline w-full relative"
                       href="/digital-visiting-card"
@@ -415,7 +415,7 @@ const MobileSidebar = ({
                       </span>
                       Digital Visiting Card
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="/family-pack" onClick={mobileToggleInactive}>
                       <div className="font-medium text-[16px] leading-[20px] text-[#333333] flex items-center gap-4 no-underline w-full relative">

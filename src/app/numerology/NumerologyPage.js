@@ -203,7 +203,7 @@ const NumerologyPage = () => {
       <AwardWinner />
       <NumerologyFeatures />
       <NumerologyFaq data={faqdata} faqs_description="To get the best VIP numbers for a lifetime, you must first clear any doubts you may have, if any."/>
-      <FAQs pageName="numberology_report" />
+      <FAQs />
       <NumerologyClient />
 
       <NumerologyConsultation title="Pay 1,999 For Numerology Report" />

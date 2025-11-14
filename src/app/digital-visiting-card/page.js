@@ -19,7 +19,7 @@ const Page = () => {
       <Contectless />
       <Sharingcard />
       <Ready />
-      <FAQs pageName="smart_card" />
+      <FAQs />
     </DigitalCardPlanProvider>
   );
 };

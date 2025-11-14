@@ -14,7 +14,7 @@ const SellerPage = () => {
             <SellNumber />
             <OurCustomers />
             <VideoTestimonial />
-            <FAQs pageName="sell_your_number" />
+            <FAQs />
             <QRVipApp />
             
         </div>
