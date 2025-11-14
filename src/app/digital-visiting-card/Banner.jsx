@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Moneybacknew from "../../../public/digital-card-new/Moneybacknew.webp";
 import savecontactimg from "../../../public/digital-card-new/savecontactimg.webp";
@@ -50,6 +50,7 @@ const Banner = () => {
   const [isLoadingCities, setIsLoadingCities] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { openPlanModal, resetPlanSelections } = useDigitalCardPlan();
+  const hasOpenedModalAfterLogin = useRef(false);
 
   const openModal = () => {
     resetPlanSelections();
@@ -150,6 +151,27 @@ const Banner = () => {
         );
     }
   }, [user]);
+
+  // Auto-open modal after login if user came from Digital Card page
+  useEffect(() => {
+    // Reset ref when user logs out
+    if (!user?.token) {
+      hasOpenedModalAfterLogin.current = false;
+      return;
+    }
+
+    if (user?.token && !hasOpenedModalAfterLogin.current) {
+      const leadPage = localStorage.getItem("Lead-Page");
+      if (leadPage === "Digital Card") {
+        hasOpenedModalAfterLogin.current = true;
+        // Small delay to ensure login popup is closed
+        setTimeout(() => {
+          openModal();
+          localStorage.removeItem("Lead-Page");
+        }, 300);
+      }
+    }
+  }, [user?.token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

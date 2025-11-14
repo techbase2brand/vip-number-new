@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import MoneyBack from "../../../public/digital-card-new/moneyback.webp";
 import Moneybacknew from "../../../public/digital-card-new/Moneybacknew.webp";
@@ -57,7 +57,7 @@ const carouselImages = [
     backimg: qrbackimg,
     alt: "Digital Visiting Card + QR NFC Standee",
     title: "Digital Visiting Card + QR NFC Standee",
-    desc: "Payments for QR Standee are non-refundable.\nNo Question Ask! Only Digital visiting Card 14 Days Money Back Guarantee",
+    desc: "Payments for QR Standee are non-refundable.\nNo Question Ask! 14-Day Money Back Guarantee - Digital Visiting Cards Only",
   },
   {
     src: allInOne,
@@ -108,6 +108,7 @@ const DigitalVisitingCard = () => {
     resetPlanSelections,
   } = useDigitalCardPlan();
   const activePlanRef = React.useRef(checkoutPlan);
+  const hasOpenedModalAfterLogin = useRef(false);
   const basePlan = checkoutPlan?.basePlan;
   const addOnTotal = checkoutPlan
     ? checkoutPlan.totalAmount - (checkoutPlan.basePlan?.amount ?? 0)
@@ -171,16 +172,12 @@ const DigitalVisitingCard = () => {
         return {
           features: [
             {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-            {
               icon: "TbCreditCardPay",
               iconSize: 24,
               text: "Share Your Socials Instantly – All in One Digital Visiting card",
             },
           ],
+          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -192,16 +189,12 @@ const DigitalVisitingCard = () => {
         return {
           features: [
             {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-            {
               icon: "TbCreditCardPay",
               iconSize: 24,
               text: "Share Your Socials Instantly – All in One Digital Visiting card",
             },
           ],
+          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -222,12 +215,8 @@ const DigitalVisitingCard = () => {
               iconSize: 22,
               text: "No Question Ask?",
             },
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "Only Digital visiting Card 14 Days Money Back Guarantee",
-            },
           ],
+          guarantee: "14-Day Money Back Guarantee - Digital Visiting Cards Only",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -248,12 +237,8 @@ const DigitalVisitingCard = () => {
               iconSize: 22,
               text: "No Question Ask?",
             },
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "Only Digital visiting Card 14 Days Money Back Guarantee",
-            },
           ],
+          guarantee: "14-Day Money Back Guarantee - Digital Visiting Cards Only",
           offers: [
             "Renew your Digital Visiting Card plan and get the 365-day package just ₹499",
             isGold
@@ -263,13 +248,8 @@ const DigitalVisitingCard = () => {
         };
       default:
         return {
-          features: [
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-          ],
+          features: [],
+          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -417,6 +397,29 @@ const DigitalVisitingCard = () => {
         });
     }
   }, [user]);
+
+  // Auto-open profile modal after login if user came from Digital Card page
+  useEffect(() => {
+    // Reset ref when user logs out
+    if (!user?.token) {
+      hasOpenedModalAfterLogin.current = false;
+      return;
+    }
+
+    if (user?.token && !hasOpenedModalAfterLogin.current) {
+      const leadPage = localStorage.getItem("Lead-Page");
+      if (leadPage === "Digital Card") {
+        hasOpenedModalAfterLogin.current = true;
+        // Small delay to ensure login popup is closed
+        setTimeout(() => {
+          // Get current plan config based on selected image
+          const currentPlanConfig = getPlanConfigForImage(selectedIdx);
+          startProfileFlow(currentPlanConfig);
+          localStorage.removeItem("Lead-Page");
+        }, 300);
+      }
+    }
+  }, [user?.token, selectedIdx, startProfileFlow]);
 
   useEffect(() => {
     const scriptUrl = "https://checkout.razorpay.com/v1/checkout.js";
@@ -885,6 +888,15 @@ const DigitalVisitingCard = () => {
                     </option>
                   ))}
                 </select>
+                {/* Guarantee Highlight Section */}
+                {getContentForImage(selectedIdx).guarantee && (
+                  <div className="flex items-center gap-2 bg-secondary/20 border border-secondary/50 rounded-xl px-4 py-3 mt-3">
+                    {renderIcon("RiExchangeDollarLine", 24)}
+                    <span className="text-secondary text-[16px] font-semibold">
+                      {getContentForImage(selectedIdx).guarantee}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="border border-gray-200 rounded-2xl px-4 py-4 bg-gray-50">
@@ -1074,7 +1086,7 @@ const DigitalVisitingCard = () => {
                 <div className="w-2 h-full rounded-full bg-[#FFD600] opacity-80"></div>
               </div>
               {/* Thumbnails */}
-              <div className="flex flex-col gap-2 z-10 pt-[10px] pb-[10px] m-auto">
+              <div className="flex flex-col gap-2 z-10 pt-[10px] pb-[10px]">
                 {carouselImages
                   .slice(carouselWindowStart, carouselWindowStart + 3)
                   .map((img, idx) => (
@@ -1191,6 +1203,15 @@ const DigitalVisitingCard = () => {
                         </option>
                       ))}
                     </select>
+                    {/* Guarantee Highlight Section */}
+                    {getContentForImage(selectedIdx).guarantee && (
+                      <div className="flex items-center gap-2 bg-secondary/20 border border-secondary/50 rounded-xl px-4 py-3">
+                        {renderIcon("RiExchangeDollarLine", 24)}
+                        <span className="text-secondary text-[16px] font-semibold">
+                          {getContentForImage(selectedIdx).guarantee}
+                        </span>
+                      </div>
+                    )}
                     <div className="flex flex-col gap-2 bg-[#6E53A8] bg-opacity-60 border border-white/20 rounded-xl px-4 py-3 text-white text-sm">
                       <span className="font-semibold text-[15px]">
                         Add-ons (optional)
@@ -1277,7 +1298,7 @@ const DigitalVisitingCard = () => {
                 {basePlan?.type?.toLowerCase() === "gold" && 
                  getContentForImage(selectedIdx).features.some((feature) =>
                   feature.text.includes(
-                    "Only Digital visiting Card 14 Days Money Back Guarantee"
+                    "14-Day Money Back Guarantee - Digital Visiting Cards Only"
                   )
                 ) && (
                   <div className="absolute top-[-70px] right-[-40px]">

@@ -123,16 +123,12 @@ const Scannerpage = () => {
         return {
           features: [
             {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-            {
               icon: "TbCreditCardPay",
               iconSize: 24,
               text: "Share Your Socials Instantly – All in One Digital Visiting card",
             },
           ],
+          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -144,16 +140,12 @@ const Scannerpage = () => {
         return {
           features: [
             {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-            {
               icon: "TbCreditCardPay",
               iconSize: 24,
               text: "Share Your Socials Instantly – All in One Digital Visiting card",
             },
           ],
+          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -174,12 +166,8 @@ const Scannerpage = () => {
               iconSize: 22,
               text: "No Question Ask?",
             },
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "Only Digital visiting Card 14 Days Money Back Guarantee",
-            },
           ],
+          guarantee: "14-Day Money Back Guarantee - Digital Visiting Cards Only",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -200,12 +188,8 @@ const Scannerpage = () => {
               iconSize: 22,
               text: "No Question Ask?",
             },
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "Only Digital visiting Card 14 Days Money Back Guarantee",
-            },
           ],
+          guarantee: "14-Day Money Back Guarantee - Digital Visiting Cards Only",
           offers: [
             "Renew your Digital Visiting Card plan and get the 365-day package just ₹499",
             isGold
@@ -215,13 +199,8 @@ const Scannerpage = () => {
         };
       default:
         return {
-          features: [
-            {
-              icon: "RiExchangeDollarLine",
-              iconSize: 24,
-              text: "14 Days No Question ask money back guarantee",
-            },
-          ],
+          features: [],
+          guarantee: "14-Day Money-Back Guarantee - No Questions Ask",
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
             isGold
@@ -350,7 +329,7 @@ const Scannerpage = () => {
         {getContentForImage(currentImageIndex).features.some(
           (feature) =>
             feature.text.includes(
-              "Only Digital visiting Card 14 Days Money Back Guarantee"
+              "14-Day Money Back Guarantee - Digital Visiting Cards Only"
             )
         ) && (
           <div className="absolute top-[-30px] right-[-5px]">
@@ -363,25 +342,7 @@ const Scannerpage = () => {
             />
           </div>
         )}
-        <div className="absolute bottom-[-5rem] left-0 w-full flex justify-center items-end  ">
-          <div className="text-center h-max relative right-[1%] z-[10] flex flex-col items-center">
-            {/* <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
-              <span className="text-primary">Powerd by</span> VIP Number shop
-            </p> */}
-            <Image
-            src={Powerdby}
-            alt="Powerdby"
-            width={3000}
-            height={1000}
-            className="object-contain max-w-[150px] w-full rounded-[16px]"
-          />
-            <span className="text-primary text-base font-semibold">
-              {basePlan?.type?.toLowerCase() === "gold"
-                ? "Gold Pack l Removed Branding"
-                : "Silver Pack l Added Branding"}
-            </span>
-          </div>
-        </div>
+        
         <div className="absolute top-[20%] right-0 w-full flex justify-center items-end ">
           <Image
             src={
@@ -427,16 +388,34 @@ const Scannerpage = () => {
             )}
           </ul>
 
-          <div className="pt-4 space-y-1 flex items-center gap-2">
+          <div className="flex justify-between pt-4 space-y-1  items-center gap-2">
+            <div className="">
             <p className="text-purple-700 text-xl font-semibold">
               ₹{basePlan?.amount ?? "--"} /-
             </p>
             <p className="text-gray-500 line-through"> ₹1599/-</p>
+            </div>
             {/* {addOnTotal > 0 && (
               <p className="text-sm text-gray-600">
                 Add-ons: {checkoutPlan?.addOnLabel} (+₹{addOnTotal})
               </p>
             )} */}
+            <div className="flex justify-end-">
+          <div className="text-center h-max relative right-[1%] z-[10] flex flex-col items-center">
+            <Image
+            src={Powerdby}
+            alt="Powerdby"
+            width={3000}
+            height={1000}
+            className="object-contain max-w-[150px] w-full rounded-[16px]"
+          />
+            <span className="text-primary text-base font-semibold">
+              {basePlan?.type?.toLowerCase() === "gold"
+                ? "Gold Pack l Removed Branding"
+                : "Silver Pack l Added Branding"}
+            </span>
+          </div>
+        </div>
           </div>
 
           <div className="mt-4 space-y-4">
@@ -459,6 +438,15 @@ const Scannerpage = () => {
                   </option>
                 ))}
               </select>
+              {/* Guarantee Highlight Section */}
+              {getContentForImage(currentImageIndex).guarantee && (
+                <div className="flex items-center gap-2 bg-secondary/20 border border-secondary/50 rounded-xl px-3 py-3 mt-3">
+                  {renderIcon("RiExchangeDollarLine", 20)}
+                  <span className="text-secondary text-[14px] font-semibold">
+                    {getContentForImage(currentImageIndex).guarantee}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="border border-purple-200 rounded-xl px-3 py-3 bg-purple-50">
