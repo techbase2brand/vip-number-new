@@ -5,7 +5,7 @@ import Image from "next/image";
 const BusinessRow = () => {
   return (
     <div className="container-os  px-4">
-      <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 gap-8 items-center justify-items-end pt-16">
+      <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 gap-8 items-center justify-items-end pt-8">
         {/* Text Section */}
         <div>
           <h2 className=" text-[36px] 2xl:text-[52px] leading-tight mb-4 font-bold text-center md:text-left">

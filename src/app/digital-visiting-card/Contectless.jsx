@@ -134,7 +134,7 @@ const Contectless = () => {
 
   return (
     <div>
-      <section className="flex flex-col items-center justify-center text-center px-4 py-16 bg-white">
+      <section className="flex flex-col items-center justify-center text-center px-4 py-4 bg-white">
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900">
           Go contactless in{" "}
           <span className="text-primary underline decoration-blue-400 decoration-4">
@@ -147,7 +147,7 @@ const Contectless = () => {
           materials, with a complimentary two-year replacement assurance.
         </p>
       </section>
-      <section className="py-12 bg-white">
+      <section className="py-8 bg-white">
         <div className="mx-auto px-4">
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {pricingData.map((item) => (
@@ -308,7 +308,7 @@ const Contectless = () => {
                     // Get guarantee message based on plan and add-ons
                     let guaranteeText = null;
                     if (hasStand) {
-                      guaranteeText = "14-Day Money Back Guarantee - Digital Visiting Cards Only";
+                      guaranteeText = "14-Day Money Back Guarantee for Digital Visiting Card";
                     } else if (isGold365) {
                       // Only show "No Questions Ask" for Gold 365 days plan
                       guaranteeText = "14-Day Money-Back Guarantee - No Questions Ask";

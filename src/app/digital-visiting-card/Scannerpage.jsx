@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Goldscanner from "../../../public/digital-card-new/Goldscanner.webp";
 import { useDigitalCardPlan } from "./PlanContext";
+import { AppStateContext } from "../contexts/AppStateContext/AppStateContext";
+import { MyRegisterSignInContext } from "../contexts/MyRegisterSignInContext/MyRegisterSignInContext";
 import qrRight from "../../../public/digital-card-new/qrRight.webp";
 import card1 from "../../../public/digital-card-new/Infowithscanner.webp";
 import allInOne from "../../../public/digital-card-new/allInOne.webp";
@@ -48,6 +50,9 @@ const carouselImages = [
 const Scannerpage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageClick, setIsImageClick] = useState(false);
+  const { user } = useContext(AppStateContext);
+  const { setActiveSignInWithOtp } = useContext(MyRegisterSignInContext);
+  const hasOpenedModalAfterLogin = useRef(false);
   const {
     basePlans,
     basePlanId,
@@ -123,7 +128,7 @@ const Scannerpage = () => {
     // Get guarantee message based on plan and add-ons
     const getGuaranteeMessage = () => {
       if (hasStand) {
-        return "14-Day Money Back Guarantee - Digital Visiting Cards Only";
+        return "14-Day Money Back Guarantee for Digital Visiting Card";
       }
       // Only show "No Questions Ask" for Gold 365 days plan
       if (isGold365) {
@@ -145,9 +150,9 @@ const Scannerpage = () => {
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       case 1: // Digital Visiting Card + Smart Visiting Card
@@ -162,9 +167,9 @@ const Scannerpage = () => {
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       case 2: // Digital Visiting Card + QR NFC Standee
@@ -178,15 +183,15 @@ const Scannerpage = () => {
             {
               icon: "BsQuestionCircleFill",
               iconSize: 22,
-              text: "No Question Ask?",
+              text: "14-Day Money-Back Guarantee - No Questions Ask",
             },
           ],
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       case 3: // All-in-One (Digital + Smart + Stand)
@@ -200,15 +205,15 @@ const Scannerpage = () => {
             {
               icon: "BsQuestionCircleFill",
               iconSize: 22,
-              text: "No Question Ask?",
+              text: "14-Day Money-Back Guarantee - No Questions Ask",
             },
           ],
           guarantee: getGuaranteeMessage(),
           offers: [
             "Renew your Digital Visiting Card plan and get the 365-day package just ₹499",
-            isGold
-              ? "Remove Tagline (Powerd by Vip Number shop)"
-              : "Tagline not Remove (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Remove Tagline (Powerd by Vip Number shop)"
+            //   : "Tagline not Remove (Powerd by Vip Number shop)",
           ],
         };
       default:
@@ -217,9 +222,9 @@ const Scannerpage = () => {
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
     }
@@ -229,7 +234,7 @@ const Scannerpage = () => {
   const renderIcon = (iconName, size) => {
     const iconProps = {
       fontSize: size,
-      className: "text-secondary",
+      className: "text-primary",
     };
     switch (iconName) {
       case "RiExchangeDollarLine":
@@ -284,6 +289,29 @@ const Scannerpage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [basePlanId, selectedAddOns]); // Watch for plan changes
+
+  // Auto-open profile modal after login if user came from Digital Card page
+  useEffect(() => {
+    // Reset ref when user logs out
+    if (!user?.token) {
+      hasOpenedModalAfterLogin.current = false;
+      return;
+    }
+
+    if (user?.token && !hasOpenedModalAfterLogin.current) {
+      const leadPage = localStorage.getItem("Lead-Page");
+      if (leadPage === "Digital Card") {
+        hasOpenedModalAfterLogin.current = true;
+        // Small delay to ensure login popup is closed
+        setTimeout(() => {
+          // Get current plan config based on selected image
+          const currentPlanConfig = getPlanConfigForImage(currentImageIndex);
+          startProfileFlow(currentPlanConfig);
+          localStorage.removeItem("Lead-Page");
+        }, 300);
+      }
+    }
+  }, [user?.token, currentImageIndex, startProfileFlow]);
 
   return (
     <div>
@@ -343,7 +371,7 @@ const Scannerpage = () => {
         {getContentForImage(currentImageIndex).features.some(
           (feature) =>
             feature.text.includes(
-              "14-Day Money Back Guarantee - Digital Visiting Cards Only"
+              "14-Day Money Back Guarantee for Digital Visiting Card"
             )
         ) && (
           <div className="absolute top-[-30px] right-[-5px]">
@@ -375,7 +403,7 @@ const Scannerpage = () => {
         {/* Soft Glow and Light Center */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none"></div>
       </div>
-      <section className="block sm:hidden bg-white px-4 py-16 text-gray-900">
+      <section className="block sm:hidden bg-white px-4 py-6 text-gray-900">
         <div className="max-w-2xl mx-auto space-y-4">
           <h2 className="text-2xl font-semibold">
             {carouselImages[currentImageIndex]?.title ||
@@ -454,9 +482,9 @@ const Scannerpage = () => {
               </select>
               {/* Guarantee Highlight Section */}
               {getContentForImage(currentImageIndex).guarantee && (
-                <div className="flex items-center gap-2 bg-secondary/20 border border-secondary/50 rounded-xl px-3 py-3 mt-3">
+                <div className="flex items-center gap-2 bg-secondary border border-secondary/50 rounded-xl px-3 py-3 mt-3">
                   {renderIcon("RiExchangeDollarLine", 20)}
-                  <span className="text-secondary text-[14px] font-semibold">
+                  <span className="text-primary text-[14px] font-semibold">
                     {getContentForImage(currentImageIndex).guarantee}
                   </span>
                 </div>
@@ -518,9 +546,14 @@ const Scannerpage = () => {
             <button
               className="mt-4 bg-[rgba(88,68,127,1)] text-white font-medium px-6 py-2 rounded-full hover:bg-purple-800 transition-all"
               onClick={() => {
-                const currentPlanConfig =
-                  getPlanConfigForImage(currentImageIndex);
-                startProfileFlow(currentPlanConfig);
+                if (!user?.token) {
+                  setActiveSignInWithOtp(true);
+                  localStorage.setItem("Lead-Page", "Digital Card");
+                } else {
+                  const currentPlanConfig =
+                    getPlanConfigForImage(currentImageIndex);
+                  startProfileFlow(currentPlanConfig);
+                }
               }}
             >
               Buy Now

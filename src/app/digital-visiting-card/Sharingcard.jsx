@@ -18,7 +18,7 @@ import Image from "next/image";
 const Sharingcard = () => {
   return (
     <div>
-      <div className="py-16 px-4">
+      <div className="py-4 px-4">
         <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:gap-8 items-center justify-items-center">
           <h2 className=" text-[36px] 2xl:text-[52px] leading-tight mb-4 font-bold text-center md:text-left">
             Benefits of <span className="text-primary">Smart Cards</span>

@@ -57,7 +57,7 @@ const carouselImages = [
     backimg: qrbackimg,
     alt: "Digital Visiting Card + QR NFC Standee",
     title: "Digital Visiting Card + QR NFC Standee",
-    desc: "Payments for QR Standee are non-refundable.\nNo Question Ask! 14-Day Money Back Guarantee - Digital Visiting Cards Only",
+    desc: "Payments for QR Standee are non-refundable.\nNo Question Ask! 14-Day Money Back Guarantee for Digital Visiting Card",
   },
   {
     src: allInOne,
@@ -172,7 +172,7 @@ const DigitalVisitingCard = () => {
     // Get guarantee message based on plan and add-ons
     const getGuaranteeMessage = () => {
       if (hasStand) {
-        return "14-Day Money Back Guarantee - Digital Visiting Cards Only";
+        return "14-Day Money Back Guarantee for Digital Visiting Card";
       }
       // Only show "No Questions Ask" for Gold 365 days plan
       if (isGold365) {
@@ -194,9 +194,9 @@ const DigitalVisitingCard = () => {
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       case 1: // Digital Visiting Card + Smart Visiting Card
@@ -211,9 +211,9 @@ const DigitalVisitingCard = () => {
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       case 2: // Digital Visiting Card + QR NFC Standee
@@ -227,15 +227,15 @@ const DigitalVisitingCard = () => {
             {
               icon: "BsQuestionCircleFill",
               iconSize: 22,
-              text: "No Question Ask?",
+              text: "14-Day Money-Back Guarantee - No Questions Ask",
             },
           ],
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
       case 3: // All-in-One (Digital + Smart + Stand)
@@ -249,15 +249,15 @@ const DigitalVisitingCard = () => {
             {
               icon: "BsQuestionCircleFill",
               iconSize: 22,
-              text: "No Question Ask?",
+              text: "14-Day Money-Back Guarantee - No Questions Ask",
             },
           ],
           guarantee: getGuaranteeMessage(),
           offers: [
             "Renew your Digital Visiting Card plan and get the 365-day package just ₹499",
-            isGold
-              ? "Remove Tagline (Powerd by Vip Number shop)"
-              : "Tagline not Remove (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Remove Tagline (Powerd by Vip Number shop)"
+            //   : "Tagline not Remove (Powerd by Vip Number shop)",
           ],
         };
       default:
@@ -266,9 +266,9 @@ const DigitalVisitingCard = () => {
           guarantee: getGuaranteeMessage(),
           offers: [
             "You can Renew your plan for next 365 days package just ₹499",
-            isGold
-              ? "Removed Branding (Powerd by Vip Number shop)"
-              : "Added Branding (Powerd by Vip Number shop)",
+            // isGold
+            //   ? "Removed Branding (Powerd by Vip Number shop)"
+            //   : "Added Branding (Powerd by Vip Number shop)",
           ],
         };
     }
@@ -1312,7 +1312,7 @@ const DigitalVisitingCard = () => {
                 {basePlan?.type?.toLowerCase() === "gold" && 
                  getContentForImage(selectedIdx).features.some((feature) =>
                   feature.text.includes(
-                    "14-Day Money Back Guarantee - Digital Visiting Cards Only"
+                    "14-Day Money Back Guarantee for Digital Visiting Card"
                   )
                 ) && (
                   <div className="absolute top-[-70px] right-[-40px]">
