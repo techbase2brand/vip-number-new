@@ -516,7 +516,8 @@ const ContactCard = () => {
           {/* Website */}
           {formData?.companyUrl && (
             <Link
-              href="/"
+              href={formData?.companyUrl}
+               target="_blank"
               rel="noopener noreferrer"
               className="bg-white rounded-2xl p-2 mb-3 flex items-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0 active:shadow-sm cursor-pointer"
             >
