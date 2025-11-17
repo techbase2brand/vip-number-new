@@ -63,6 +63,7 @@ const ContactCard = () => {
     account_section: "",
     valid: "1",
     company: "",
+    companyUrl: "",
     gst_number: "",
     payment_number: "",
     upi_id: "",
@@ -113,6 +114,7 @@ const ContactCard = () => {
             account_section: apiData.account_section || "",
             valid: apiData.valid || "1",
             company: apiData.company || "",
+            companyUrl: apiData?.companyUrl || "",
             gst_number: apiData.gst_number || "",
             payment_number: apiData.payment_number || "",
             upi_id: apiData.upi_id || "",
@@ -242,18 +244,20 @@ const ContactCard = () => {
     // Use file-saver to download the vCard
     saveAs(blob, `${contact.name || "contact"}.vcf`);
   };
-const downloadQrCode = () => {
-    const qrCodeUrl = formData.qr_code ? formData.qr_code : "/assets/qr-code.png";
+  const downloadQrCode = () => {
+    const qrCodeUrl = formData.qr_code
+      ? formData.qr_code
+      : "/assets/qr-code.png";
 
     // Create an anchor element to trigger the download
     const link = document.createElement("a");
-    link.href = qrCodeUrl;  // Set the href to the image URL
-    link.download = "QRCode.png";  // Specify the download filename
+    link.href = qrCodeUrl; // Set the href to the image URL
+    link.download = "QRCode.png"; // Specify the download filename
     document.body.appendChild(link);
-    link.click();  // Trigger the download
-    document.body.removeChild(link);  // Clean up the link element
+    link.click(); // Trigger the download
+    document.body.removeChild(link); // Clean up the link element
   };
-  
+
   return (
     <div className="min-h-screen bg-primary flex items-center justify-center font-sans">
       {showCrackers && (
@@ -546,7 +550,8 @@ const downloadQrCode = () => {
               </svg>
             </div>
             <span className="text-sm font-bold text-gray-700">
-              www.vipnumbershop.com
+              {/* www.vipnumbershop.com */}
+              {formData?.companyUrl}
             </span>
           </Link>
 
@@ -708,13 +713,13 @@ const downloadQrCode = () => {
                           alt="Payment QR Code"
                           className="w-full h-full border border-gray-200 rounded-lg"
                         />
-                        <button 
-                      onClick={downloadQrCode} 
-                      className="absolute bottom-2 right-2 bg-gray-800 bg-opacity-80 text-white p-2 rounded-full shadow-md hover:bg-gray-700 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-200"
-                      title="Download QR Code"
-                    >
-                      <FiDownload fontSize={18} />
-                    </button>
+                        <button
+                          onClick={downloadQrCode}
+                          className="absolute bottom-2 right-2 bg-gray-800 bg-opacity-80 text-white p-2 rounded-full shadow-md hover:bg-gray-700 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-200"
+                          title="Download QR Code"
+                        >
+                          <FiDownload fontSize={18} />
+                        </button>
                       </div>
                       <p className="text-xs text-gray-600 mt-2">
                         Scan this QR code with any UPI app to make payment

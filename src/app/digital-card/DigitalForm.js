@@ -40,6 +40,7 @@ const DigitalForm = () => {
     account_section: "",
     valid: "1",
     company: "",
+    companyUrl:"",
     gst_number: "",
     payment_number: "",
     upi_id: "",
@@ -125,6 +126,7 @@ const DigitalForm = () => {
             account_section: apiData.account_section || "",
             valid: apiData.valid || "1",
             company: apiData.company || "",
+             companyUrl: apiData?.companyUrl || "",
             gst_number: apiData.gst_number || "",
             payment_number: apiData.payment_number || "",
             upi_id: apiData.upi_id || "",
@@ -215,6 +217,7 @@ const DigitalForm = () => {
       /^-?([1-8]?[0-9]\.{1}\d{1,6}|90\.{1}0{1,6}),-?((1[0-7][0-9])|([1-9]?[0-9]))\.{1}\d{1,6}$/;
     return locationRegex.test(location);
   };
+console.log("formatatata", formData);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -1088,6 +1091,28 @@ const DigitalForm = () => {
                         {errors.upi_id}
                       </p>
                     )}
+                  </div>
+                  {/* Comapny */}
+                  <div>
+                    <label
+                      htmlFor="comapnyUrl"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      Company Domain Url
+                    </label>
+                    <input
+                      type="url"
+                      id="companyUrl"
+                      name="companyUrl"
+                      value={formData.companyUrl}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                        errors.youtube
+                          ? "border-red-500 bg-red-50"
+                          : "border-gray-300"
+                      }`}
+                      placeholder="https://yourcompany.com"
+                    />
                   </div>
 
                   {/* Bank Details */}
