@@ -670,6 +670,7 @@ const NumCalculator = () => {
             </p>
           </div>
           <div className="">
+            
             <div className="lg:w-[80%] m-auto">
               <div className="flex flex-col gap-5 bg-[url('/assets/pnglight.webp')] bg-no-repeat bg-center bg-contain justify-center items-center  lg:px-7 md:px-5 px-2 pt-5 rounded-2xl">
                 {user?.token && (
