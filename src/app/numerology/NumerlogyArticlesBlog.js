@@ -6,26 +6,24 @@ import { FiArrowRight } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 
 const NumerlogyArticlesBlog = () => {
-  const [articles, setArticles] = useState([]); // State to hold API data
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
-  const api = `/api/leaf/blogs.php?perPageLimit=10&recordStartFrom=0&type=${
-    pathname === "/family-pack" ? "FamilyPack" : "Numerology"
-  }`;
+  const api = `/api/leaf/blogs.php?perPageLimit=10&recordStartFrom=0&type=${pathname === "/family-pack" ? "FamilyPack" : "Numerology"
+    }`;
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Treat <= 768px as mobile
+      setIsMobile(window.innerWidth <= 768); 
     };
 
-    handleResize(); // Initial check
+    handleResize(); 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Fetch data on component mount
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -44,7 +42,6 @@ const NumerlogyArticlesBlog = () => {
     fetchArticles();
   }, []);
 
-  // ✅ Hide section if no articles exist
   if (loading || error || articles.length === 0) {
     return null;
   }
@@ -61,13 +58,19 @@ const NumerlogyArticlesBlog = () => {
   return (
     <div className="bg-[#F9F9F9] lg:py-9 py-10">
       <div className="container-os mx-auto px-4 py-10">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-semibold">
-            Articles &{" "}
-            <span className="inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-primary font-bold px-2">
-              Blogs
-            </span>
-          </h2>
+        <div className="flex flex-col md:flex-row justify-between items-end md:items-center mb-10  max-w-7xl m-auto md:pe-[8%]">
+          <div className="pb-3 md:pb-0">
+            <h2 className="text-3xl font-semibold relative z-[11]">
+              Articles &{" "}
+              <span className="inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-primary font-bold px-2">
+                Blogs
+              </span>
+            </h2>
+
+            <p className="font-normal text-[16px] leading-[24px]   md:text-[17px] md:leading-[30px] text-darktext pt-3">
+              Stay Informed with the Latest Updates & Expert Insights!
+            </p>
+          </div>
           <Link
             href="/blogs"
             className="text-sm text-black font-medium flex items-center hover:underline"
@@ -77,28 +80,28 @@ const NumerlogyArticlesBlog = () => {
         </div>
 
         {/* Blog List (Shows Only 5 Articles) */}
-        <div className="grid md:gap-6 gap-10">
+        <div className="grid md:gap-10 gap-10 max-w-7xl m-auto">
           {articles.map((post, index) => (
-            <>
-              <Link href={`/blogs/${post.img_url}`}>
-                <div
-                  key={post.id}
-                  className="flex flex-col lg:flex-row bg-white shadow-md rounded-lg"
-                >
-                  {/* Blog Image */}
+            <Link href={`/blogs/${post.img_url}`} key={index}>
+              <div
+                key={post.id}
+                className="flex flex-col lg:flex-row bg-white  rounded-lg"
+              >
+                {/* Blog Image */}
 
-                  <div className="relative w-full lg:w-1/3 md:h-[240px] h-[171px]">
-                    <Image
-                      src={post.mainImage || "/assets/default-image.png"} // ✅ Uses correct API field
-                      alt={post.mainHeading}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-t-lg lg:rounded-l-lg lg:rounded-t-none  object-contain md:h-[240px] h-[171px]"
-                    />
-                  </div>
+                <div className="relative w-full lg:w-1/2 2xl:min-h-[330px] md:min-h-[240px] min-h-[171px]">
+                  <Image
+                    src={post.mainImage || "/assets/default-image.png"} // ✅ Uses correct API field
+                    alt={post.mainHeading}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-t-lg lg:rounded-l-lg lg:rounded-t-none  object-contain 2xl:min-h-[330px] md:min-h-[240px] min-h-[171px]"
+                  />
+                </div>
 
+                <div className="w-full lg:w-1/2 flex relative lg:right-[20px]">
                   {/* Blog Content */}
-                  <div className="p-5 flex flex-col w-full lg:w-2/3">
+                  <div className="p-6 flex flex-col md:max-w-[80%] justify-end  bg-[#E4E4E4] h-max mt-auto">
                     {/* <p className="text-sm text-gray-500">
                   {post.Date || "No Date"}
                 </p> */}
@@ -110,21 +113,23 @@ const NumerlogyArticlesBlog = () => {
                     <p className="font-normal text-[16px] leading-[24px] md:text-[17px] md:leading-[30px] text-darktext">
                       {truncateWords(
                         post.mainDescriptionNoHtml.replace(/(<([^>]+)>)/gi, ""),
-                        isMobile ? 25 : 60
+                        isMobile ? 25 : 45
                       )}
                     </p>
                   </div>
 
                   {/* Arrow Button */}
-                  <div className="flex items-center justify-center px-6 relative">
-                    <button className="bg-primary text-white p-3 absolute md:left-[20px] md:right-auto right-0">
-                      <FiArrowRight size={20} />
+                  <div className="flex  justify-center items-end relative right-5">
+                    <button className="bg-primary text-white p-4 md:p-6  md:left-[20px] md:right-auto right-0 bottom-0">
+                      <FiArrowRight size={34} />
                     </button>
                   </div>
                 </div>
-              </Link>
-            </>
+              </div>
+            </Link>
           ))}
+
+
         </div>
       </div>
     </div>

@@ -59,7 +59,7 @@ const NumerologyHowWorks = () => {
                   <Image className="w-20" src={step.imageSrc} alt={step.alt} />
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 max-w-xs break-words m-auto bg-[url('/assets/path.webp')] bg-no-repeat bg-center bg-contain h-11 w-full">
+              <h3 className="text-xl font-semibold mb-4 max-w-xs break-words m-auto bg-[url('/assets/path.webp')] bg-no-repeat bg-center bg-cover h-11 w-full">
                 {step.title}
               </h3>
 

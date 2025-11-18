@@ -104,16 +104,16 @@ const VipNumberShopSliderImages1 = () => {
   };
 
   return (
-    <section className="p-2 pb-[1rem]">
+    <section className="py-6 lg:py-12">
       <div className="container-os mx-auto">
         {!isLoading ? (
           <>
             <div className="text-center lg:mb-6 mb-3">
-              <h2 className="text-center flex items-center gap-[1rem] justify-center  font-bold text-[20px] lg:text-[32px] text-HeadingText 2xl:text-[38px] leading-[30px] lg:leading-[40px] tracking-wide mt-4 ">
+              <h2 className="text-center flex items-center gap-[1rem] justify-center  font-bold text-[20px] lg:text-[32px] xl:text-[44px] text-HeadingText 2xl:text-[50px] leading-[30px] lg:leading-[60px] tracking-wide mt-4 ">
                 Tap Into the Magic of Diverse{" "}
               </h2>
-              <span className="text-center text-[20px] lg:text-[32px] text-HeadingText leading-[30px] lg:leading-[40px] tracking-wide mb-4 2xl:text-[38px] inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-[#5c469c] font-bold px-2">
-                Numerology Numbers
+              <span className="text-center text-[20px] lg:text-[32px] text-HeadingText leading-[30px] lg:leading-[60px] tracking-wide mb-4 xl:text-[44px] 2xl:text-[50px] inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-[#5c469c] font-bold px-2">
+                Numerology Numbers 
               </span>
             </div>
 

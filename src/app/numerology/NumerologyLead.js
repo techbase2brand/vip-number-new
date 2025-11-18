@@ -17,7 +17,7 @@ const NumerologyLead = ({ title1, para1, title, titleClass }) => {
     }
   };
   return (
-    <section className={`md:p-8 p-3`}>
+    <section className={`md:px-8 px-3 py-12`}>
       <div className="container-os">
         <div className="space-y-2 text-center">
           <h2
@@ -26,13 +26,14 @@ const NumerologyLead = ({ title1, para1, title, titleClass }) => {
             {title1}
           </h2>
 
-          <p className="font-normal text-[16px] leading-[24px]  md:text-[17px] md:leading-[30px] text-darktext text-center">
+          <p className="font-normal text-[16px] leading-[24px]  md:text-[17px] md:leading-[30px] text-darktext text-center max-w-5xl m-auto py-3">
             {para1}
           </p>
-          <div className="flex justify-center mb-4">
-            <NumerologyBtn title={title} onClick={handleOpen} />
+          <div className="flex justify-center mb-4 gap-3 md:gap-6 flex-wrap">
+            <NumerologyBtn title={'Get Your FREE Basic Numerology Report'} onClick={handleOpen} />
+            <NumerologyBtn title={'Pay 2100/- For Advanced Numerology Report'} onClick={handleOpen} secondary={true}/>
           </div>
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <span className="mb-2 text-darktext text-center md:text-[18px] text-[15px]    w-full">
                 Get <span className="text-primary">1,500 Cashback</span> with
                 your Numerology Report.
@@ -45,7 +46,7 @@ const NumerologyLead = ({ title1, para1, title, titleClass }) => {
                   <span className="text-black">(For buying a Number)</span>
                 </Link>
               </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
