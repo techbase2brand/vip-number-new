@@ -198,7 +198,7 @@ export default function NumerologyClient() {
     <div className="lg:py-9 py-5">
       <div className="relative container-os">
         <h2 className="font-semibold text-[26px] md:text-[32px] lg:text-[35px]  text-HeadingText text-center w-[90%] md:w-[80%] lg:w-[70% xl:w-1/2  mx-auto leading-[1.3] lg:leading-[1.5] mb-4 lg:mb-6">
-          Client <span className="text-primary whitespace-nowrap">Success Story</span>
+          Client <span className="text-primary whitespace-nowrap bg-[url('/assets/118.webp')] bg-contain">Success</span> Story
         </h2>
 
         <Swiper

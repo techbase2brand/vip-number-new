@@ -23,14 +23,14 @@ const features = [
 
 export default function NumerologyFeatures() {
   return (
-    <section className=" py-3">
-      <div className="md:container lg:mx-auto px-4 md:py-6 text-center container-os">
+    <section className=" py-12">
+      <div className="md:container lg:mx-auto px-4 text-center container-os">
         {/* Title */}
         <h2 className="font-semibold text-[26px] md:text-[32px] lg:text-[35px] text-center text-darktext leading-tight mb-6">
-          Harness the Power of{" "}
+          Harness the Power of{" "} 
           <span className="inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-primary font-bold px-2">
             Numerology
-          </span>{" "}
+          </span>{" "} <br/>
           for Your{" "}
           <span className="inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-primary font-bold px-2">
             Success

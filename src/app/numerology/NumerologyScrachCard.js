@@ -5,6 +5,9 @@ import NumerologyBtn from "./NumerologyBtn";
 import { AppStateContext } from "../contexts/AppStateContext/AppStateContext";
 import { MyRegisterSignInContext } from "../contexts/MyRegisterSignInContext/MyRegisterSignInContext";
 import Link from "next/link";
+import Image from "next/image";
+import discountvoucher from "../../../public/updatednumerology/discountvoucher.webp"
+import discountvoucherph from "../../../public/updatednumerology/discountvoucherph.webp"
 const NumerologyScrachCard = () => {
   const { setNumerologyPop, user } = useContext(AppStateContext);
   const { setActiveSignInWithOtp } = useContext(MyRegisterSignInContext);
@@ -20,15 +23,15 @@ const NumerologyScrachCard = () => {
   return (
     <div className="ScrachCard-section-os bg-secondary py-6">
       <div className="container-os">
-        <div className="ScrachCard-page-bg ph_banner">
-          {/* <Image
+        {/* <div className="ScrachCard-page-bg ph_banner">
+          <Image
             src={`${panelImg}/assets/img/vip-images/ph_price_nqu3vb.webp`}
             className="show_only_ph"
             width={300}
             height={100}
             priority="true"
             alt="scrach card"
-          /> */}
+          /> 
           <div className="banner-description">
             <h2 className="text-secondary mb-3">
               Get ₹1500 Cashback <br /> in Your Wallet
@@ -51,6 +54,24 @@ const NumerologyScrachCard = () => {
             <h2>₹1999/-</h2>
             <h3 className="text-secondary mt-8 text-center">Get ₹1500 Cashback</h3>
           </div>
+        </div> */}
+        <div className="hidden md:block">
+          <Image
+            src={discountvoucher}
+            alt="discountvoucher"
+            width={3000}
+            height={500}
+            className=""
+          />
+        </div>
+        <div className="block md:hidden">
+          <Image
+            src={discountvoucherph}
+            alt="discountvoucher"
+            width={3000}
+            height={500}
+            className=""
+          />
         </div>
       </div>
     </div>

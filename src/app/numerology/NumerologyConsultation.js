@@ -5,7 +5,7 @@ import { AppStateContext } from "../contexts/AppStateContext/AppStateContext";
 import { MyRegisterSignInContext } from "../contexts/MyRegisterSignInContext/MyRegisterSignInContext";
 
 const NumerologyConsultation = ({ title }) => {
-  const { setNumerologyPop,user } = useContext(AppStateContext);
+  const { setNumerologyPop, user } = useContext(AppStateContext);
   const { setActiveSignInWithOtp } = useContext(MyRegisterSignInContext);
   const handleOpen = () => {
     if (!user?.token) {
@@ -17,10 +17,10 @@ const NumerologyConsultation = ({ title }) => {
     }
   };
   return (
-    <section className="bg-[#F9F9F9] py-10">
-      <div className="container-os mx-auto px-4 flex flex-col lg:flex-row justify-between items-center gap-5">
+    <section className="bg-[#E4E4E4] py-10">
+      <div className="container-os mx-auto px-4 grid lg:grid-cols-[4fr_2fr] justify-between items-center gap-5">
         {/* Left Section: Text Content */}
-        <div className="lg:w-3/4 text-center lg:text-left">
+        <div className="lg:max-w-[80%] text-center lg:text-left">
           <h2 className="text-2xl md:text-3xl font-semibold text-black capitalize">
             your Numerology Mobile Number Consultation
           </h2>
@@ -33,7 +33,11 @@ const NumerologyConsultation = ({ title }) => {
         </div>
 
         {/* Right Section: Button */}
-        <NumerologyBtn title={title} onClick={handleOpen} />
+        <div className="flex flex-col gap-3 lg:justify-start justify-center">
+          <NumerologyBtn title={'Get Your FREE Basic Numerology Report'} onClick={handleOpen} />
+          <NumerologyBtn title={'Pay 2100/- For Advanced Numerology Report'} onClick={handleOpen} secondary={true} />
+        </div>
+
       </div>
     </section>
   );

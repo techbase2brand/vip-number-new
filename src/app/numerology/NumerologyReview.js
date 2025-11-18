@@ -34,8 +34,8 @@ const NumerologyReview = () => {
 
   return (
     <div className={`lg:my-8 bg-no-repeat bg-cover ${pathname === "/family-pack" ? "bg-primary" : "bg-[url('/assets/albo.webp')]"}`}>
-      <div className="md:py-16 py-6 px-4 flex justify-center flex-wrap md:gap-6 gap-3 max-w-full" ref={ref}>
-        <div className="bg-white rounded-xl shadow-md md:px-6 md:py-6 p-3 w-full md:w-auto   min-w-[280px] border-[2px] border-primary  ">
+      <div className="py-10 md:py-16 2xl:py-18 px-4  grid md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[90%] 2xl:max-w-[70%] m-auto" ref={ref}>
+        <div className="bg-white rounded-[40px] shadow-md md:px-6 md:py-6 p-3 w-full    max-w-[400px] border-[2px] border-primary  ">
           <div className="flex items-center md:gap-3 gap-1 justify-center">
             <Image
               src={Trusted}
@@ -43,17 +43,17 @@ const NumerologyReview = () => {
               width={1000}
               height={600}
               layout="intrinsic"
-              className="md:w-14 w-10"
+              className="!max-w-[60px] xl:!max-w-[70px] 2xl:!max-w-[81px]"
             />
             <div>
-              <p className="text-purple-900 font-extrabold text-lg">
+              <p className="text-purple-900 font-extrabold text-lg lg:text-2xl 2xl:text-3xl">
                 {counterOn && <CountUp start={0} end={1000000}></CountUp>} +
               </p>
-              <p className="text-gray-800 text-sm ">Trusted Customers</p>
+              <p className="text-gray-800 text-xl pt-1.5 ">Trusted Customers</p>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-md md:px-6 md:py-6 p-3 w-full md:w-auto   min-w-[280px] border-[2px] border-primary  ">
+        <div className="bg-white rounded-[40px] shadow-md md:px-6 md:py-6 p-3 w-full    max-w-[400px] border-[2px] border-primary  ">
           <div className="flex items-center md:gap-3 gap-1 justify-center">
             <Image
               src={yearsofexperience}
@@ -61,17 +61,17 @@ const NumerologyReview = () => {
               width={1000}
               height={600}
               layout="intrinsic"
-              className="md:w-14 w-10"
+              className="!max-w-[60px] xl:!max-w-[70px] 2xl:!max-w-[81px]"
             />
             <div>
-              <p className="text-purple-900 font-extrabold text-lg">
+              <p className="text-purple-900 font-extrabold text-lg lg:text-2xl 2xl:text-3xl">
                 {counterOn && <CountUp start={0} end={yearsOfExp}></CountUp>} +
               </p>
-              <p className="text-gray-800 text-sm ">Year's Experience</p>
+              <p className="text-gray-800 text-xl pt-1.5 ">Year's Experience</p>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-md md:px-6 md:py-6 p-3 w-full md:w-auto   min-w-[280px] border-[2px] border-primary  ">
+        <div className="bg-white rounded-[40px] shadow-md md:px-6 md:py-6 p-3 w-full    max-w-[400px] border-[2px] border-primary  ">
           <div className="flex items-center md:gap-3 gap-1 justify-center">
             <Image
               src={review}
@@ -79,13 +79,13 @@ const NumerologyReview = () => {
               width={1000}
               height={600}
               layout="intrinsic"
-              className="md:w-14 w-10"
+              className="!max-w-[60px] xl:!max-w-[70px] 2xl:!max-w-[81px]"
             />
             <div>
-              <p className="text-purple-900 font-extrabold text-lg">
+              <p className="text-purple-900 font-extrabold text-lg lg:text-2xl 2xl:text-3xl">
                 {counterOn && <CountUp start={0} end={99}></CountUp>} %
               </p>
-              <p className="text-gray-800 text-sm ">Client Satisfaction</p>
+              <p className="text-gray-800 text-xl pt-1.5 ">Client Satisfaction</p>
             </div>
           </div>
         </div>

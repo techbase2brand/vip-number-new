@@ -2,11 +2,10 @@
 import React, { useContext } from "react";
 import "./Numerology.css";
 import { AppStateContext } from "../contexts/AppStateContext/AppStateContext";
-import Image from "next/image";
-import numerlogycircle from "../../../public/assets/numerlogycircle.png";
-import numer1numerology from "../../../public/assets/numer1numerology.svg";
-import numer2numerology from "../../../public/assets/numer2numerology.svg";
+import numerologybannerdesk from "../../../public/updatednumerology/numerologybannerdesk.webp"
+import numerologybannerph from "../../../public/updatednumerology/numerologybannerph.webp"
 import { MyRegisterSignInContext } from "../contexts/MyRegisterSignInContext/MyRegisterSignInContext";
+import Image from "next/image";
 
 const NumerologyBanner = () => {
   const { setNumerologyPop, user } = useContext(AppStateContext);
@@ -106,24 +105,25 @@ const NumerologyBanner = () => {
     //     }
     //   `}</style>
     // </div>
-    <div
-      className={`bg-[url("/assets/nimrologyaph.webp")] md:bg-[url("/assets/numerologybanner.webp")] bg-cover bg-no-repeat bg-center 
-              w-full h-[70vh] md:h-[400px] lg:h-[400px] xl:h-[85vh] 2xl:h-[85vh] relative overflow-hidden`}
-    >
-      <style jsx>{`
-        @keyframes custom-spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-
-        .animate-custom-spin {
-          animation: custom-spin 5s linear infinite; /* Adjust 5s for speed control */
-        }
-      `}</style>
+    <div>
+       <div className="hidden md:block">
+        <Image
+         src={numerologybannerdesk}
+         alt="numerologybannerdesk"
+         width={4000}
+         height={500}
+         className=""
+         />
+      </div>
+      <div className="block md:hidden">
+        <Image
+         src={numerologybannerph}
+         alt="numerologybannerph"
+         width={1000}
+         height={500}
+         className=""
+         />
+      </div>
     </div>
   );
 };

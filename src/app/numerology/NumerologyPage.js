@@ -28,6 +28,8 @@ import NumerologyTrustedNumerology from "./NumerologyTrustedNumerology";
 import NumerologyExplore from "./NumerologyExplore";
 import NumerologyReportDetail from "./NumerologyReportDetail";
 import AwardWinner from "../Shared/AwardWinner/AwardWinner/AwardWinner";
+import Comparison from "./Comparison";
+import NumerologyawardWinner from "./NumerologyawardWinner";
 // import { ResponsiveFooter } from "../ResponsiveModule";
 const NumerologyPage = () => {
   const faqdata = [
@@ -104,7 +106,12 @@ const NumerologyPage = () => {
         </div>
       </div>
       <VipNumberShopSliderImages1 />
-      <NumerologyLeadReport
+      <Comparison
+        setNumerologyPop={setNumerologyPop}
+        user={user}
+        setActiveSignInWithOtp={setActiveSignInWithOtp}
+      />
+      {/* <NumerologyLeadReport
         title1={
           <>
             Know Your{" "}
@@ -137,7 +144,7 @@ const NumerologyPage = () => {
         para1=""
         title="Pay 1,999 For Numerology Report"
         titleClass="text-white"
-      />
+      /> */}
       <NumerologyCard />
       <ChooseNumerology />
       <NumerologyLuckyNumber
@@ -199,12 +206,13 @@ const NumerologyPage = () => {
       <NumerologyExplore />
 
       <NumerlogyArticlesBlog />
-      <AwardWinner />
+      {/* <AwardWinner /> */}
+      <NumerologyawardWinner />
       <NumerologyFeatures />
-      <NumerologyFaq data={faqdata} faqs_description="To get the best VIP numbers for a lifetime, you must first clear any doubts you may have, if any."/>
+      <NumerologyFaq data={faqdata} faqs_description="To get the best VIP numbers for a lifetime, you must first clear any doubts you may have, if any." />
       <NumerologyClient />
 
-      <NumerologyConsultation title="Pay 1,999 For Numerology Report" />
+      <NumerologyConsultation/>
     </div>
   );
 };

@@ -23,9 +23,9 @@ const NumerologyReportDetail = () => {
       {/* Header with underline background */}
       <h2 className="text-3xl font-bold 2xl:text-[38px] text-black relative inline-block mb-3">
         <span className="relative z-10">
-          Pythagorean Western System  <br />
-          <span className="inline-block bg-[url('/assets/1922.webp')] bg-no-repeat bg-center bg-contain text-primary font-bold px-2">
-            Numerology Report
+          Numerology Number <br /> 
+          <span className="inline-block bg-[url('/assets/1922.webp')] bg-no-repeat bg-center bg-contain text-primary font-bold px-2 pt-2">
+            Report Detail
           </span>
         </span>
         {/* Background image underline */}
@@ -40,7 +40,7 @@ const NumerologyReportDetail = () => {
       <div className="flex justify-center">
         <NumerologyBtn title="Numerology Report Options" onClick={handleOpen} />
       </div>
-      <div className="mt-4">
+      {/* <div className="mt-4">
          <span className="mb-2 text-darktext text-center md:text-[18px] text-[15px]    w-full">
                 Get <span className="text-primary">1,500 Cashback</span> with
                 your Numerology Report.
@@ -53,7 +53,7 @@ const NumerologyReportDetail = () => {
                   <span className="text-black">(For buying a Number)</span>
                 </Link>
               </span>
-      </div>
+      </div> */}
     </div>
   );
 };
