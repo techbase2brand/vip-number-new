@@ -837,7 +837,7 @@ const DigitalVisitingCard = () => {
               }
             }}
           ></div>
-          <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-2xl mr-4 my-auto max-h-[90vh] overflow-y-auto">
+          <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-2xl my-auto">
             <div className="flex items-center justify-between px-6 py-4 border-b sticky top-0 bg-white z-10 rounded-t-3xl">
               <h3 className="text-[20px] font-semibold text-gray-900">
                 Choose Your Plan
@@ -854,7 +854,7 @@ const DigitalVisitingCard = () => {
                 ×
               </button>
             </div>
-            <div className="px-6 py-5 flex flex-col gap-4">
+            <div className="px-6 py-5 flex flex-col gap-4  max-h-[85vh] overflow-auto">
               <div>
                 <label className="text-sm font-semibold text-gray-700 mb-2 block">
                   Digital Visiting Card Plan
@@ -1148,7 +1148,7 @@ const DigitalVisitingCard = () => {
               {/* Bottom button - only show if there are images below, with highlight */}
               {carouselWindowStart < carouselImages.length - 3 && (
                 <button
-                  className="flex items-center justify-center rounded-full bg-[#9077c9] min-w-[100px] h-[60px] mt-3 text-3xl shadow-md transition hover:bg-primary opacity-100 ring-2 ring-secondary/50"
+                  className="flex items-center justify-center rounded-full bg-[#9077c9] min-w-[100px] h-[60px] mt-3 text-3xl shadow-md transition hover:bg-primary opacity-100  "
                   onClick={() =>
                     setCarouselIdx((idx) =>
                       idx < carouselImages.length - 3 ? idx + 1 : idx
@@ -1169,7 +1169,7 @@ const DigitalVisitingCard = () => {
                 //   backgroundImage: `url(${carouselImages[selectedIdx].src})`,
                 // }}
               >
-                <div className=" flex-1 flex flex-col gap-1 ps-14 py-10 left-0 top-3 max-w-[540px] min-w-[340px] z-10">
+                <div className=" flex-1 flex flex-col gap-1 ps-14 py-10 left-0 top-3 max-w-[572px] min-w-[340px] z-10">
                   <h2 className="text-[41px] font-bold mb-3 leading-snug text-white">
                     {carouselImages[selectedIdx].title}
                   </h2>

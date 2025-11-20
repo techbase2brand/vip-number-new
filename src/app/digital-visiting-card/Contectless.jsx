@@ -307,9 +307,10 @@ const Contectless = () => {
                     
                     // Get guarantee message based on plan and add-ons
                     let guaranteeText = null;
-                    if (hasStand) {
-                      guaranteeText = "14-Day Money Back Guarantee for Digital Visiting Card";
-                    } else if (isGold365) {
+                    // if (hasStand) {
+                    //   guaranteeText = "14-Day Money Back Guarantee for Digital Visiting Card";
+                    // } else
+                       if (isGold365) {
                       // Only show "No Questions Ask" for Gold 365 days plan
                       guaranteeText = "14-Day Money-Back Guarantee - No Questions Ask";
                     }

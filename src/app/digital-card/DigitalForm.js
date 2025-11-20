@@ -215,7 +215,7 @@ const DigitalForm = () => {
 
   const validateLocation = (location) => {
     const locationRegex =
-      /^-?([1-8]?[0-9]\.{1}\d{1,6}|90\.{1}0{1,6}),-?((1[0-7][0-9])|([1-9]?[0-9]))\.{1}\d{1,6}$/;
+      /^-?([1-8]?[0-9]\.{1}\d{1,6}|90\.{1}0{1,6}), -?((1[0-7][0-9])|([1-9]?[0-9]))\.{1}\d{1,6}$/;
     return locationRegex.test(location);
   };
   console.log("formatatata", formData);
@@ -396,7 +396,7 @@ const DigitalForm = () => {
 
     if (formData.location && !validateLocation(formData.location)) {
       newErrors.location =
-        "Please enter valid coordinates (format: 19.0760,72.8777)";
+        "Please enter valid coordinates (format: 19.0760, 72.8777)";
     }
 
     setErrors(newErrors);
@@ -1232,51 +1232,7 @@ const DigitalForm = () => {
                   <p className="text-red-500 text-sm mt-1">{errors.address}</p>
                 )}
               </div>
-
-              {/* City */}
-              <div>
-                <label
-                  htmlFor="city"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  City <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-                    errors.city ? "border-red-500 bg-red-50" : "border-gray-300"
-                  }`}
-                  placeholder="Mumbai"
-                />
-                {errors.city && (
-                  <p className="text-red-500 text-sm mt-1">{errors.city}</p>
-                )}
-              </div>
-
-              {/* District */}
-              <div>
-                <label
-                  htmlFor="district"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  District
-                </label>
-                <input
-                  type="text"
-                  id="district"
-                  name="district"
-                  value={formData.district}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="District"
-                />
-              </div>
-
-              {/* State */}
+  {/* State */}
               <div>
                 <label
                   htmlFor="state"
@@ -1301,6 +1257,51 @@ const DigitalForm = () => {
                   <p className="text-red-500 text-sm mt-1">{errors.state}</p>
                 )}
               </div>
+                {/* District */}
+              <div>
+                <label
+                  htmlFor="district"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  District
+                </label>
+                <input
+                  type="text"
+                  id="district"
+                  name="district"
+                  value={formData.district}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  placeholder="District"
+                />
+              </div>
+              {/* City */}
+              <div>
+                <label
+                  htmlFor="city"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  City <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    errors.city ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
+                  placeholder="Mumbai"
+                />
+                {errors.city && (
+                  <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                )}
+              </div>
+
+            
+
+            
 
               {/* Postal Code */}
               <div>
