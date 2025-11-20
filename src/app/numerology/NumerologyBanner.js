@@ -70,10 +70,10 @@ const NumerologyBanner = () => {
 
     //       <button
     //         onClick={handleOpen}
-    //         aria-label="Pay 1,999 For Numerology Report"
+    //         aria-label="Pay 2,100 For Numerology Report"
     //         className="text-[16px] leading-[20px] text-center text-darktext font-normal bg-secondary rounded-[9px] flex items-center justify-center gap-3 no-underline lg:px-6 lg:py-4 px-4 py-3 w-max "
     //       >
-    //         Pay 1,999 For Numerology Report
+    //         Pay 2,100 For Numerology Report
     //       </button>
 
     //       <span className=" flex flex-col">

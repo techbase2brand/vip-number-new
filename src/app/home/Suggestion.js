@@ -46,10 +46,10 @@ const Suggestion = () => {
               }}
               className="font-roboto font-bold lg:text-[17px] lg:p-5 p-3 text-[13px] leading-[20px] text-center bg-primary  rounded-[6px] flex items-center justify-center gap-2 w-fit   text-white m-auto"
             >
-              Pay 1,999 For Numerology Report
+              Pay 2,100 For Numerology Report
             </button>
             <p className="text-center my-1 lg:text-[18px] text-[13px] ">
-              Pay 1,999 and Get 1,500 Cashback with your Numerology Report.
+              Pay 2,100 and Get 1,500 Cashback with your Numerology Report.
             </p>
             <p
               className="text-center my-1"

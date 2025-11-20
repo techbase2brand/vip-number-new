@@ -142,7 +142,7 @@ const NumerologyPage = () => {
           </>
         }
         para1=""
-        title="Pay 1,999 For Numerology Report"
+        title="Pay 2,100 For Numerology Report"
         titleClass="text-white"
       /> */}
       <NumerologyCard />
@@ -182,7 +182,7 @@ const NumerologyPage = () => {
           </>
         }
         para1="Lucky numbers are typically derived from a person's birthdate or other significant dates. Numerologists believe that certain numbers influence individuals more than others, and these numbers are considered auspicious or lucky. By analyzing these numbers, numerologists offer insights into personality traits, life events, and potential opportunities."
-        title="Pay 1,999 For Numerology Report"
+        title="Pay 2,100 For Numerology Report"
         titleClass="text-darktext"
       />
       <NumerologyReview />

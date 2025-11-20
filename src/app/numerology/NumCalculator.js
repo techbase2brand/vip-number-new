@@ -143,7 +143,7 @@ const NumCalculator = () => {
   }, [user]);
 
   // Payment Integration code
-  const razarAmount = 1999;
+  const razarAmount = 2100;
   function handleRzpClick(e) {
     // if (e) {
     //     e.preventDefault();
@@ -914,7 +914,7 @@ const NumCalculator = () => {
                 )}
                 {user?.token && (
                   <NumerologyBtn
-                    title="Pay 1,999 For Numerology Report"
+                    title="Pay 2,100 For Numerology Report"
                     onClick={handleSubmit}
                   />
                 )}

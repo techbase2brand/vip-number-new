@@ -44,14 +44,14 @@ const NumerologyScrachCard = () => {
             <div className="valid_btn">
               <NumerologyBtn
                 title="Know Your Lucky Mobile Number Now"
-                working="1999"
+                working="2100"
                 onClick={handleOpen}
                 secondary={true}
               />
             </div>
           </div>
           <div className="banner-price">
-            <h2>₹1999/-</h2>
+            <h2>₹2100/-</h2>
             <h3 className="text-secondary mt-8 text-center">Get ₹1500 Cashback</h3>
           </div>
         </div> */}
