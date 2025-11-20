@@ -76,27 +76,27 @@ const Scannerpage = () => {
     switch (imageIndex) {
       case 0: // "Digital Visiting Card" - Just digital card, no add-ons
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: false, stand: false },
         };
       case 1: // "Digital Visiting Card + Smart Visiting Card" - Digital + Smart only
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: true, stand: false },
         };
       case 2: // "Digital Visiting Card + QR NFC Standee" - Digital card + stand
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: false, stand: true },
         };
       case 3: // "Digital Visiting Card + Smart Visiting Card + QR NFC Standee" - All-in-One
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: true, stand: true },
         };
       default:
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: false, stand: false },
         };
     }
@@ -127,9 +127,9 @@ const Scannerpage = () => {
 
     // Get guarantee message based on plan and add-ons
     const getGuaranteeMessage = () => {
-      if (hasStand) {
-        return "14-Day Money Back Guarantee for Digital Visiting Card";
-      }
+      // if (hasStand) {
+      //   return "14-Day Money Back Guarantee for Digital Visiting Card";
+      // }
       // Only show "No Questions Ask" for Gold 365 days plan
       if (isGold365) {
         return "14-Day Money-Back Guarantee - No Questions Ask";

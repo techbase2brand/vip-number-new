@@ -1097,7 +1097,7 @@ const DigitalVisitingCard = () => {
           </div>
         </div>
       )}
-      <div className=" hidden lg:block">
+      <div className="hidden lg:block">
         {/* third Component */}
         <div className="w-full my-16 flex justify-center">
           <div className="flex gap-10 w-full">
@@ -1189,8 +1189,8 @@ const DigitalVisitingCard = () => {
                       <div key={idx} className="flex items-center mb-1 gap-2">
                         {renderIcon(feature.icon, feature.iconSize)}
                         <h4 className="text-white font-normal text-[18px]">
-                          {feature.text.includes("\n")
-                            ? feature.text.split("\n").map((line, i) => (
+                          {feature?.text?.includes("\n")
+                            ? feature?.text?.split("\n").map((line, i) => (
                                 <span key={i}>
                                   {line}
                                   {i < feature.text.split("\n").length - 1 && (
