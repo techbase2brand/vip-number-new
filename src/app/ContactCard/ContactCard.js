@@ -81,6 +81,7 @@ const ContactCard = () => {
     linkedin: "",
     location: "",
     bank_status: "",
+    action:""
   });
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useContext(AppStateContext);
@@ -135,6 +136,7 @@ const ContactCard = () => {
             qr_code: apiData.qr_code || "",
             company_logo: apiData.company_logo || "",
             bank_status: apiData.bank_status || "",
+            action: apiData?.action || ""
           });
         }
       } catch (error) {
@@ -517,7 +519,7 @@ const ContactCard = () => {
           {formData?.companyUrl && (
             <Link
               href={formData?.companyUrl}
-               target="_blank"
+              target="_blank"
               rel="noopener noreferrer"
               className="bg-white rounded-2xl p-2 mb-3 flex items-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0 active:shadow-sm cursor-pointer"
             >
@@ -933,16 +935,18 @@ const ContactCard = () => {
         </div>
 
         {/* Footer */}
-        <Link href="/">
-          <div className="text-center pb-5 px-5">
-            <span className="text-xs text-gray-500">
-              Powered by{" "}
-              <span className="font-semibold text-gray-700">
-                VIP Number Shop
+        {formData.action !== "Gold - DVC" && (
+          <Link href="/">
+            <div className="text-center pb-5 px-5">
+              <span className="text-xs text-gray-500">
+                Powered by{" "}
+                <span className="font-semibold text-gray-700">
+                  VIP Number Shop
+                </span>
               </span>
-            </span>
-          </div>
-        </Link>
+            </div>
+          </Link>
+        )}
       </div>
 
       <style jsx>{`

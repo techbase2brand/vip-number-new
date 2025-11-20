@@ -337,9 +337,9 @@ const Banner = () => {
                     height={500}
                     className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
-                  <button className="Save Contact relative  text-[12px]  2xl:text-[14px] right-[4px] xl:right-[18px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
+                  <div className="Save Contact relative flex items-center justify-center  text-[12px]  2xl:text-[14px] right-[4px] xl:right-[18px] 2xl:right-[24px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Save Contact
-                  </button>
+                  </div>
                 </div>
 
                 <div className="left-img-two relative bottom-[8%] 2xl:bottom-[17%] left-[19%] xl:left-[39%] 2xl:left-[51%]  items-center">
@@ -350,9 +350,9 @@ const Banner = () => {
                     height={500}
                     className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
-                  <button className="Save Contact relative text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-8px] 2xl:right-[-22px] bottom-[43px] 2xl:bottom-[39px] bg-[#3B82F6] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
+                  <div className="Save Contact relative  flex items-center justify-center text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-8px] 2xl:right-[-5px] bottom-[43px] 2xl:bottom-[39px] bg-[#3B82F6] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Account Details
-                  </button>
+                  </div>
                 </div>
 
                 <div className="left-img-three relative  bottom-[8%] 2xl:bottom-[15%] left-[23%] xl:left-[73%] 2xl:left-[83%]  items-center">
@@ -363,9 +363,9 @@ const Banner = () => {
                     height={500}
                     className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
-                  <button className="Save Contact relative text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-4px] 2xl:right-[-19px] bottom-[43px] 2xl:bottom-[39px] bg-[#E21A20] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
+                  <div className="Save Contact relative flex items-center justify-center text-[12px]  2xl:text-[14px] right-[-16px] xl:right-[-4px] 2xl:right-[-2px] bottom-[43px] 2xl:bottom-[39px] bg-[#E21A20] text-white w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Social Links
-                  </button>
+                  </div>
                 </div>
               </div>
 
@@ -389,9 +389,9 @@ const Banner = () => {
                       height={500}
                       className="Allwithsingleclick max-w-[144.81px] xl:max-w-[244.81px] 2xl:max-w-[344.81px] m-auto items-center"
                     />
-                    <button className="Save Contact relative right-[-1px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[35px] bg-[#22C55E] text-white           w-[170px] xl:w-[270px] 2xl:w-[389px] h-[33px] xl:h-[43px] 2xl:h-[74px] items-center m-auto rounded-[50px]">
+                    <div className="Save Contact relative flex items-center justify-center right-[-1px] 2xl:right-[5px] bottom-[23px] 2xl:bottom-[35px] bg-[#22C55E] text-white           w-[170px] xl:w-[270px] 2xl:w-[389px] h-[33px] xl:h-[43px] 2xl:h-[74px] items-center m-auto rounded-[50px]">
                       All With Single Click
-                    </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -405,9 +405,9 @@ const Banner = () => {
                     height={500}
                     className="savecontactimg max-w-[158px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
-                  <button className="Save Contact relative right-[-18px] xl:right-[-18px] 2xl:right-[-20px] bottom-[23px] 2xl:bottom-[23px] bg-[#3B82F6] text-white              w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
+                  <div className="Save Contact relative flex items-center justify-center right-[-18px] xl:right-[-18px] 2xl:right-[-18px] bottom-[23px] 2xl:bottom-[23px] bg-[#3B82F6] text-white              w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Call
-                  </button>
+                  </div>
                 </div>
 
                 <div className="right-img-two relative bottom-[6%]  xl:bottom-[10%] 2xl:bottom-[17%]  right-[43%]">
@@ -418,9 +418,9 @@ const Banner = () => {
                     height={500}
                     className="savecontactimg max-w-[158px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
-                  <button className="Save Contact relative right-[-18px] 2xl:right-[-20px] xl:right-[-18px] bottom-[23px] 2xl:bottom-[23px] bg-[#E21A20] text-white             w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
+                  <div className="Save Contact relative flex items-center justify-center right-[-18px] 2xl:right-[-16px] xl:right-[-18px] bottom-[23px] 2xl:bottom-[23px] bg-[#E21A20] text-white             w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to Qr Code
-                  </button>
+                  </div>
                 </div>
 
                 <div className="right-img-three relative bottom-[3%] xl:bottom-[8%] 2xl:bottom-[13%] right-[45%] xl:right-[55%] 2xl:right-[75%]">
@@ -431,9 +431,9 @@ const Banner = () => {
                     height={500}
                     className="savecontactimg max-w-[168px] md:max-w-[250px] 2xl:max-w-[248px] h-auto 2xl:h-[295px] m-auto"
                   />
-                  <button className="Save Contact relative right-[-18px] xl:right-[-18px] 2xl:right-[-20px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white             w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
+                  <div className="Save Contact relative flex items-center justify-center right-[-18px] xl:right-[-18px] 2xl:right-[-14px] bottom-[23px] 2xl:bottom-[23px] bg-[#22C55E] text-white             w-[150px] xl:w-[200px] 2xl:w-[217px] h-[33px] xl:h-[43px] items-center m-auto rounded-[50px]">
                     Click to WhatsApp
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>
