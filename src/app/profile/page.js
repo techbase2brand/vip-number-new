@@ -602,7 +602,7 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                      <div className="relative profile-label-rs">
+                      {/* <div className="relative profile-label-rs display-none">
                         <input
                           id="primaryNo"
                           type="number"
@@ -622,32 +622,7 @@ const Profile = () => {
                         >
                           Primary No.
                         </label>
-                      </div>
-
-                      <div className="relative profile-label-rs">
-                        <input
-                          id="emailInput"
-                          type="email"
-                          placeholder=" "
-                          name="email"
-                          value={profile?.email || ""}
-                          onChange={handleInputChange}
-                          className="peer w-full p-3 text-gray-800  rounded-md border border-primary focus:outline-none focus:ring-1 focus:ring-primary "
-                          required
-                        />
-                        <label
-                          htmlFor="emailInput"
-                          className={`absolute left-3 transition-all transform origin-left text-primary ${
-                            profile?.email
-                              ? "-top-2 text-sm text-primary scale-90 bg-white"
-                              : "top-[14px] text-primary bg-white"
-                          } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1`}
-                        >
-                          Email
-                        </label>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
+                      </div> */}
                       <div className="relative profile-label-rs">
                         <input
                           id="anniversaryDate"
@@ -685,6 +660,30 @@ const Profile = () => {
 
                       <div className="relative profile-label-rs">
                         <input
+                          id="emailInput"
+                          type="email"
+                          placeholder=" "
+                          name="email"
+                          value={profile?.email || ""}
+                          onChange={handleInputChange}
+                          className="peer w-full p-3 text-gray-800  rounded-md border border-primary focus:outline-none focus:ring-1 focus:ring-primary "
+                          required
+                        />
+                        <label
+                          htmlFor="emailInput"
+                          className={`absolute left-3 transition-all transform origin-left text-primary ${
+                            profile?.email
+                              ? "-top-2 text-sm text-primary scale-90 bg-white"
+                              : "top-[14px] text-primary bg-white"
+                          } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1`}
+                        >
+                          Email
+                        </label>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
+                      <div className="relative profile-label-rs">
+                        <input
                           id="birthDate"
                           type={
                             isBirthFocused || profile?.date_of_birth
@@ -715,6 +714,27 @@ const Profile = () => {
                           } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1 `}
                         >
                           Date of Birth
+                        </label>
+                      </div>
+                      <div className="relative profile-label-rs">
+                        <input
+                          id="vehicleNo"
+                          type="number"
+                          placeholder=" "
+                          name="car_number"
+                          value={profile?.car_number || ""}
+                          onChange={handleInputChange}
+                          className="peer w-full p-3 text-gray-800  rounded-md border border-primary focus:outline-none focus:ring-1 focus:ring-primary "
+                        />
+                        <label
+                          htmlFor="vehicleNo"
+                          className={`absolute left-3 transition-all transform origin-left text-primary ${
+                            profile?.car_number
+                              ? "-top-2 text-sm text-primary scale-90 bg-white"
+                              : "top-[14px] text-primary bg-white"
+                          } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1`}
+                        >
+                          Vehicle No.
                         </label>
                       </div>
                     </div>
@@ -764,28 +784,6 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                      <div className="relative profile-label-rs">
-                        <input
-                          id="vehicleNo"
-                          type="number"
-                          placeholder=" "
-                          name="car_number"
-                          value={profile?.car_number || ""}
-                          onChange={handleInputChange}
-                          className="peer w-full p-3 text-gray-800  rounded-md border border-primary focus:outline-none focus:ring-1 focus:ring-primary "
-                        />
-                        <label
-                          htmlFor="vehicleNo"
-                          className={`absolute left-3 transition-all transform origin-left text-primary ${
-                            profile?.car_number
-                              ? "-top-2 text-sm text-primary scale-90 bg-white"
-                              : "top-[14px] text-primary bg-white"
-                          } peer-focus:-top-2 peer-focus:text-sm peer-focus:text-primary peer-focus:scale-90 px-1`}
-                        >
-                          Vehicle No.
-                        </label>
-                      </div>
-
                       <div className="relative profile-label-rs">
                         <input
                           id="luckyNo"
