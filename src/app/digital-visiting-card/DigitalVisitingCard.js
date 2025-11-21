@@ -1068,9 +1068,9 @@ const DigitalVisitingCard = () => {
                 )}
               </div>
             </div>
-                <hr />
-              <div className="flex justify-end gap-3 p-3">
-                {/* <button
+            <hr />
+            <div className="flex justify-end gap-3 p-3">
+              {/* <button
                   type="button"
                   className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700"
                   onClick={() => {
@@ -1082,18 +1082,18 @@ const DigitalVisitingCard = () => {
                 >
                   Cancel
                 </button> */}
-                <button
-                  type="button"
-                  className="px-6 py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  onClick={handleRzpClick}
-                  disabled={isProcessingPayment || !checkoutPlan}
-                >
-                  {isProcessingPayment && (
-                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  )}
-                  {isProcessingPayment ? "Preparing..." : "Proceed to Pay"}
-                </button>
-              </div>
+              <button
+                type="button"
+                className="px-6 py-2.5 rounded-xl bg-primary text-white font-semibold hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                onClick={handleRzpClick}
+                disabled={isProcessingPayment || !checkoutPlan}
+              >
+                {isProcessingPayment && (
+                  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                )}
+                {isProcessingPayment ? "Preparing..." : "Proceed to Pay"}
+              </button>
+            </div>
           </div>
         </div>
       )}

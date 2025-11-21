@@ -12,6 +12,8 @@ const ImageUploadComponent = ({
   imagePreview,
   setImagePreview,
 }) => {
+  console.log("formDataformData", formData);
+
   const fileInputRef = useRef(null);
   // Handle file selection
   const handleFileSelect = (event) => {
@@ -27,11 +29,11 @@ const ImageUploadComponent = ({
     }
 
     // Validate file size (max 5MB)
-    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-    if (file.size > maxSize) {
-      toast.error("Image size should be less than 5MB");
-      return;
-    }
+    // const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    // if (file.size > maxSize) {
+    //   toast.error("Image size should be less than 5MB");
+    //   return;
+    // }
 
     setSelectedImage(file);
 
@@ -259,6 +261,7 @@ const ImageUploadComponent = ({
                 src={formData?.profile_image}
                 alt=""
               />
+              <div class="text-xs font-bold md:hidden text-center">Profile Image</div>
             </div>
             <div>
               <img
@@ -266,6 +269,7 @@ const ImageUploadComponent = ({
                 src={formData?.company_logo}
                 alt=""
               />
+              <div class="text-xs font-bold md:hidden  text-center">Company Logo</div>
             </div>
             <div>
               <img
@@ -273,6 +277,7 @@ const ImageUploadComponent = ({
                 src={formData?.qr_code}
                 alt=""
               />
+              <div class="text-xs font-bold md:hidden text-center">QR Code</div>
             </div>
           </div>
         </div>
