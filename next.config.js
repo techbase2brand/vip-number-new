@@ -34,6 +34,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "staging.fancymobilenumber.in",
+      },
+      {
+        protocol: "https",
         hostname: "newadmin.leafymango.com",
       },
       {

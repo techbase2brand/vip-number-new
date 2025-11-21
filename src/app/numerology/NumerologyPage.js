@@ -28,7 +28,8 @@ import NumerologyTrustedNumerology from "./NumerologyTrustedNumerology";
 import NumerologyExplore from "./NumerologyExplore";
 import NumerologyReportDetail from "./NumerologyReportDetail";
 import AwardWinner from "../Shared/AwardWinner/AwardWinner/AwardWinner";
-import FAQs from "../Shared/FAQs/FAQs";
+import Comparison from "./Comparison";
+import NumerologyawardWinner from "./NumerologyawardWinner";
 // import { ResponsiveFooter } from "../ResponsiveModule";
 const NumerologyPage = () => {
   const faqdata = [
@@ -105,7 +106,12 @@ const NumerologyPage = () => {
         </div>
       </div>
       <VipNumberShopSliderImages1 />
-      <NumerologyLeadReport
+      <Comparison
+        setNumerologyPop={setNumerologyPop}
+        user={user}
+        setActiveSignInWithOtp={setActiveSignInWithOtp}
+      />
+      {/* <NumerologyLeadReport
         title1={
           <>
             Know Your{" "}
@@ -136,9 +142,9 @@ const NumerologyPage = () => {
           </>
         }
         para1=""
-        title="Pay 1,999 For Numerology Report"
+        title="Pay 2,100 For Numerology Report"
         titleClass="text-white"
-      />
+      /> */}
       <NumerologyCard />
       <ChooseNumerology />
       <NumerologyLuckyNumber
@@ -176,7 +182,7 @@ const NumerologyPage = () => {
           </>
         }
         para1="Lucky numbers are typically derived from a person's birthdate or other significant dates. Numerologists believe that certain numbers influence individuals more than others, and these numbers are considered auspicious or lucky. By analyzing these numbers, numerologists offer insights into personality traits, life events, and potential opportunities."
-        title="Pay 1,999 For Numerology Report"
+        title="Pay 2,100 For Numerology Report"
         titleClass="text-darktext"
       />
       <NumerologyReview />
@@ -200,13 +206,14 @@ const NumerologyPage = () => {
       <NumerologyExplore />
 
       <NumerlogyArticlesBlog />
-      <AwardWinner />
+      {/* <AwardWinner /> */}
+      <NumerologyawardWinner />
       <NumerologyFeatures />
       <NumerologyFaq data={faqdata} faqs_description="To get the best VIP numbers for a lifetime, you must first clear any doubts you may have, if any."/>
-      <FAQs />
+      {/* <FAQs /> */}
       <NumerologyClient />
 
-      <NumerologyConsultation title="Pay 1,999 For Numerology Report" />
+      <NumerologyConsultation/>
     </div>
   );
 };

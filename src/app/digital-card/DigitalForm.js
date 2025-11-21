@@ -40,6 +40,7 @@ const DigitalForm = () => {
     account_section: "",
     valid: "1",
     company: "",
+    companyUrl: "",
     gst_number: "",
     payment_number: "",
     upi_id: "",
@@ -67,6 +68,7 @@ const DigitalForm = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [imageType, setImageType] = useState("");
+  const [copied, setCopied] = useState(false);
   const imageTypeOptions = [
     {
       value: "profile_image",
@@ -125,6 +127,7 @@ const DigitalForm = () => {
             account_section: apiData.account_section || "",
             valid: apiData.valid || "1",
             company: apiData.company || "",
+            companyUrl: apiData?.companyUrl || "",
             gst_number: apiData.gst_number || "",
             payment_number: apiData.payment_number || "",
             upi_id: apiData.upi_id || "",
@@ -212,9 +215,10 @@ const DigitalForm = () => {
 
   const validateLocation = (location) => {
     const locationRegex =
-      /^-?([1-8]?[0-9]\.{1}\d{1,6}|90\.{1}0{1,6}),-?((1[0-7][0-9])|([1-9]?[0-9]))\.{1}\d{1,6}$/;
+      /^-?([1-8]?[0-9]\.{1}\d{1,6}|90\.{1}0{1,6}), -?((1[0-7][0-9])|([1-9]?[0-9]))\.{1}\d{1,6}$/;
     return locationRegex.test(location);
   };
+  console.log("formatatata", formData);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -258,16 +262,16 @@ const DigitalForm = () => {
         }
         break;
 
-      case "primary_phone":
-        if (!value.trim()) {
-          newErrors.primary_phone = "Mobile number is required";
-        } else if (!validateMobile(value)) {
-          newErrors.primary_phone =
-            "Please enter a valid  number (format: +91-9876543210 or 9876543210)";
-        } else {
-          delete newErrors.primary_phone; // Remove the error if valid
-        }
-        break;
+      // case "primary_phone":
+      //   if (!value.trim()) {
+      //     newErrors.primary_phone = "Mobile number is required";
+      //   } else if (!validateMobile(value)) {
+      //     newErrors.primary_phone =
+      //       "Please enter a valid  number (format: +91-9876543210 or 9876543210)";
+      //   } else {
+      //     delete newErrors.primary_phone; // Remove the error if valid
+      //   }
+      //   break;
 
       case "email":
         if (!value.trim()) {
@@ -353,9 +357,9 @@ const DigitalForm = () => {
     }
 
     // Optional field validations
-    if (formData.primary_phone && !validateMobile(formData.primary_phone)) {
-      newErrors.primary_phone = "Please enter a valid phone number";
-    }
+    // if (formData.primary_phone && !validateMobile(formData.primary_phone)) {
+    //   newErrors.primary_phone = "Please enter a valid phone number";
+    // }
 
     if (formData.gst_number && !validateGST(formData.gst_number)) {
       newErrors.gst_number =
@@ -392,7 +396,7 @@ const DigitalForm = () => {
 
     if (formData.location && !validateLocation(formData.location)) {
       newErrors.location =
-        "Please enter valid coordinates (format: 19.0760,72.8777)";
+        "Please enter valid coordinates (format: 19.0760, 72.8777)";
     }
 
     setErrors(newErrors);
@@ -685,6 +689,31 @@ const DigitalForm = () => {
   //     </div>
   //   );
   // }
+  const fullUrl = `https://vipnumbershop.com/vip-${
+    formData.url_extension || ""
+  }`;
+  const copyToClipboard = async (text) => {
+    try {
+      if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // fallback for older browsers
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      toast.success("Link copied !");
+      setTimeout(() => setCopied(false), 2000); // hide after 2s
+    } catch (err) {
+      console.error("Copy failed", err);
+    }
+  };
 
   useEffect(() => {
     if (formData.mobile.length !== 10) {
@@ -886,17 +915,17 @@ const DigitalForm = () => {
                   value={formData.primary_phone}
                   onChange={handleInputChange}
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-                    errors.primary_phone
-                      ? "border-red-500 bg-red-50"
-                      : "border-gray-300"
+                    // errors.primary_phone
+                    //   ? "border-red-500 bg-red-50"
+                    "border-gray-300"
                   }`}
                   placeholder="Primary phone number"
                 />
-                {errors.primary_phone && (
+                {/* {errors.primary_phone && (
                   <p className="text-red-500 text-sm mt-1">
                     {errors.primary_phone}
                   </p>
-                )}
+                )} */}
               </div>
 
               {/* Email */}
@@ -929,7 +958,7 @@ const DigitalForm = () => {
                   htmlFor="url_extension"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Domain Url <span className="text-red-500">*</span>
+                  Link to share <span className="text-red-500">*</span>
                 </label>
 
                 <input
@@ -962,9 +991,44 @@ const DigitalForm = () => {
                     {errors.url_extension}
                   </p>
                 )}
-                <span className="text-sm font-semibold text-primary block mt-2">
-                  https://vipnumbershop.com/vip-{formData.url_extension}
-                </span>
+
+                {/* URL + Copy button */}
+                <div className="mt-2 flex items-center gap-3 justify-between">
+                  <span className="text-sm font-semibold text-primary break-all">
+                    {fullUrl}
+                  </span>
+
+                  {/* Copy button with SVG */}
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard(fullUrl)}
+                    aria-label="Copy link"
+                  >
+                    {/* SVG copy icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4"
+                    >
+                      <rect
+                        x="9"
+                        y="9"
+                        width="13"
+                        height="13"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  </button>
+                </div>
               </div>
               {/* Business Information Section */}
               <label className="inline-flex items-center cursor-pointer gap-4">
@@ -1011,6 +1075,28 @@ const DigitalForm = () => {
                   onChange={handleInputChange}
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 border-gray-300`}
                   placeholder="ABC Company Ltd"
+                />
+              </div>
+              {/* Comapny */}
+              <div>
+                <label
+                  htmlFor="comapnyUrl"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Company Domain Url
+                </label>
+                <input
+                  type="url"
+                  id="companyUrl"
+                  name="companyUrl"
+                  value={formData.companyUrl}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    errors.youtube
+                      ? "border-red-500 bg-red-50"
+                      : "border-gray-300"
+                  }`}
+                  placeholder="https://yourcompany.com"
                 />
               </div>
               {formData.bank_status && (
@@ -1146,51 +1232,7 @@ const DigitalForm = () => {
                   <p className="text-red-500 text-sm mt-1">{errors.address}</p>
                 )}
               </div>
-
-              {/* City */}
-              <div>
-                <label
-                  htmlFor="city"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  City <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-                    errors.city ? "border-red-500 bg-red-50" : "border-gray-300"
-                  }`}
-                  placeholder="Mumbai"
-                />
-                {errors.city && (
-                  <p className="text-red-500 text-sm mt-1">{errors.city}</p>
-                )}
-              </div>
-
-              {/* District */}
-              <div>
-                <label
-                  htmlFor="district"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  District
-                </label>
-                <input
-                  type="text"
-                  id="district"
-                  name="district"
-                  value={formData.district}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="District"
-                />
-              </div>
-
-              {/* State */}
+  {/* State */}
               <div>
                 <label
                   htmlFor="state"
@@ -1215,6 +1257,51 @@ const DigitalForm = () => {
                   <p className="text-red-500 text-sm mt-1">{errors.state}</p>
                 )}
               </div>
+                {/* District */}
+              <div>
+                <label
+                  htmlFor="district"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  District
+                </label>
+                <input
+                  type="text"
+                  id="district"
+                  name="district"
+                  value={formData.district}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  placeholder="District"
+                />
+              </div>
+              {/* City */}
+              <div>
+                <label
+                  htmlFor="city"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  City <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    errors.city ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
+                  placeholder="Mumbai"
+                />
+                {errors.city && (
+                  <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                )}
+              </div>
+
+            
+
+            
 
               {/* Postal Code */}
               <div>

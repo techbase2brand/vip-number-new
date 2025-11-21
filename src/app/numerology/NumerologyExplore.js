@@ -60,7 +60,7 @@ const NumerologyExplore = () => {
           ({ id, label, content, filledArrows, emptyArrows, topPosition }) => (
             <div
               key={id}
-              className="rounded-xl shadow-md relative overflow-hidden p-6 text-center text-white"
+              className="rounded-xl shadow-md relative overflow-hidden py-12 px-6 text-center text-white"
               style={{
                 background:
                   "radial-gradient(circle, #824deb 0%, rgba(88,68,127,1) 100%)",
@@ -68,7 +68,7 @@ const NumerologyExplore = () => {
             >
               {/* Top label */}
               <div
-                className={`lg:text-lg inline-block bg-yellow-400 text-purple-900 font-semibold rounded-b-xl px-6 py-2 absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm md:w-[48%] w-[90%] top-[18px]`}
+                className={`lg:text-2xl inline-block bg-yellow-400 text-purple-900 font-semibold rounded-b-xl px-6 py-2 absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm md:w-[48%] w-[90%] top-[24px]`}
               >
                 {label}
               </div>

@@ -55,7 +55,7 @@ export const NumerologyCard = () => {
     <section className="lg:mt-8 lg:mb-[8rem] my-5 max-w-screen-xl m-auto relative ">
       
       <div className="container-os">
-        <h2 className="font-semibold text-[26px] lg:leading-[40px] leading-[35px] text-HeadingText md:text-[32px] lg:text-[35px]  tracking-wide 2xl:text-[38px] lg:mb-6 text-center mb-4 lg:w-1/2 m-auto">
+        <h2 className="font-semibold text-[26px] lg:leading-[60px] leading-[35px] text-HeadingText md:text-[32px] lg:text-[35px]  tracking-wide xl:text-[44px] 2xl:text-[50px] lg:mb-6 text-center mb-4 lg:w-[70%] m-auto">
           Benefits of Choosing a{" "}
           <span className="inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-[#5c469c] font-bold px-2">
             Numerology
@@ -82,18 +82,18 @@ export const NumerologyCard = () => {
                   : {}
               }
             >
-              <div className="lg:w-1/2 w-full md:p-5 p-2 space-y-2 text-center lg:text-left">
-                <h3 className="lg:text-[22px] text-xl font-medium ">
+              <div className="lg:w-1/3 w-full md:p-5 p-2 space-y-2 text-center lg:text-left">
+                <h3 className="lg:text-[30px] text-xl font-medium ">
                   {card.title}
                 </h3>
-                <p className="text-sm font-medium">{card.paragraph}</p>
+                <p className="text-xl font-normal">{card.paragraph}</p>
               </div>
 
-              <div className="lg:w-1/2 w-full">
+              <div className="lg:w-1/1 w-full">
                 <Image
                   src={card.cardimage}
                   alt={card.title}
-                  className="object-cover h-[250px] rounded-[20px] w-full object-top"
+                  className="object-cover h-[280px] rounded-[20px] w-full object-top"
                 />
               </div>
             </div>

@@ -63,6 +63,7 @@ const ContactCard = () => {
     account_section: "",
     valid: "1",
     company: "",
+    companyUrl: "",
     gst_number: "",
     payment_number: "",
     upi_id: "",
@@ -80,6 +81,7 @@ const ContactCard = () => {
     linkedin: "",
     location: "",
     bank_status: "",
+    action:""
   });
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useContext(AppStateContext);
@@ -113,6 +115,7 @@ const ContactCard = () => {
             account_section: apiData.account_section || "",
             valid: apiData.valid || "1",
             company: apiData.company || "",
+            companyUrl: apiData?.companyUrl || "",
             gst_number: apiData.gst_number || "",
             payment_number: apiData.payment_number || "",
             upi_id: apiData.upi_id || "",
@@ -133,6 +136,7 @@ const ContactCard = () => {
             qr_code: apiData.qr_code || "",
             company_logo: apiData.company_logo || "",
             bank_status: apiData.bank_status || "",
+            action: apiData?.action || ""
           });
         }
       } catch (error) {
@@ -242,18 +246,20 @@ const ContactCard = () => {
     // Use file-saver to download the vCard
     saveAs(blob, `${contact.name || "contact"}.vcf`);
   };
-const downloadQrCode = () => {
-    const qrCodeUrl = formData.qr_code ? formData.qr_code : "/assets/qr-code.png";
+  const downloadQrCode = () => {
+    const qrCodeUrl = formData.qr_code
+      ? formData.qr_code
+      : "/assets/qr-code.png";
 
     // Create an anchor element to trigger the download
     const link = document.createElement("a");
-    link.href = qrCodeUrl;  // Set the href to the image URL
-    link.download = "QRCode.png";  // Specify the download filename
+    link.href = qrCodeUrl; // Set the href to the image URL
+    link.download = "QRCode.png"; // Specify the download filename
     document.body.appendChild(link);
-    link.click();  // Trigger the download
-    document.body.removeChild(link);  // Clean up the link element
+    link.click(); // Trigger the download
+    document.body.removeChild(link); // Clean up the link element
   };
-  
+
   return (
     <div className="min-h-screen bg-primary flex items-center justify-center font-sans">
       {showCrackers && (
@@ -510,45 +516,49 @@ const downloadQrCode = () => {
             </Link>
           )}
           {/* Website */}
-          <Link
-            href="/"
-            rel="noopener noreferrer"
-            className="bg-white rounded-2xl p-2 mb-3 flex items-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0 active:shadow-sm cursor-pointer"
-          >
-            <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <line
-                  x1="2"
-                  y1="12"
-                  x2="22"
-                  y2="12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-              </svg>
-            </div>
-            <span className="text-sm font-bold text-gray-700">
-              www.vipnumbershop.com
-            </span>
-          </Link>
+          {formData?.companyUrl && (
+            <Link
+              href={formData?.companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-2xl p-2 mb-3 flex items-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0 active:shadow-sm cursor-pointer"
+            >
+              <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <line
+                    x1="2"
+                    y1="12"
+                    x2="22"
+                    y2="12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </div>
+              <span className="text-sm font-bold text-gray-700">
+                {/* www.vipnumbershop.com */}
+                {formData?.companyUrl}
+              </span>
+            </Link>
+          )}
 
           {/* Address */}
           {(formData.address ||
@@ -708,13 +718,13 @@ const downloadQrCode = () => {
                           alt="Payment QR Code"
                           className="w-full h-full border border-gray-200 rounded-lg"
                         />
-                        <button 
-                      onClick={downloadQrCode} 
-                      className="absolute bottom-2 right-2 bg-gray-800 bg-opacity-80 text-white p-2 rounded-full shadow-md hover:bg-gray-700 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-200"
-                      title="Download QR Code"
-                    >
-                      <FiDownload fontSize={18} />
-                    </button>
+                        <button
+                          onClick={downloadQrCode}
+                          className="absolute bottom-2 right-2 bg-gray-800 bg-opacity-80 text-white p-2 rounded-full shadow-md hover:bg-gray-700 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-200"
+                          title="Download QR Code"
+                        >
+                          <FiDownload fontSize={18} />
+                        </button>
                       </div>
                       <p className="text-xs text-gray-600 mt-2">
                         Scan this QR code with any UPI app to make payment
@@ -925,16 +935,18 @@ const downloadQrCode = () => {
         </div>
 
         {/* Footer */}
-        <Link href="/">
-          <div className="text-center pb-5 px-5">
-            <span className="text-xs text-gray-500">
-              Powered by{" "}
-              <span className="font-semibold text-gray-700">
-                VIP Number Shop
+        {formData.action !== "Gold - DVC" && (
+          <Link href="/">
+            <div className="text-center pb-5 px-5">
+              <span className="text-xs text-gray-500">
+                Powered by{" "}
+                <span className="font-semibold text-gray-700">
+                  VIP Number Shop
+                </span>
               </span>
-            </span>
-          </div>
-        </Link>
+            </div>
+          </Link>
+        )}
       </div>
 
       <style jsx>{`

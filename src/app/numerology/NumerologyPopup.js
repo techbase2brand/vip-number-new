@@ -123,7 +123,7 @@ const NumerologyPopup = () => {
   }, [user]);
 
   // Payment Integration code
-  const razarAmount = 1999;
+  const razarAmount = 2100;
   function handleRzpClick(e) {
     const token = user?.token; // get the user's token data
     const orderData = {
@@ -710,7 +710,7 @@ const NumerologyPopup = () => {
                 <SubmitButton
                   buttonTitle={
                     !loading ? (
-                      "Pay 1,999 For Numerology Report"
+                      "Pay 2,100 For Numerology Report"
                     ) : (
                       <span className="dot-loader ml-2 flex justify-center">
                         <span className="dot animate-bounce delay-0 bg-white h-2 w-2 rounded-full"></span>

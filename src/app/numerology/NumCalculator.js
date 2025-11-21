@@ -93,9 +93,8 @@ const NumCalculator = () => {
         setProfile(res);
         const address = res?.address || {};
         const dateBirth = res?.contactsubdetails || {};
-        const fullName = `${res?.firstname || ""} ${
-          res?.lastname || ""
-        }`.trim(); // Remove leading/trailing spaces from the full name
+        const fullName = `${res?.firstname || ""} ${res?.lastname || ""
+          }`.trim(); // Remove leading/trailing spaces from the full name
         setFormData((prevState) => ({
           ...prevState,
           first_name: `${res?.firstname} ${res.lastname}` || "",
@@ -137,14 +136,14 @@ const NumCalculator = () => {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-    script.onload = async () => {};
+    script.onload = async () => { };
     return () => {
       document.body.removeChild(script);
     };
   }, [user]);
 
   // Payment Integration code
-  const razarAmount = 1999;
+  const razarAmount = 2100;
   function handleRzpClick(e) {
     // if (e) {
     //     e.preventDefault();
@@ -644,11 +643,11 @@ const NumCalculator = () => {
   }, [data?.pin_code]);
 
   return (
-    <section className="lg:py-10 py-6">
+    <section className="lg:py-12 py-6">
       <div className="container-os">
         <div className="grid lg:grid-cols-2 items-center gap-5 grid-cols-1 max-w-screen-xl m-auto ">
-          <div className="">
-            <div className="flex items-center lg:mb-6 mb-2 gap-3">
+          <div className="text-center lg:text-start">
+            <div className="flex items-center lg:mb-6 mb-2 gap-3 justify-center lg:justify-start">
               <h2 className="font-semibold text-[26px] lg:leading-[40px] leading-[35px] text-HeadingText  md:text-[32px] lg:text-[35px]  tracking-wide ">
                 {" "}
                 <span
@@ -671,87 +670,85 @@ const NumCalculator = () => {
             </p>
           </div>
           <div className="">
-            <div className="flex flex-col gap-5 bg-[url('/assets/pnglight.webp')] bg-no-repeat bg-center bg-contain justify-center items-center  lg:p-7 md:p-5 p-2 rounded-2xl">
-              {user?.token && (
+            <div className="lg:w-[80%] m-auto">
+              <div className="flex flex-col gap-5 bg-[url('/assets/pnglight.webp')] bg-no-repeat bg-center bg-contain justify-center items-center  lg:px-7 md:px-5 px-2 pt-5 rounded-2xl">
+                {user?.token && (
+                  <div className="w-full">
+                    <div className="relative">
+                      <input
+                        id="full_nameuser"
+                        type="text"
+                        value={data?.full_name}
+                        name="full_name"
+                        onChange={handleChange}
+                        className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
+                      />
+                      <label
+                        htmlFor="full_nameuser"
+                        className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${data.full_name
+                            ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                            : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                          }`}
+                      >
+                        Enter your full name
+                      </label>
+                    </div>
+                  </div>
+                )}
                 <div className="w-full">
                   <div className="relative">
                     <input
-                      id="full_nameuser"
-                      type="text"
-                      value={data?.full_name}
-                      name="full_name"
+                      id="mobileNumber"
+                      type="number"
+                      name="mobileNumber"
+                      value={data.mobileNumber}
                       onChange={handleChange}
+                      disabled={user?.token && data.mobileNumber !== ""}
                       className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
                     />
                     <label
-                      htmlFor="full_nameuser"
-                      className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                        data.full_name
+                      htmlFor="mobileNumber"
+                      className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${data.mobileNumber
                           ? "-top-2 left-2.5 text-xs text-primary scale-90"
                           : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                      }`}
+                        }`}
                     >
-                      Enter your full name
+                      Enter your mobile number
                     </label>
                   </div>
                 </div>
-              )}
-              <div className="w-full">
-                <div className="relative">
-                  <input
-                    id="mobileNumber"
-                    type="number"
-                    name="mobileNumber"
-                    value={data.mobileNumber}
-                    onChange={handleChange}
-                    disabled={user?.token && data.mobileNumber !== ""}
-                    className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
-                  />
-                  <label
-                    htmlFor="mobileNumber"
-                    className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                      data.mobileNumber
-                        ? "-top-2 left-2.5 text-xs text-primary scale-90"
-                        : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                    }`}
-                  >
-                    Enter your mobile number
-                  </label>
-                </div>
-              </div>
 
-              {!user?.token && (
-                <div className="">
-                  <div className="relative">
-                    <input
-                      id="otpsms"
-                      type="text"
-                      name="otp"
-                      value={otp}
-                      onChange={handleInputOtp}
-                      ref={otpRef}
-                      className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
-                    />
-                    <label
-                      htmlFor="otpsms"
-                      className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                        otp
-                          ? "-top-2 left-2.5 text-xs text-primary scale-90"
-                          : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                      }`}
-                    >
-                      OTP
-                    </label>
+                {!user?.token && (
+                  <div className="w-full">
+                    <div className="relative">
+                      <input
+                        id="otpsms"
+                        type="text"
+                        name="otp"
+                        value={otp}
+                        onChange={handleInputOtp}
+                        ref={otpRef}
+                        className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
+                      />
+                      <label
+                        htmlFor="otpsms"
+                        className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${otp
+                            ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                            : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                          }`}
+                      >
+                        OTP
+                      </label>
 
-                    <button
-                      type="button"
-                      className="resendOtp-btn-os mt-3 mb-6"
-                      onClick={handleResendOTP}
-                      aria-label="Resend OTP"
-                    >
-                      Resend OTP
-                    </button>
-                    <span className="mb-2 text-darktext text-center md:text-[18px] text-[15px]    w-full">
+                      <button
+                        type="button"
+                        className="resendOtp-btn-os mt-3 mb-6"
+                        onClick={handleResendOTP}
+                        aria-label="Resend OTP"
+                      >
+                        Resend OTP
+                      </button>
+                      {/* <span className="mb-2 text-darktext text-center md:text-[18px] text-[15px]    w-full">
                       Get <span className="text-primary">1,500 Cashback</span>{" "}
                       with your Numerology Report.
                       <br />
@@ -764,184 +761,180 @@ const NumCalculator = () => {
                           (For buying a Number)
                         </span>
                       </Link>
-                    </span>
-                  </div>
-                </div>
-              )}
-              {user?.token && (
-                <>
-                  <div className="w-full">
-                    <div className="relative">
-                      <input
-                        id="email"
-                        type="text"
-                        name="email"
-                        value={data?.email}
-                        onChange={handleChange}
-                        className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
-                      />
-                      <label
-                        htmlFor="email"
-                        className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                          data.email
-                            ? "-top-2 left-2.5 text-xs text-primary scale-90"
-                            : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                        }`}
-                      >
-                        Enter your email
-                      </label>
+                    </span> */}
                     </div>
                   </div>
-
-                  <div className="flex flex-col md:flex-row justify-between w-full gap-3">
+                )}
+                {user?.token && (
+                  <>
                     <div className="w-full">
                       <div className="relative">
                         <input
-                          id="birthDate"
-                          type="date"
-                          name="dob"
-                          value={data.dob}
-                          onChange={handleChange}
-                          className="iphone-field peer w-full bg-transparent text-black border border-primary  rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary hover:border-primary  shadow-sm text-[16px] leading-4"
-                        />
-                        <label
-                          htmlFor="birthDate"
-                          className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                            data.dob
-                              ? "-top-2 left-2.5 text-xs text-primary scale-90"
-                              : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                          }`}
-                        >
-                          Enter your DOB
-                        </label>
-                      </div>
-                    </div>
-                    <div className="w-full">
-                      <div className="relative">
-                        <input
-                          id="time_of_birth"
-                          type="time"
-                          name="time_of_birth"
-                          value={rawTime}
-                          onChange={handleChange}
-                          className="iphone-field peer w-full bg-transparent text-black border border-primary  rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary hover:border-primary  shadow-sm text-[16px] leading-4"
-                        />
-                        <label
-                          htmlFor="time_of_birth"
-                          className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                            rawTime
-                              ? "-top-2 left-2.5 text-xs text-primary scale-90"
-                              : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                          }`}
-                        >
-                          Enter your Time Birth
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col md:flex-row justify-between w-full gap-3">
-                    <div className="w-full">
-                      <div className="relative">
-                        <input
-                          id="pin_code"
+                          id="email"
                           type="text"
-                          name="pin_code"
-                          value={data.pin_code}
+                          name="email"
+                          value={data?.email}
                           onChange={handleChange}
-                          maxLength={6}
-                          placeholder=" "
                           className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
                         />
                         <label
-                          htmlFor="pin_code"
-                          className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                            data.pin_code
+                          htmlFor="email"
+                          className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${data.email
                               ? "-top-2 left-2.5 text-xs text-primary scale-90"
                               : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                          }`}
+                            }`}
                         >
-                          Enter Pin Code (Birth Place)
+                          Enter your email
                         </label>
                       </div>
-                      <span className="text-red-600 text-sm block mt-1">{`${data.state_name} ${data.district}`}</span>
                     </div>
-                    <div className="w-full">
-                      {area.length > 0 ? (
-                        <div className="relative">
-                          <select
-                            id="area"
-                            onChange={handleAreaChange}
-                            value={data?.area}
-                            disabled={loading}
-                            className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4 appearance-none"
-                          >
-                            <option value="" disabled>
-                              Select Area
-                            </option>
-                            {area.map((item) => (
-                              <option key={item.area} value={item.area}>
-                                {item.area}
-                              </option>
-                            ))}
-                          </select>
-                          <label
-                            htmlFor="area"
-                            className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                              data.area
-                                ? "-top-2 left-2.5 text-xs text-primary scale-90"
-                                : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                            }`}
-                          >
-                            Select Area
-                          </label>
-                        </div>
-                      ) : (
+
+                    <div className="flex flex-col md:flex-row justify-between w-full gap-3">
+                      <div className="w-full">
                         <div className="relative">
                           <input
-                            id="area"
-                            type="text"
-                            value={data?.area}
-                            name="area"
+                            id="birthDate"
+                            type="date"
+                            name="dob"
+                            value={data.dob}
                             onChange={handleChange}
+                            className="iphone-field peer w-full bg-transparent text-black border border-primary  rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary hover:border-primary  shadow-sm text-[16px] leading-4"
+                          />
+                          <label
+                            htmlFor="birthDate"
+                            className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${data.dob
+                                ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                                : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                              }`}
+                          >
+                            Enter your DOB
+                          </label>
+                        </div>
+                      </div>
+                      <div className="w-full">
+                        <div className="relative">
+                          <input
+                            id="time_of_birth"
+                            type="time"
+                            name="time_of_birth"
+                            value={rawTime}
+                            onChange={handleChange}
+                            className="iphone-field peer w-full bg-transparent text-black border border-primary  rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary hover:border-primary  shadow-sm text-[16px] leading-4"
+                          />
+                          <label
+                            htmlFor="time_of_birth"
+                            className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${rawTime
+                                ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                                : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                              }`}
+                          >
+                            Enter your Time Birth
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col md:flex-row justify-between w-full gap-3">
+                      <div className="w-full">
+                        <div className="relative">
+                          <input
+                            id="pin_code"
+                            type="text"
+                            name="pin_code"
+                            value={data.pin_code}
+                            onChange={handleChange}
+                            maxLength={6}
+                            placeholder=" "
                             className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
                           />
                           <label
-                            htmlFor="area"
-                            className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${
-                              data.area
+                            htmlFor="pin_code"
+                            className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${data.pin_code
                                 ? "-top-2 left-2.5 text-xs text-primary scale-90"
                                 : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
-                            }`}
+                              }`}
                           >
-                            City
+                            Enter Pin Code (Birth Place)
                           </label>
                         </div>
-                      )}
+                        <span className="text-red-600 text-sm block mt-1">{`${data.state_name} ${data.district}`}</span>
+                      </div>
+                      <div className="w-full">
+                        {area.length > 0 ? (
+                          <div className="relative">
+                            <select
+                              id="area"
+                              onChange={handleAreaChange}
+                              value={data?.area}
+                              disabled={loading}
+                              className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4 appearance-none"
+                            >
+                              <option value="" disabled>
+                                Select Area
+                              </option>
+                              {area.map((item) => (
+                                <option key={item.area} value={item.area}>
+                                  {item.area}
+                                </option>
+                              ))}
+                            </select>
+                            <label
+                              htmlFor="area"
+                              className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${data.area
+                                  ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                                  : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                                }`}
+                            >
+                              Select Area
+                            </label>
+                          </div>
+                        ) : (
+                          <div className="relative">
+                            <input
+                              id="area"
+                              type="text"
+                              value={data?.area}
+                              name="area"
+                              onChange={handleChange}
+                              className="peer w-full bg-transparent text-black border border-primary rounded-md px-3 py-4 transition duration-300 ease-in-out focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary  hover:border-primary shadow-sm text-[16px] leading-4"
+                            />
+                            <label
+                              htmlFor="area"
+                              className={`absolute cursor-text bg-[#F9F9F9] px-1 left-2.5 transition-all transform origin-left capitalize text-[16px] leading-4 ${data.area
+                                  ? "-top-2 left-2.5 text-xs text-primary scale-90"
+                                  : "top-[20px] text-primary peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-primary peer-focus:scale-90"
+                                }`}
+                            >
+                              City
+                            </label>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
-              {user?.token && (
-                <NumerologyBtn
-                  title="Pay 1,999 For Numerology Report"
-                  onClick={handleSubmit}
-                />
-              )}
+                  </>
+                )}
+                {user?.token && (
+                  <NumerologyBtn
+                    title="Pay 2,100 For Numerology Report"
+                    onClick={handleSubmit}
+                  />
+                )}
+              </div>
+              <div className=" lg:px-7 md:px-5 px-2 pt-5 text-center lg:text-start">
+                <span className="mb-2 text-darktext  md:text-[18px] text-[15px]    w-full">
+                  Get <span className="text-primary">1,500 Cashback</span> with
+                  your Numerology Report.
+                  {/* <br />
+                  Cashback valid for 30 days only. */}
+                  <br />
+                  Cashback can be used only on{" "}
+                  <Link href="/" className="text-primary">
+                    www.vipnumbershop.com{" "}
+                    <span className="text-black">(For buying a Number)</span>
+                  </Link>
+                </span>
+              </div>
             </div>
-            <div className="text-center">
-              <span className="mb-2 text-darktext text-center md:text-[18px] text-[15px]    w-full">
-                Get <span className="text-primary">1,500 Cashback</span> with
-                your Numerology Report.
-                <br />
-                Cashback valid for 30 days only.
-                <br />
-                Cashback can be used only on{" "}
-                <Link href="/" className="text-primary">
-                  www.vipnumbershop.com{" "}
-                  <span className="text-black">(For buying a Number)</span>
-                </Link>
-              </span>
-            </div>
+
           </div>
         </div>
       </div>

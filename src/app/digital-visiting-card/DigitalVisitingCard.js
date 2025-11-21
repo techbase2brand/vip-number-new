@@ -119,27 +119,27 @@ const DigitalVisitingCard = () => {
     switch (imageIndex) {
       case 0: // "Digital Visiting Card" - Just digital card, no add-ons
         return {
-          basePlanId: "digital-365-gold", // Default to Gold plan
+          basePlanId: basePlanId, // Default to Gold plan
           addOns: { smart: false, stand: false },
         };
       case 1: // "Digital Visiting Card + Smart Visiting Card" - Digital + Smart only
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: true, stand: false },
         };
       case 2: // "Digital Visiting Card + QR NFC Standee" - Digital card + stand
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: false, stand: true },
         };
       case 3: // "Digital Visiting Card + Smart Visiting Card + QR NFC Standee" - All-in-One
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: true, stand: true },
         };
       default:
         return {
-          basePlanId: "digital-365-gold",
+          basePlanId: basePlanId,
           addOns: { smart: false, stand: false },
         };
     }
@@ -171,9 +171,9 @@ const DigitalVisitingCard = () => {
 
     // Get guarantee message based on plan and add-ons
     const getGuaranteeMessage = () => {
-      if (hasStand) {
-        return "14-Day Money Back Guarantee for Digital Visiting Card";
-      }
+      // if (hasStand) {
+      //   return "14-Day Money Back Guarantee for Digital Visiting Card";
+      // }
       // Only show "No Questions Ask" for Gold 365 days plan
       if (isGold365) {
         return "14-Day Money-Back Guarantee - No Questions Ask";
@@ -499,8 +499,7 @@ const DigitalVisitingCard = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [basePlanId, selectedAddOns]); // Watch for plan changes
-  const PAYMENT_API_URL =
-    "/api/web/razorpay/digital_card/payment";
+  const PAYMENT_API_URL = "/api/web/razorpay/digital_card/payment";
 
   const resolveOrderDetails = (response, planInfo) => {
     const dataLayer = response?.data ?? response ?? {};
@@ -732,7 +731,10 @@ const DigitalVisitingCard = () => {
               addOnLabelParts: planSnapshot?.addOnLabelParts || [],
               timestamp: new Date().toISOString(),
             };
-            localStorage.setItem("digitalCardPaymentDetails", JSON.stringify(planDetails));
+            localStorage.setItem(
+              "digitalCardPaymentDetails",
+              JSON.stringify(planDetails)
+            );
 
             const thankYouQuery = new URLSearchParams({
               orderId: orderId || "",
@@ -835,7 +837,7 @@ const DigitalVisitingCard = () => {
               }
             }}
           ></div>
-          <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-2xl mr-4 my-auto max-h-[90vh] overflow-y-auto">
+          <div className="relative bg-white w-full max-w-[560px] rounded-3xl shadow-2xl my-auto">
             <div className="flex items-center justify-between px-6 py-4 border-b sticky top-0 bg-white z-10 rounded-t-3xl">
               <h3 className="text-[20px] font-semibold text-gray-900">
                 Choose Your Plan
@@ -852,45 +854,53 @@ const DigitalVisitingCard = () => {
                 ×
               </button>
             </div>
-            <div className="px-6 py-5 flex flex-col gap-4">
+            <div className="px-6 py-5 flex flex-col gap-4  max-h-[85vh] overflow-auto">
               <div>
                 <label className="text-sm font-semibold text-gray-700 mb-2 block">
                   Digital Visiting Card Plan
                 </label>
-                {basePlanId && basePlans && (() => {
-                  const selectedPlan = basePlans.find(plan => plan.id === basePlanId);
-                  const isGold = selectedPlan?.type?.toLowerCase() === "gold";
-                  return (
-                    <div className="mb-3 flex flex-col items-center gap-2">
-                      <div className="flex items-center gap-2 w-full justify-between">
-                      <Image
-                        src={Powerdby}
-                        alt="Powered by"
-                        width={3000}
-                        height={1000}
-                        className="object-contain max-w-[200px] h-auto"
-                      />
-                      {isGold && (
+                {basePlanId &&
+                  basePlans &&
+                  (() => {
+                    const selectedPlan = basePlans.find(
+                      (plan) => plan.id === basePlanId
+                    );
+                    const isGold = selectedPlan?.type?.toLowerCase() === "gold";
+                    return (
+                      <div className="mb-3 flex flex-col items-center gap-2">
+                        <div className="flex items-center gap-2 w-full justify-between">
                           <Image
-                            src={Moneybacknew}
-                            alt="Money Back Guarantee"
-                            width={200}
-                            height={100}
-                            className="object-contain max-w-[80px] h-auto"
+                            src={Powerdby}
+                            alt="Powered by"
+                            width={3000}
+                            height={1000}
+                            className="object-contain max-w-[200px] h-auto"
                           />
-                      )}
+                          {isGold && (
+                            <Image
+                              src={Moneybacknew}
+                              alt="Money Back Guarantee"
+                              width={200}
+                              height={100}
+                              className="object-contain max-w-[80px] h-auto"
+                            />
+                          )}
+                        </div>
+                        <span className="text-red-600 text-base font-semibold">
+                          {isGold
+                            ? "Gold Pack | Removed Branding"
+                            : "Silver Pack | Added Branding"}
+                          <span className="text-primary text-base font-semibold">
+                            {" "}
+                            Powerd by
+                          </span>{" "}
+                          <span className="text-black text-base font-semibold">
+                            VIP Number shop
+                          </span>
+                        </span>
                       </div>
-                      <span className="text-red-600 text-base font-semibold">
-                        {isGold
-                          ? "Gold Pack | Removed Branding"
-                          : "Silver Pack | Added Branding"}
-
-                        <span className="text-primary text-base font-semibold"> Powerd by</span> <span className="text-black text-base font-semibold">VIP Number shop</span>
-                      </span>
-                      
-                    </div>
-                  );
-                })()}
+                    );
+                  })()}
                 <select
                   className="w-full rounded-xl border border-gray-300 px-4 py-3 font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
                   value={basePlanId}
@@ -959,13 +969,19 @@ const DigitalVisitingCard = () => {
                         ₹{checkoutPlan.basePlan?.amount ?? 0}
                       </span>
                     </div>
-                    
+
                     {/* Add-ons Breakdown */}
                     {(() => {
-                      const smartAmount = addOnOptions?.find(opt => opt.id === 'smart')?.amount ?? 499;
-                      const standAmount = addOnOptions?.find(opt => opt.id === 'stand')?.amount ?? 999;
-                      const addOnTotal = checkoutPlan.totalAmount - (checkoutPlan.basePlan?.amount ?? 0);
-                      
+                      const smartAmount =
+                        addOnOptions?.find((opt) => opt.id === "smart")
+                          ?.amount ?? 499;
+                      const standAmount =
+                        addOnOptions?.find((opt) => opt.id === "stand")
+                          ?.amount ?? 999;
+                      const addOnTotal =
+                        checkoutPlan.totalAmount -
+                        (checkoutPlan.basePlan?.amount ?? 0);
+
                       if (checkoutPlan.hasSmart && checkoutPlan.hasStand) {
                         // Both selected - show bundle
                         return (
@@ -995,7 +1011,9 @@ const DigitalVisitingCard = () => {
                               </span>
                             </div>
                             <div className="text-xs text-gray-600 italic mt-1">
-                              * You save ₹{(smartAmount + standAmount) - addOnTotal} with bundle offer
+                              * You save ₹
+                              {smartAmount + standAmount - addOnTotal} with
+                              bundle offer
                             </div>
                           </>
                         );
@@ -1027,15 +1045,17 @@ const DigitalVisitingCard = () => {
                         );
                       }
                     })()}
-                    
+
                     {/* Divider */}
                     {(checkoutPlan.hasSmart || checkoutPlan.hasStand) && (
                       <div className="border-t border-primary/20 my-2"></div>
                     )}
-                    
+
                     {/* Total */}
                     <div className="flex justify-between items-center pt-1">
-                      <span className="text-sm font-semibold text-gray-700">Total Payable</span>
+                      <span className="text-sm font-semibold text-gray-700">
+                        Total Payable
+                      </span>
                       <span className="text-2xl font-bold text-primary">
                         ₹{checkoutPlan.totalAmount ?? 0}
                       </span>
@@ -1077,7 +1097,7 @@ const DigitalVisitingCard = () => {
           </div>
         </div>
       )}
-      <div className=" hidden lg:block">
+      <div className="hidden lg:block">
         {/* third Component */}
         <div className="w-full my-16 flex justify-center">
           <div className="flex gap-10 w-full">
@@ -1128,7 +1148,7 @@ const DigitalVisitingCard = () => {
               {/* Bottom button - only show if there are images below, with highlight */}
               {carouselWindowStart < carouselImages.length - 3 && (
                 <button
-                  className="flex items-center justify-center rounded-full bg-[#9077c9] min-w-[100px] h-[60px] mt-3 text-3xl shadow-md transition hover:bg-primary opacity-100 ring-2 ring-secondary/50"
+                  className="flex items-center justify-center rounded-full bg-[#9077c9] min-w-[100px] h-[60px] mt-3 text-3xl shadow-md transition hover:bg-primary opacity-100  "
                   onClick={() =>
                     setCarouselIdx((idx) =>
                       idx < carouselImages.length - 3 ? idx + 1 : idx
@@ -1149,7 +1169,7 @@ const DigitalVisitingCard = () => {
                 //   backgroundImage: `url(${carouselImages[selectedIdx].src})`,
                 // }}
               >
-                <div className=" flex-1 flex flex-col gap-1 ps-14 py-10 left-0 top-3 max-w-[540px] min-w-[340px] z-10">
+                <div className=" flex-1 flex flex-col gap-1 ps-14 py-10 left-0 top-3 max-w-[572px] min-w-[340px] z-10">
                   <h2 className="text-[41px] font-bold mb-3 leading-snug text-white">
                     {carouselImages[selectedIdx].title}
                   </h2>
@@ -1169,8 +1189,8 @@ const DigitalVisitingCard = () => {
                       <div key={idx} className="flex items-center mb-1 gap-2">
                         {renderIcon(feature.icon, feature.iconSize)}
                         <h4 className="text-white font-normal text-[18px]">
-                          {feature.text.includes("\n")
-                            ? feature.text.split("\n").map((line, i) => (
+                          {feature?.text?.includes("\n")
+                            ? feature?.text?.split("\n").map((line, i) => (
                                 <span key={i}>
                                   {line}
                                   {i < feature.text.split("\n").length - 1 && (
@@ -1309,22 +1329,22 @@ const DigitalVisitingCard = () => {
                     className="rounded-3x w-auto object-contain h-[80%] relative z-10  digital_img"
                   />
                 </div>
-                {basePlan?.type?.toLowerCase() === "gold" && 
-                 getContentForImage(selectedIdx).features.some((feature) =>
-                  feature.text.includes(
-                    "14-Day Money Back Guarantee for Digital Visiting Card"
-                  )
-                ) && (
-                  <div className="absolute top-[-70px] right-[-40px]">
-                    <Image
-                      src={MoneyBack}
-                      alt="Money Back Guarantee"
-                      width={400}
-                      height={300}
-                      className="max-w-[191px] "
-                    />
-                  </div>
-                )}
+                {basePlan?.type?.toLowerCase() === "gold" &&
+                  getContentForImage(selectedIdx).features.some((feature) =>
+                    feature.text.includes(
+                      "14-Day Money Back Guarantee for Digital Visiting Card"
+                    )
+                  ) && (
+                    <div className="absolute top-[-70px] right-[-40px]">
+                      <Image
+                        src={MoneyBack}
+                        alt="Money Back Guarantee"
+                        width={400}
+                        height={300}
+                        className="max-w-[191px] "
+                      />
+                    </div>
+                  )}
 
                 <div className="absolute bottom-[20%] left-0 w-full flex justify-center items-end leading-[3rem]">
                   <div className="text-center h-max relative right-[-25%] xl:right-[-10%] 2xl:right-[6%] z-[10]">

@@ -6,8 +6,8 @@ import animatespin from "../../../public/assets/Group.webp";
 const ChooseNumerology = () => {
   return (
     <section className="lg:my-8  bg-[url('/assets/bg-pandit221.png')] from-primary to-primary md:pt-11 pt-5 bg-no-repeat bg-cover">
-      <div className="max-w-screen-xl m-auto px-4">
-        <div className="grid lg:grid-cols-2 grid-cols-1 items-center md:gap-6 gap-3">
+      <div className="max-w-screen-2xl m-auto px-4">
+        <div className="grid lg:grid-cols-[3fr_2fr] grid-cols-1 items-center md:gap-6 gap-3">
           <div className="relative overflow-hidden ">
             <div className="flex justify-center relative ">
               {/* Spinning background image */}
@@ -17,13 +17,13 @@ const ChooseNumerology = () => {
                 className="animate-spin  w-full overflow-hidden absolute h-[400px] object-contain"
                 width={200}
                 height={200}
-                style={{ animationDuration: "5s" }}
+                style={{ animationDuration: "10s" }}
               />
               {/* Main numerology image on top */}
               <Image
                 src={numerologyImage}
                 alt="Numerology Design"
-                className="lg:h-[400px] h-auto object-contain z-10"
+                className="max-w-[500px] object-contain z-10"
                 width={500}
                 height={500}
               />
@@ -47,7 +47,7 @@ const ChooseNumerology = () => {
                 luck, success, and balance.
               </span>{" "}
             </h3> */}
-            <p className="font-normal text-[16px] md:text-[18px] pb-11 text-whitetext  w-full md:text-left    ">
+            <p className="font-normal text-[16px] md:text-[18px] pb-11 text-whitetext  w-full md:text-left    pt-4">
               In the world of numbers, not all are created equal. Numerology has
               long been trusted for aligning energies, improving fortune, and
               bringing positivity into life. Your mobile number isn’t just a

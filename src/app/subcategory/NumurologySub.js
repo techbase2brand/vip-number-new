@@ -18,9 +18,9 @@ const NumurologySub = ({user,setActiveSignInWithOtp,setNumerologyPop}) => {
                   localStorage.setItem("Lead-Page", "Numurology");
                 }
               }}>
-              Pay 1,999 For Numerology Report
+              Pay 2,100 For Numerology Report
             </a>
-            <p>Pay 1,999 and Get 1,500 Cashback with your Numerology Report.</p>
+            <p>Pay 2,100 and Get 1,500 Cashback with your Numerology Report.</p>
             <p style={{ fontSize: "16px", color: "#000" }}>
               Cashback can be used only on{" "}
               <span

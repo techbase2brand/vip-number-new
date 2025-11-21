@@ -14,7 +14,7 @@ const NumerologyTableDiv = () => {
   ];
 
   return (
-    <div className=" xl:max-w-screen-2xl lg:max-w-screen-lg md:max-w-screen-sm m-auto py-6 p-4  ">
+    <div className=" xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-sm m-auto py-6 p-4  ">
       <div className="text-center mb-6">
         <h2 className="font-semibold text-[26px] lg:text-[32px] text-HeadingText leading-[35px] lg:leading-[40px] tracking-wide mb-2">
           <span className="inline-block bg-[url('/assets/118.webp')] bg-no-repeat bg-center bg-contain text-primary font-bold px-2">
@@ -32,7 +32,7 @@ const NumerologyTableDiv = () => {
       </div>
 
       {/* Header */}
-      <div className="grid grid-cols-4 bg-[#4A3274] text-white font-bold text-center rounded-t-2xl overflow-hidden">
+      <div className="grid grid-cols-4 bg-[#4A3274] text-white font-bold text-center rounded-3xl overflow-hidden">
         <div className="py-3 px-4 rounded-tl-2xl text-secondary">Planets</div>
         <div className="py-3 px-4 text-secondary">Number </div>
         <div className="py-3 px-4 text-secondary">Friendly</div>
@@ -44,7 +44,7 @@ const NumerologyTableDiv = () => {
         <div
           key={number}
           className={`grid grid-cols-4 text-center ${
-            idx % 2 === 0 ? "bg-white" : "bg-[#f3f3f3]"
+            idx % 2 === 0 ? "bg-white" : "bg-[#E4E4E4]"
           } text-[#333] rounded-full my-1 overflow-hidden`}
         >
           <div className="py-3 px-4">{planet}</div>
