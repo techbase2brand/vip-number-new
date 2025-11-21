@@ -31,7 +31,7 @@ const BusinessRow = () => {
                 className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] object-cover rounded-full"
               />
             </div>
-            <div className="absolute top-[-25px] right-[-10px] w-10 h-10 bg-black rounded-full flex items-center justify-center cursor-pointer">
+            <div className="absolute top-[-25px] right-[-10px] w-10 h-10 bg-black rounded-full flex items-center justify-center">
               <FaWhatsapp className="text-white text-[20px]" />
             </div>
           </div>

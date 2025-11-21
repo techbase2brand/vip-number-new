@@ -854,7 +854,7 @@ const DigitalVisitingCard = () => {
                 ×
               </button>
             </div>
-            <div className="px-6 py-5 flex flex-col gap-4  max-h-[85vh] overflow-auto">
+            <div className="px-6 py-5 flex flex-col gap-4  max-h-[70vh] overflow-auto">
               <div>
                 <label className="text-sm font-semibold text-gray-700 mb-2 block">
                   Digital Visiting Card Plan
@@ -1067,8 +1067,9 @@ const DigitalVisitingCard = () => {
                   </p>
                 )}
               </div>
-
-              <div className="flex justify-end gap-3 pt-1">
+            </div>
+                <hr />
+              <div className="flex justify-end gap-3 p-3">
                 {/* <button
                   type="button"
                   className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700"
@@ -1093,7 +1094,6 @@ const DigitalVisitingCard = () => {
                   {isProcessingPayment ? "Preparing..." : "Proceed to Pay"}
                 </button>
               </div>
-            </div>
           </div>
         </div>
       )}
@@ -1347,7 +1347,7 @@ const DigitalVisitingCard = () => {
                   )}
 
                 <div className="absolute bottom-[20%] left-0 w-full flex justify-center items-end leading-[3rem]">
-                  <div className="text-center h-max relative right-[-25%] xl:right-[-10%] 2xl:right-[6%] z-[10]">
+                  <div className="text-center h-max relative right-[-25%] xl:right-[-5%] 2xl:right-[2%] z-[10] screen_rev">
                     {/* <p className="text-lg font-semibold text-black bg-secondary px-4 py-1.5 rounded-2xl ">
                       <span className="text-primary">Powerd by</span> VIP Number
                       shop
@@ -1357,7 +1357,7 @@ const DigitalVisitingCard = () => {
                       alt="Powerdby"
                       width={3000}
                       height={1000}
-                      className="object-contain max-w-[200px] z-10 bottom-[8rem] left-[15%] w-full rounded-[16px]"
+                      className="object-contain max-w-[200px] z-10 bottom-[8rem] left-[15%] w-full rounded-[16px] responsive__search_img"
                     />
                     <span className="text-secondary text-base font-semibold mt-3">
                       {basePlan?.type?.toLowerCase() === "gold"

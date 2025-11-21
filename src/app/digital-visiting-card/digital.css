@@ -9,13 +9,19 @@
   .sharing_easy {
     right: 4% !important;
   }
+  .screen_rev{
+      top: 5rem;
+    right: 8rem;
+  }
 }
 
 @media (max-width: 1450px) {
   .digital_img {
     max-width: 240px;
   }
-
+  .responsive__search_img{
+    width: 150px !important;
+  }
   .digital_logo {
     max-width: 150px;
   }

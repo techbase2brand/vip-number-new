@@ -85,6 +85,24 @@ const ThankYouPage = () => {
           </div>
 
           <div className="px-6 sm:px-10 py-10 flex flex-col gap-10">
+             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/10 rounded-2xl p-6 sm:p-8 text-center flex flex-col items-center gap-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#43387c]">
+                Ready to personalise your Digital Visiting Card?
+              </h2>
+              <p className="max-w-2xl text-gray-600 text-base sm:text-lg">
+                Complete a quick form with your logo, contact information, and brand
+                colours so we can craft your interactive smart card.
+              </p>
+              <Link
+                href="/digital-card"
+                className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary text-white font-semibold text-base sm:text-lg shadow-lg hover:bg-secondary transition-colors animate-bounce"
+              >
+                Fill My Card Details
+              </Link>
+              <p className="text-xs text-gray-500">
+                Takes less than 5 minutes. You can save & resume anytime.
+              </p>
+            </div>
             <div className="">
               <div className="md:col-span-2 bg-gradient-to-br from-white to-[#f6f3ff] border border-primary/10 rounded-2xl p-6 shadow-sm">
                 <h2 className="text-xl font-semibold text-[#43387c] flex items-center gap-2 mb-6">
@@ -245,24 +263,7 @@ const ThankYouPage = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/10 rounded-2xl p-6 sm:p-8 text-center flex flex-col items-center gap-4">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#43387c]">
-                Ready to personalise your Digital Visiting Card?
-              </h2>
-              <p className="max-w-2xl text-gray-600 text-base sm:text-lg">
-                Complete a quick form with your logo, contact information, and brand
-                colours so we can craft your interactive smart card.
-              </p>
-              <Link
-                href="/digital-card"
-                className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary text-white font-semibold text-base sm:text-lg shadow-lg hover:bg-secondary transition-colors animate-bounce"
-              >
-                Fill My Card Details
-              </Link>
-              <p className="text-xs text-gray-500">
-                Takes less than 5 minutes. You can save & resume anytime.
-              </p>
-            </div>
+           
           </div>
         </div>
       </div>
